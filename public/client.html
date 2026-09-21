@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trung Tâm Hướng Dẫn Kỹ Thuật XX8</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --main-blue: #1677ff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #0b132b; color: #ffffff; font-size: 13px; margin: 0; min-height: 100vh; }
+        
+        .top-right-menu-container {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 220px;
+            z-index: 100;
+        }
+
+        .small-menu-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #d9d9d9;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-weight: 600;
+            color: #333333;
+            font-size: 13px;
+        }
+
+        .small-menu-btn i { font-size: 18px; color: var(--main-blue); width: 22px; text-align: center; }
+        .small-menu-btn:hover { border-color: var(--main-blue); background: #ffffff; color: var(--main-blue); transform: translateX(-4px); }
+
+        .sticky-top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(11, 19, 43, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .subpage-bar { 
+            border-bottom: 1px solid rgba(22, 119, 255, 0.3); 
+            padding: 10px 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+        }
+
+        .btn-back-home { 
+            background: rgba(255, 255, 255, 0.15); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            padding: 6px 16px; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            color: #ffffff; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            font-size: 13px; 
+        }
+
+        .btn-back-home:hover { background: var(--main-blue); border-color: var(--main-blue); }
+
+        .folder-nav-bar { 
+            padding: 10px 16px; 
+            display: flex; 
+            gap: 8px; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .folder-tab-btn { 
+            background: rgba(255, 255, 255, 0.1); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            padding: 6px 14px; 
+            border-radius: 4px; 
+            color: #dcdcdc; 
+            font-weight: 500; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            font-size: 12px; 
+        }
+
+        .folder-tab-btn:hover { background: rgba(22, 119, 255, 0.3); border-color: #91d5ff; color: #ffffff; }
+        .folder-tab-btn.active { background: var(--main-blue); border-color: var(--main-blue); color: #ffffff; font-weight: 600; }
+
+        .content-layout-container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            min-height: calc(100vh - 110px);
+        }
+
+        .sidebar-folder-list {
+            width: 300px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .folder-item-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(5px);
+            color: #ffffff;
+        }
+
+        .folder-item-card:hover {
+            border-color: var(--main-blue);
+            background: rgba(22, 119, 255, 0.25);
+            transform: translateX(4px);
+        }
+
+        .folder-item-card.active {
+            background: rgba(22, 119, 255, 0.4);
+            border-color: var(--main-blue);
+            font-weight: bold;
+        }
+
+        .folder-item-title {
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .main-content-display {
+            flex-grow: 1;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 24px;
+            backdrop-filter: blur(6px);
+            color: #ffffff;
+            display: none;
+            position: relative;
+        }
+
+        .main-content-display.active { display: block; }
+
+        .btn-hide-content {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-hide-content:hover { background: #ff4d4f; border-color: #ff4d4f; }
+
+        .content-block-item { 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 14px; 
+            margin-top: 12px; 
+            border-radius: 6px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 16px; 
+        }
+
+        .content-block-item .block-img { 
+            width: 240px; 
+            max-height: 180px; 
+            object-fit: cover; 
+            border-radius: 4px; 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            flex-shrink: 0; 
+            cursor: pointer; 
+        }
+
+        .content-block-item .block-text { 
+            font-size: 13px; 
+            color: #e0e0e0; 
+            line-height: 1.6; 
+            white-space: pre-wrap; 
+            word-break: break-word;
+            flex-grow: 1; 
+        }
+
+        .image-viewer-modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 4000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0, 0, 0, 0.9); 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .image-viewer-modal.active { display: flex; }
+        .image-viewer-content { max-width: 90%; max-height: 90%; border-radius: 6px; object-fit: contain; }
+
+        #refreshToast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(22, 119, 255, 0.9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            display: none;
+            z-index: 5000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* STYLES CHO GIAO DIỆN CÂU HỎI / QUIZ */
+        .quiz-card {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .quiz-option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 12px 16px;
+            text-align: left;
+            width: 100%;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quiz-option-btn:hover:not(:disabled) {
+            background: rgba(22, 119, 255, 0.2);
+            border-color: var(--main-blue);
+        }
+
+        .quiz-option-btn.correct {
+            background-color: #198754 !important;
+            border-color: #198754 !important;
+            color: #ffffff !important;
+            font-weight: bold;
+        }
+
+        .quiz-option-btn.incorrect {
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
+            color: #ffffff !important;
+            font-weight: bold;
+        }
+
+        .explanation-box {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #ffda6a;
+        }
+
+        .btn-amount-select {
+            min-width: 70px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mainHomeScreen">
+        <div class="top-right-menu-container" id="clientDynamicMenu"></div>
+    </div>
+
+    <div id="subContentScreen" style="display: none;">
+        <div class="sticky-top-bar">
+            <div class="subpage-bar">
+                <button class="btn-back-home" onclick="showHomeScreen()">
+                    <i class="fa-solid fa-arrow-left me-1"></i> Quay lại Màn hình chính
+                </button>
+                <h6 class="mb-0 fw-bold text-info" id="subPageTitle">NỘI DUNG CHI TIẾT</h6>
+                <div></div>
+            </div>
+
+            <div id="luuTrinhSectionTop" style="display: none;">
+                <div class="folder-nav-bar" id="clientFolderContainer"></div>
+            </div>
+        </div>
+
+        <div id="luuTrinhSection" class="content-layout-container" style="display: none;">
+            <div class="sidebar-folder-list" id="clientDocList"></div>
+
+            <div class="main-content-display" id="contentDisplayArea">
+                <button class="btn-hide-content" onclick="hideDocDetail()">
+                    <i class="fa-solid fa-xmark me-1"></i> Ẩn nội dung (ESC)
+                </button>
+                <div id="contentDisplayBody"></div>
+            </div>
+        </div>
+
+        <div id="dynamicSection" class="container my-4" style="max-width: 900px; display: none;"></div>
+    </div>
+
+    <div id="imageViewerModal" class="image-viewer-modal" onclick="closeImageViewer()">
+        <img id="imageViewerImg" class="image-viewer-content" src="" alt="Xem ảnh">
+    </div>
+
+    <div id="refreshToast"><i class="fa-solid fa-rotate me-1"></i> Đang tải lại dữ liệu...</div>
+
+<script>
+    const API_URL = '/api';
+    let rawDocsData = [];
+    let selectedFolder = '';
+    let clientConfig = null;
+    let activeDocId = null;
+    let isImageViewerOpen = false;
+
+    // QUẢN LÝ TRẠNG THÁI QUIZ / CÂU HỎI
+    let quizQuestions = [];
+    let currentQuizIndex = 0;
+    let userScore = 0;
+    let isAnswered = false;
+
+    const FOLDER_MAP = [
+        { id: 'main_gioithieu', name: 'Giới Thiệu HƯỚNG DẪN' },
+        { id: 'Slot_nohu', name: 'Test Game - Chạy Cược' },
+        { id: 'Bo_don', name: 'Hướng Dẫn Duyệt Đơn' },
+        { id: 'Bo_main', name: 'Hướng Dẫn Sử Dụng Bo' },
+        { id: 'main_casino', name: 'Casino Trực Tuyến' },
+        { id: 'main_xoso', name: 'Xổ Số Online' },
+        { id: 'main_thethao', name: 'Thể Thao' },
+        { id: 'main_daga', name: 'Đá Gà' },
+        { id: 'duyedon_main', name: 'Lưu Trình Duyệt Đơn' },
+        { id: 'xulyld_main', name: 'Xử Lý Hội Viên Gian Lận' },
+        { id: 'main', name: 'Liên Hệ Hỗ Trợ - Hướng Dẫn' }
+    ];
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        await fetchClientConfig();
+        await loadDocs();
+
+        history.replaceState({ screen: 'home' }, '', window.location.pathname);
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' || e.keyCode === 27) {
+                e.preventDefault();
+                if (isImageViewerOpen) {
+                    closeImageViewer();
+                } else if (activeDocId !== null) {
+                    hideDocDetail();
+                }
+            }
+
+            if (e.key === 'F5' || e.keyCode === 116) {
+                e.preventDefault();
+                e.stopPropagation();
+                refreshCurrentData();
+            }
+        }, true);
+
+        window.addEventListener('popstate', (e) => {
+            if (e.state) applyState(e.state);
+        });
+    });
+
+    async function refreshCurrentData() {
+        const toast = document.getElementById('refreshToast');
+        toast.style.display = 'block';
+
+        await loadDocs();
+        if (selectedFolder) {
+            renderClientDocs();
+            if (activeDocId) {
+                const activeDoc = rawDocsData.find(d => String(d.ID) === String(activeDocId));
+                if (activeDoc && activeDoc.IsHidden) {
+                    hideDocDetail();
+                } else {
+                    renderDocContent(activeDocId);
+                }
+            }
+        }
+
+        setTimeout(() => { toast.style.display = 'none'; }, 1000);
+    }
+
+    function applyState(state) {
+        closeImageViewer();
+        if (state.screen === 'home') {
+            document.getElementById('mainHomeScreen').style.display = 'block';
+            document.getElementById('subContentScreen').style.display = 'none';
+        } else if (state.screen === 'sub') {
+            document.getElementById('mainHomeScreen').style.display = 'none';
+            document.getElementById('subContentScreen').style.display = 'block';
+            
+            selectedFolder = state.folder || FOLDER_MAP[0].id;
+            renderFolderTabs(FOLDER_MAP);
+            renderClientDocs();
+
+            if (state.docId) {
+                activeDocId = state.docId;
+                renderDocContent(state.docId);
+            } else {
+                activeDocId = null;
+                document.getElementById('contentDisplayArea').classList.remove('active');
+            }
+        }
+    }
+
+    async function fetchClientConfig() {
+        try {
+            const res = await fetch(`${API_URL}/layout-config`);
+            if (res.ok) {
+                clientConfig = await res.json();
+                applyClientTheme(clientConfig.theme);
+                renderClientMenu(clientConfig.navItems);
+            }
+        } catch (e) { console.error("Lỗi lấy cấu hình client:", e); }
+    }
+
+    function applyClientTheme(theme) {
+        if (!theme) return;
+
+        if (theme.primaryColor) document.documentElement.style.setProperty('--main-blue', theme.primaryColor);
+        if ((theme.bgType === 'url' || theme.bgType === 'file') && theme.bgUrl) {
+            document.body.style.backgroundImage = `url('${theme.bgUrl}')`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+
+        let customStyleTag = document.getElementById('dynamic-custom-css');
+        if (!customStyleTag) {
+            customStyleTag = document.createElement('style');
+            customStyleTag.id = 'dynamic-custom-css';
+            document.head.appendChild(customStyleTag);
+        }
+
+        let combinedCss = theme.customCss || '';
+        if (clientConfig && clientConfig.navItems) {
+            clientConfig.navItems.forEach(item => {
+                if (item.customCss) {
+                    combinedCss += `\n/* CSS Tùy chỉnh cho phần: ${item.id} */\n` + item.customCss;
+                }
+            });
+        }
+
+        customStyleTag.textContent = combinedCss;
+    }
+
+    function renderClientMenu(navItems) {
+        const container = document.getElementById('clientDynamicMenu');
+        if (!container) return;
+
+        let html = `
+            <div class="small-menu-btn" onclick="openTarget('trangchu')">
+                <i class="fa-solid fa-house"></i>
+                <span>TRANG CHỦ XX8</span>
+            </div>
+        `;
+
+        if (navItems && Array.isArray(navItems)) {
+            navItems.forEach(item => {
+                if (item.id === 'trangchu' || item.name.toUpperCase().includes('TRANG CHỦ')) return;
+                html += `
+                    <div class="small-menu-btn" onclick="openTarget('${item.id}')">
+                        <i class="fa-solid ${item.icon || 'fa-folder'}"></i>
+                        <span>${item.name}</span>
+                    </div>
+                `;
+            });
+        }
+        container.innerHTML = html;
+    }
+
+    function openTarget(type) {
+        if (type === 'trangchu') {
+            window.open('https://ad88v9.com/', '_blank');
+            return;
+        }
+
+        document.getElementById('mainHomeScreen').style.display = 'none';
+        document.getElementById('subContentScreen').style.display = 'block';
+
+        if (type === 'luutrinh') {
+            document.getElementById('subPageTitle').innerText = 'LƯU TRÌNH HƯỚNG DẪN';
+            document.getElementById('luuTrinhSectionTop').style.display = 'block';
+            document.getElementById('luuTrinhSection').style.display = 'flex';
+            document.getElementById('dynamicSection').style.display = 'none';
+
+            if (!selectedFolder && FOLDER_MAP.length > 0) {
+                selectedFolder = FOLDER_MAP[0].id;
+            }
+            renderFolderTabs(FOLDER_MAP);
+            renderClientDocs();
+
+            history.pushState({ screen: 'sub', folder: selectedFolder, docId: null }, '', '#luutrinh');
+        } else {
+            const currentItem = clientConfig ? clientConfig.navItems.find(i => i.id === type) : null;
+            const title = currentItem ? currentItem.name : 'NỘI DUNG CHI TIẾT';
+
+            document.getElementById('subPageTitle').innerText = title;
+            document.getElementById('luuTrinhSectionTop').style.display = 'none';
+            document.getElementById('luuTrinhSection').style.display = 'none';
+            document.getElementById('dynamicSection').style.display = 'block';
+
+            if (type === 'test' || type === 'testsanpham' || title.toUpperCase().includes('TEST SẢN PHẨM')) {
+                renderQuizStartScreen();
+            } else {
+                loadDynamicTableData(type, title);
+            }
+            history.pushState({ screen: 'sub', folder: null, docId: null }, '', '#' + type);
+        }
+    }
+
+    function showHomeScreen() {
+        document.getElementById('mainHomeScreen').style.display = 'block';
+        document.getElementById('subContentScreen').style.display = 'none';
+        hideDocDetail();
+        history.pushState({ screen: 'home' }, '', window.location.pathname);
+    }
+
+    async function loadDocs() {
+        try {
+            const res = await fetch(`${API_URL}/camnangad88`);
+            if (res.ok) rawDocsData = await res.json();
+        } catch (err) { console.error("Lỗi tải dữ liệu bài viết!", err); }
+    }
+
+    function renderFolderTabs(folders) {
+        let html = '';
+        (folders || []).forEach(folder => {
+            html += `<div class="folder-tab-btn ${selectedFolder === folder.id ? 'active' : ''}" onclick="selectFolder('${folder.id}')"><i class="fa-solid fa-folder me-1"></i> ${folder.name}</div>`;
+        });
+        document.getElementById('clientFolderContainer').innerHTML = html;
+    }
+
+    function selectFolder(folderId) {
+        selectedFolder = folderId;
+        hideDocDetail();
+        renderFolderTabs(FOLDER_MAP);
+        renderClientDocs();
+        history.pushState({ screen: 'sub', folder: selectedFolder, docId: null }, '', '#folder-' + folderId);
+    }
+
+    function renderClientDocs() {
+        const filtered = rawDocsData.filter(item => (item.Parent || 'main') === selectedFolder && !item.IsHidden);
+        const container = document.getElementById('clientDocList');
+
+        if (!container) return;
+
+        if (filtered.length === 0) {
+            container.innerHTML = '<div class="text-muted p-2">Chưa có bài viết.</div>';
+            return;
+        }
+
+        let html = '';
+        filtered.forEach(item => {
+            const isActive = String(item.ID) === String(activeDocId);
+            html += `
+                <div class="folder-item-card ${isActive ? 'active' : ''}" onclick="viewDocDetail('${item.ID}')">
+                    <div class="folder-item-title">
+                        <i class="fa-solid fa-file-lines text-info"></i>
+                        <span>${item.Label || 'Không có tiêu đề'}</span>
+                    </div>
+                    <span class="badge bg-secondary" style="font-size: 10px;">${item.ID || 'N/A'}</span>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    function viewDocDetail(docId) {
+        activeDocId = docId;
+        renderClientDocs();
+        renderDocContent(docId);
+        history.pushState({ screen: 'sub', folder: selectedFolder, docId: docId }, '', '#doc-' + docId);
+    }
+
+    function renderDocContent(docId) {
+        const item = rawDocsData.find(d => String(d.ID) === String(docId));
+        if (!item || item.IsHidden) {
+            hideDocDetail();
+            return;
+        }
+
+        let html = `
+            <h4 class="text-info fw-bold mb-2"><i class="fa-solid fa-file-lines me-2"></i>${item.Label || 'Không có tiêu đề'}</h4>
+            <div class="mb-3 text-secondary"><span class="badge bg-dark border border-secondary">Mã: ${item.ID || 'N/A'}</span></div>
+            <hr class="my-3 border-secondary">
+        `;
+
+        if (item.Content && item.Content.trim() !== '') {
+            html += `<div class="mb-3 text-light" style="line-height: 1.7; font-size: 14px; white-space: pre-wrap; word-break: break-word;">${item.Content}</div>`;
+        }
+
+        if (item.File_Url && item.File_Url.trim() !== '') {
+            const urls = item.File_Url.split('|').map(s => s.trim());
+            const captions = item.Image_Captions ? item.Image_Captions.split('|').map(s => s.trim()) : [];
+
+            urls.forEach((url, idx) => {
+                if (!url) return;
+                html += `
+                    <div class="content-block-item">
+                        <img src="${url}" class="block-img" onclick="openImageViewer('${url}')" onerror="this.onerror=null; this.src='https://via.placeholder.com/240x180?text=Loi+Anh';">
+                        <div class="block-text">${captions[idx] || ''}</div>
+                    </div>
+                `;
+            });
+        }
+
+        document.getElementById('contentDisplayBody').innerHTML = html;
+        document.getElementById('contentDisplayArea').classList.add('active');
+    }
+
+    function hideDocDetail() {
+        activeDocId = null;
+        document.getElementById('contentDisplayArea').classList.remove('active');
+        renderClientDocs();
+    }
+
+    // ==========================================
+    // LOGIC & GIAO DIỆN QUIZ / KIỂM TRA SẢN PHẨM
+    // ==========================================
+
+    function renderQuizStartScreen() {
+        const container = document.getElementById('dynamicSection');
+        container.innerHTML = `
+            <div class="quiz-card text-center py-5">
+                <i class="fa-solid fa-graduation-cap text-info mb-3" style="font-size: 50px;"></i>
+                <h3 class="fw-bold text-light mb-2">HỆ THỐNG TRẮC NGHIỆM KIỂM TRA SẢN PHẨM</h3>
+                <p class="text-secondary mb-4">Vui lòng chọn số lượng câu hỏi bạn muốn thực hiện để bắt đầu bài test.</p>
+                
+                <div class="d-flex justify-content-center gap-2 flex-wrap mb-4">
+                    <button class="btn btn-outline-info btn-amount-select py-2 px-3" onclick="startQuiz(10)">10 Câu</button>
+                    <button class="btn btn-outline-info btn-amount-select py-2 px-3" onclick="startQuiz(20)">20 Câu</button>
+                    <button class="btn btn-outline-info btn-amount-select py-2 px-3" onclick="startQuiz(30)">30 Câu</button>
+                    <button class="btn btn-outline-info btn-amount-select py-2 px-3" onclick="startQuiz(50)">50 Câu</button>
+                    <button class="btn btn-outline-info btn-amount-select py-2 px-3" onclick="startQuiz(100)">100 Câu</button>
+                </div>
+            </div>
+        `;
+    }
+
+    // HÀM TRỘN MẢNG NGẪU NHIÊN (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
+    async function startQuiz(amount) {
+        const container = document.getElementById('dynamicSection');
+        container.innerHTML = '<div class="text-center py-5 text-muted"><i class="fa-solid fa-spinner fa-spin me-2"></i>Đang khởi tạo bộ câu hỏi ngẫu nhiên...</div>';
+
+        try {
+            let rawQuestions = [];
+            const res = await fetch(`${API_URL}/questions?limit=1000`);
+            if (res.ok) {
+                rawQuestions = await res.json();
+            } else {
+                let fallbackRes = await fetch(`${API_URL}/dynamic-table/test`);
+                if (!fallbackRes.ok) {
+                    fallbackRes = await fetch(`${API_URL}/dynamic-table/testsanpham`);
+                }
+                if (fallbackRes.ok) rawQuestions = await fallbackRes.json();
+            }
+
+            if (!rawQuestions || rawQuestions.length === 0) {
+                container.innerHTML = `
+                    <div class="quiz-card text-center py-4">
+                        <i class="fa-solid fa-triangle-exclamation text-warning mb-2" style="font-size: 30px;"></i>
+                        <h5>Chưa có dữ liệu câu hỏi trong hệ thống.</h5>
+                        <button class="btn btn-sm btn-secondary mt-3" onclick="renderQuizStartScreen()">Quay lại</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const shuffled = shuffleArray([...rawQuestions]);
+            quizQuestions = shuffled.slice(0, Math.min(amount, shuffled.length));
+
+            currentQuizIndex = 0;
+            userScore = 0;
+            renderQuizQuestion();
+
+        } catch (err) {
+            console.error("Lỗi nạp danh sách câu hỏi:", err);
+            container.innerHTML = '<div class="alert alert-danger text-center">Lỗi kết nối máy chủ! Vui lòng thử lại sau.</div>';
+        }
+    }
+
+    function renderQuizQuestion() {
+        const container = document.getElementById('dynamicSection');
+        const q = quizQuestions[currentQuizIndex];
+        isAnswered = false;
+
+        const options = q.options || [q.optionA, q.optionB, q.optionC, q.optionD].filter(Boolean);
+
+        let optionsHtml = '';
+        options.forEach((opt, idx) => {
+            optionsHtml += `
+                <button class="quiz-option-btn" id="opt-btn-${idx}" onclick="handleAnswerSelect(${idx}, '${q.correctAnswer || q.answer}')">
+                    <span><strong>${String.fromCharCode(65 + idx)}.</strong> ${opt}</span>
+                    <i class="fa-regular fa-circle" id="opt-icon-${idx}"></i>
+                </button>
+            `;
+        });
+
+        container.innerHTML = `
+            <div class="quiz-card">
+                <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
+                    <span class="badge bg-primary fs-6">Câu ${currentQuizIndex + 1} / ${quizQuestions.length}</span>
+                    <span class="text-secondary fw-bold">Điểm hiện tại: <span class="text-success">${userScore}</span></span>
+                </div>
+
+                <h5 class="fw-bold text-light mb-4" style="line-height: 1.6;">${q.question || q.title || 'Câu hỏi chưa có nội dung'}</h5>
+
+                <div id="optionsContainer">
+                    ${optionsHtml}
+                </div>
+
+                <div id="explanationContainer" style="display: none;"></div>
+
+                <div class="d-flex justify-content-end mt-4 pt-2 border-top border-secondary">
+                    <button class="btn btn-primary px-4" id="btnNextQuestion" style="display: none;" onclick="nextQuizQuestion()">
+                        ${currentQuizIndex < quizQuestions.length - 1 ? 'Câu tiếp theo <i class="fa-solid fa-arrow-right ms-1"></i>' : 'Xem kết quả <i class="fa-solid fa-check-double ms-1"></i>'}
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    function handleAnswerSelect(selectedIndex, correctAnswer) {
+        if (isAnswered) return;
+        isAnswered = true;
+
+        const q = quizQuestions[currentQuizIndex];
+        const options = q.options || [q.optionA, q.optionB, q.optionC, q.optionD].filter(Boolean);
+        
+        let correctIdx = -1;
+
+        if (correctAnswer !== undefined && correctAnswer !== null) {
+            const cleanStr = String(correctAnswer).trim();
+            
+            if (!isNaN(cleanStr) && cleanStr !== '') {
+                correctIdx = parseInt(cleanStr, 10);
+            } else if (['A', 'B', 'C', 'D'].includes(cleanStr.toUpperCase())) {
+                correctIdx = cleanStr.toUpperCase().charCodeAt(0) - 65;
+            } else {
+                correctIdx = options.findIndex(o => o.trim().toLowerCase() === cleanStr.toLowerCase());
+            }
+        }
+
+        const selectedBtn = document.getElementById(`opt-btn-${selectedIndex}`);
+        const selectedIcon = document.getElementById(`opt-icon-${selectedIndex}`);
+
+        if (selectedIndex === correctIdx) {
+            userScore++;
+            selectedBtn.classList.add('correct');
+            selectedIcon.className = 'fa-solid fa-circle-check';
+        } else {
+            selectedBtn.classList.add('incorrect');
+            selectedIcon.className = 'fa-solid fa-circle-xmark';
+
+            if (correctIdx >= 0 && correctIdx < options.length) {
+                const correctBtn = document.getElementById(`opt-btn-${correctIdx}`);
+                const correctIcon = document.getElementById(`opt-icon-${correctIdx}`);
+                if (correctBtn) {
+                    correctBtn.classList.add('correct');
+                    correctIcon.className = 'fa-solid fa-circle-check';
+                }
+            }
+        }
+
+        const buttons = document.querySelectorAll('.quiz-option-btn');
+        buttons.forEach(btn => btn.disabled = true);
+
+        if (q.explanation && q.explanation.trim() !== '') {
+            const expBox = document.getElementById('explanationContainer');
+            expBox.innerHTML = `
+                <div class="explanation-box">
+                    <i class="fa-solid fa-lightbulb me-1"></i> <strong>Giải thích:</strong> ${q.explanation}
+                </div>
+            `;
+            expBox.style.display = 'block';
+        }
+
+        document.getElementById('btnNextQuestion').style.display = 'inline-block';
+    }
+
+    function nextQuizQuestion() {
+        currentQuizIndex++;
+        if (currentQuizIndex < quizQuestions.length) {
+            renderQuizQuestion();
+        } else {
+            renderQuizResult();
+        }
+    }
+
+    function renderQuizResult() {
+        const container = document.getElementById('dynamicSection');
+        const percentage = Math.round((userScore / quizQuestions.length) * 100);
+
+        let badgeColor = 'bg-danger';
+        let statusText = 'Cần cố gắng hơn!';
+        if (percentage >= 80) {
+            badgeColor = 'bg-success';
+            statusText = 'Xuất sắc!';
+        } else if (percentage >= 50) {
+            badgeColor = 'bg-warning text-dark';
+            statusText = 'Đạt yêu cầu!';
+        }
+
+        container.innerHTML = `
+            <div class="quiz-card text-center py-5">
+                <i class="fa-solid fa-award text-warning mb-3" style="font-size: 60px;"></i>
+                <h3 class="fw-bold text-light mb-1">HOÀN THÀNH BÀI KIỂM TRA</h3>
+                <p class="text-secondary mb-4">Bạn đã trả lời xong toàn bộ câu hỏi.</p>
+
+                <div class="p-4 rounded mb-4" style="background: rgba(255,255,255,0.05); display: inline-block; min-width: 280px;">
+                    <div class="display-4 fw-bold text-info mb-1">${userScore} / ${quizQuestions.length}</div>
+                    <div class="mb-2">Tỷ lệ chính xác: <strong>${percentage}%</strong></div>
+                    <span class="badge ${badgeColor} px-3 py-2 fs-6">${statusText}</span>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary px-4 py-2 me-2" onclick="renderQuizStartScreen()">
+                        <i class="fa-solid fa-rotate-right me-1"></i> Làm bài test khác
+                    </button>
+                    <button class="btn btn-outline-light px-4 py-2" onclick="showHomeScreen()">
+                        <i class="fa-solid fa-house me-1"></i> Về trang chủ
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    async function loadDynamicTableData(tabId, titleName) {
+        const container = document.getElementById('dynamicSection');
+        container.innerHTML = '<div class="text-center py-4 text-muted">Đang tải dữ liệu...</div>';
+        try {
+            const res = await fetch(`${API_URL}/dynamic-table/${tabId}`);
+            const list = res.ok ? await res.json() : [];
+
+            let tableHtml = `
+                <div class="card p-3 shadow-sm bg-dark text-light border-secondary">
+                    <h5 class="fw-bold text-info mb-3"><i class="fa-solid fa-list-check me-2"></i>DANH SÁCH ${titleName.toUpperCase()}</h5>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-bordered align-middle text-center" style="font-size: 13px;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 60px;">STT</th>
+                                    <th>Tên Sản Phẩm / Tên Mục</th>
+                                    <th style="width: 160px;">Trạng Thái</th>
+                                    <th>Ghi Chú / Kết Quả</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+            if (!list || list.length === 0) {
+                tableHtml += '<tr><td colspan="4" class="text-muted">Chưa có dữ liệu cho mục này.</td></tr>';
+            } else {
+                list.forEach((row, idx) => {
+                    tableHtml += `
+                        <tr>
+                            <td>${idx + 1}</td>
+                            <td class="text-start fw-bold">${row.title || row.question || '-'}</td>
+                            <td><span class="badge ${row.status === 'Đã kiểm tra' ? 'bg-success' : (row.status === 'Đang xử lý' ? 'bg-warning text-dark' : 'bg-danger')}">${row.status || 'Chưa kiểm tra'}</span></td>
+                            <td class="text-start">${row.note || row.explanation || '-'}</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            tableHtml += '</tbody></table></div></div>';
+            container.innerHTML = tableHtml;
+        } catch (err) {
+            container.innerHTML = '<div class="alert alert-danger">Lỗi tải dữ liệu cho mục này!</div>';
+        }
+    }
+
+    function openImageViewer(url) {
+        document.getElementById('imageViewerImg').src = url;
+        document.getElementById('imageViewerModal').classList.add('active');
+        isImageViewerOpen = true;
+    }
+
+    function closeImageViewer() {
+        document.getElementById('imageViewerModal').classList.remove('active');
+        isImageViewerOpen = false;
+    }
+</script>
+</body>
+</html>

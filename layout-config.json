@@ -1,0 +1,32 @@
+{
+  "theme": {
+    "bgType": "url",
+    "bgColor": "#f4f6f9",
+    "bgUrl": "https://i.ibb.co/VpMVmc2q/image.png",
+    "primaryColor": "#1677ff",
+    "customCss": ""
+  },
+  "navItems": [
+    {
+      "id": "trangchu",
+      "name": "TRANG CHỦ AD88",
+      "type": "luutrinh",
+      "icon": "fa-house",
+      "customCss": ""
+    },
+    {
+      "id": "luutrinh",
+      "name": "LƯU TRÌNH",
+      "type": "luutrinh",
+      "icon": "fa-file-lines",
+      "customCss": ""
+    },
+    {
+      "id": "test",
+      "name": "TEST SẢN PHẨM",
+      "type": "table",
+      "icon": "fa-vial-circle-check",
+      "customCss": ""
+    }
+  ]
+}

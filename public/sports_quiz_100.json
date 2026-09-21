@@ -1,0 +1,1402 @@
+[
+  {
+    "id": 1,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Trong Kèo Châu Á, ký hiệu (-0.5) dành cho Đội A có nghĩa là gì?",
+    "options": [
+      "Đội A chấp Đội B 0.5 trái",
+      "Đội A được Đội B chấp 0.5 trái",
+      "Trận đấu bắt đầu với tỷ số 0-1",
+      "Đội A hòa vẫn thắng đủ tiền"
+    ],
+    "answer": 0,
+    "explanation": "Dấu trừ (-) đại diện cho đội cửa trên (đội chấp), 0.5 là tỷ lệ chấp nửa trái."
+  },
+  {
+    "id": 2,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Kèo đồng banh (0.0) có nghĩa là gì?",
+    "options": [
+      "Không đội nào chấp đội nào, hòa thì hoàn tiền",
+      "Đội nhà chấp nửa trái",
+      "Đội khách chấp 1 trái",
+      "Bắt buộc phải có đội thắng mới được tính tiền"
+    ],
+    "answer": 0,
+    "explanation": "Kèo 0.0 là kèo cân bằng, nếu trận đấu hòa thì nhà cái hoàn lại tiền cược."
+  },
+  {
+    "id": 3,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Trung bình",
+    "question": "Bắt Tài 2.25 (2-2.5) trái. Trận đấu kết thúc với tổng số 2 bàn thắng. Kết quả vé cược là gì?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thắng nửa tiền",
+      "Thua nửa tiền",
+      "Thua đủ tiền"
+    ],
+    "answer": 2,
+    "explanation": "Tài 2.25 tách thành Tài 2.0 (Hòa tiền) và Tài 2.5 (Thua đủ). Tổng hợp lại vé cược thua nửa tiền."
+  },
+  {
+    "id": 4,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Dễ",
+    "question": "Kèo Tài Xỉu 2.5 trái. Trận đấu có tỷ số 2-1 (tổng 3 bàn). Người bắt cửa Tài sẽ như thế nào?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thắng nửa tiền",
+      "Thua nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Tổng 3 bàn lớn hơn mức 2.5 nên cửa Tài thắng đủ tiền."
+  },
+  {
+    "id": 5,
+    "category": "Kèo Châu Âu (1X2)",
+    "difficulty": "Dễ",
+    "question": "Trong ký hiệu 1X2 của Kèo Châu Âu, cửa '2' đại diện cho kết quả nào?",
+    "options": [
+      "Đội chủ nhà thắng",
+      "Kết quả Hòa",
+      "Đội khách thắng",
+      "Cả hai đội cùng ghi bàn"
+    ],
+    "answer": 2,
+    "explanation": "1 = Home (Đội nhà), X = Draw (Hòa), 2 = Away (Đội khách)."
+  },
+  {
+    "id": 6,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Trung bình",
+    "question": "Đặt Đội A chấp (-0.75) trái. Đội A thắng cách biệt đúng 1 bàn (1-0, 2-1). Vé cược sẽ kết toán ra sao?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thắng nửa tiền",
+      "Thua nửa tiền",
+      "Thua đủ tiền"
+    ],
+    "answer": 1,
+    "explanation": "Kèo -0.75 tách thành -0.5 (Thắng đủ) và -1.0 (Hòa tiền). Kết quả ăn nửa tiền."
+  },
+  {
+    "id": 7,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Đặt Đội B được chấp (+1.0) trái. Trận đấu kết thúc Đội B thua 0-1. Vé cược tính thế nào?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền (Hòa kèo)",
+      "Thua nửa tiền"
+    ],
+    "answer": 2,
+    "explanation": "Thua đúng cách biệt 1 bàn trùng với mốc chấp +1.0 nên được hoàn tiền."
+  },
+  {
+    "id": 8,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Khó",
+    "question": "Bắt Xỉu 2.75 (2.5-3) trái. Trận đấu kết thúc với tỷ số 2-1 (3 bàn). Kết quả là gì?",
+    "options": [
+      "Thua đủ tiền",
+      "Thua nửa tiền",
+      "Thắng nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 1,
+    "explanation": "Xỉu 2.75 tách thành Xỉu 2.5 (Thua đủ) và Xỉu 3.0 (Hòa tiền). Kết quả thua nửa tiền."
+  },
+  {
+    "id": 9,
+    "category": "Tỷ Lệ Cược (Odds)",
+    "difficulty": "Dễ",
+    "question": "Theo tỷ lệ Decimal (Châu Âu) là 2.10, nếu đặt 100$ và thắng thì tổng số tiền thu về (gồm vốn) là bao nhiêu?",
+    "options": [
+      "110$",
+      "210$",
+      "310$",
+      "100$"
+    ],
+    "answer": 1,
+    "explanation": "Tiền thu về = Tiền cược x Odds = 100 x 2.10 = 210$."
+  },
+  {
+    "id": 10,
+    "category": "Kèo Phụ (Phạt Góc)",
+    "difficulty": "Trung bình",
+    "question": "Kèo Tài Xỉu Phạt Góc trận đấu là 9.5 quả. Trận đấu có 10 quả góc. Cửa Tài kết quả thế nào?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thắng nửa tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "10 quả phạt góc lớn hơn mốc 9.5 nên cửa Tài thắng đủ."
+  },
+  {
+    "id": 11,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Trung bình",
+    "question": "Bạn bắt cửa trên chấp (-1.25) trái. Đội cửa trên thắng 1-0. Kết quả vé cược là gì?",
+    "options": [
+      "Thắng nửa tiền",
+      "Thua nửa tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 1,
+    "explanation": "Kèo -1.25 tách thành -1.0 (Hòa tiền) và -1.5 (Thua đủ) -> Tổng thua nửa tiền."
+  },
+  {
+    "id": 12,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Khó",
+    "question": "Kèo chấp (-1.75) trái. Đội cửa trên thắng 2-0. Người đặt cửa trên sẽ ra sao?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thắng nửa tiền",
+      "Thua nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 1,
+    "explanation": "Kèo -1.75 tách thành -1.5 (Thắng đủ) và -2.0 (Hòa tiền) -> Tổng thắng nửa tiền."
+  },
+  {
+    "id": 13,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Dễ",
+    "question": "Kèo Tài Xỉu Hiệp 1 là 1.0 trái. Hết Hiệp 1 tỷ số là 0-0. Cửa Xỉu thắng hay thua?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền",
+      "Thắng nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "0 bàn thắng nhỏ hơn mốc 1.0 trái nên Xỉu thắng đủ tiền."
+  },
+  {
+    "id": 14,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Dễ",
+    "question": "Kèo Tài Xỉu Hiệp 1 là 1.0 trái. Hết Hiệp 1 tỷ số là 1-0 (1 bàn). Vé cược Tài/Xỉu tính sao?",
+    "options": [
+      "Tài thắng",
+      "Xỉu thắng",
+      "Hoàn tiền cả 2 cửa",
+      "Mỗi bên ăn nửa tiền"
+    ],
+    "answer": 2,
+    "explanation": "Tổng số bàn bằng đúng mốc 1.0 nên cả hai cửa Tài và Xỉu đều hòa tiền."
+  },
+  {
+    "id": 15,
+    "category": "Kèo Châu Âu (1X2)",
+    "difficulty": "Trung bình",
+    "question": "Kèo Châu Âu 1X2 tính trong thời gian thi đấu nào?",
+    "options": [
+      "90 phút + bù giờ",
+      "Tính cả 30 phút hiệp phụ",
+      "Tính cả loạt sút luân lưu",
+      "Chỉ tính 45 phút hiệp 1"
+    ],
+    "answer": 0,
+    "explanation": "Kèo 1X2 mặc định chỉ tính 90 phút thi đấu chính thức và thời gian bù giờ."
+  },
+  {
+    "id": 16,
+    "category": "Kèo Phụ (Thẻ Phạt)",
+    "difficulty": "Trung bình",
+    "question": "Trong quy tắc đặt cược thẻ phạt, 1 thẻ đỏ trực tiếp thường được tính tương đương bao nhiêu thẻ vàng?",
+    "options": [
+      "1 thẻ vàng",
+      "2 thẻ vàng",
+      "3 thẻ vàng",
+      "Không tính thẻ vàng"
+    ],
+    "answer": 1,
+    "explanation": "Theo quy tắc phổ biến, thẻ đỏ trực tiếp thường được quy đổi tương đương 2 thẻ vàng, tuy nhiên cách tính điểm thẻ có thể thay đổi tùy nhà cung cấp."
+  },
+  {
+    "id": 17,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Trung bình",
+    "question": "Đặt Đội A chấp (+0.25) nghĩa là Đội A đang ở vị thế nào?",
+    "options": [
+      "Đội cửa trên",
+      "Đội cửa dưới (được chấp)",
+      "Đội chấp hòa",
+      "Đội chủ nhà mặc định"
+    ],
+    "answer": 1,
+    "explanation": "Dấu cộng (+) thể hiện đội cửa dưới được chấp handicap."
+  },
+  {
+    "id": 18,
+    "category": "Kèo Chẵn Lẻ (Odd/Even)",
+    "difficulty": "Dễ",
+    "question": "Trận đấu kết thúc với tỷ số 0-0. Kèo Tổng Số Bàn Thắng Chẵn/Lẻ ra kết quả gì?",
+    "options": [
+      "Chẵn (Even)",
+      "Lẻ (Odd)",
+      "Hủy vé cược",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Trong quy ước cá cược, 0 được tính là số Chẵn."
+  },
+  {
+    "id": 19,
+    "category": "Kèo Tỷ Số (Correct Score)",
+    "difficulty": "Dễ",
+    "question": "Kèo Tỷ Số Đúng (Correct Score) là dạng cược như thế nào?",
+    "options": [
+      "Dự đoán chính xác tỷ số cuối cùng của trận đấu",
+      "Dự đoán đội nào ghi bàn trước",
+      "Dự đoán tổng số bàn thắng vượt quá mốc cho trước",
+      "Dự đoán số lần phạm lỗi"
+    ],
+    "answer": 0,
+    "explanation": "Correct Score yêu cầu đoán đúng chính xác tỷ số sau 90 phút."
+  },
+  {
+    "id": 20,
+    "category": "Tỷ Lệ Cược (Odds)",
+    "difficulty": "Trung bình",
+    "question": "Odds HK (Hồng Kông) là 0.85. Đặt 100$ nếu thắng sẽ thu về tổng cộng bao nhiêu tiền?",
+    "options": [
+      "85$",
+      "185$",
+      "285$",
+      "100$"
+    ],
+    "answer": 1,
+    "explanation": "Odds HK chỉ tính tiền lời. Lời 85$ + Gốc 100$ = 185$ tổng thu."
+  },
+  {
+    "id": 21,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Khó",
+    "question": "Kèo chấp (-2.0) trái. Đội cửa trên thắng 2-0. Kết quả vé cược là gì?",
+    "options": [
+      "Thắng đủ",
+      "Thua đủ",
+      "Hoàn tiền (Hòa kèo)",
+      "Thắng nửa tiền"
+    ],
+    "answer": 2,
+    "explanation": "Thắng đúng cách biệt 2 bàn bằng mốc chấp 2.0 nên hoàn lại tiền cược."
+  },
+  {
+    "id": 22,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Trung bình",
+    "question": "Kèo Tài Xỉu 3.0 trái. Trận đấu có tỷ số 2-1 (3 bàn). Cửa Xỉu sẽ như thế nào?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền",
+      "Thua nửa tiền"
+    ],
+    "answer": 2,
+    "explanation": "Tổng số bàn thắng bằng đúng mốc Tài Xỉu 3.0 nên hòa tiền."
+  },
+  {
+    "id": 23,
+    "category": "Kèo Xiên (Parlay)",
+    "difficulty": "Trung bình",
+    "question": "Kèo Xiên (Mix Parlay) trong cá cược bóng đá là gì?",
+    "options": [
+      "Kết hợp từ 2 hoặc nhiều lựa chọn cược vào cùng 1 vé",
+      "Đặt cược duy nhất 1 trận với số tiền lớn",
+      "Kèo cược chỉ dành cho hiệp phụ",
+      "Kèo chia đều tiền cho 2 đội"
+    ],
+    "answer": 0,
+    "explanation": "Kèo Xiên gộp nhiều trận/kèo vào một vé cược để nhân tỷ lệ ăn tiền."
+  },
+  {
+    "id": 24,
+    "category": "Kèo Xiên (Parlay)",
+    "difficulty": "Khó",
+    "question": "Trong 1 vé Xiên 3 trận, nếu có 1 trận bị HỦY thì vé xiên đó xử lý ra sao?",
+    "options": [
+      "Hủy toàn bộ vé xiên",
+      "Trận bị hủy tính Odds = 1.0, các trận còn lại vẫn tính bình thường",
+      "Coi như vé xiên thua 100%",
+      "Hoàn lại tiền cược ban đầu"
+    ],
+    "answer": 1,
+    "explanation": "Trận bị hủy sẽ nhân hệ số 1.0 (không nhân lời/thua), vé xiên chuyển thành Xiên 2."
+  },
+  {
+    "id": 25,
+    "category": "Kèo Rung (Running)",
+    "difficulty": "Dễ",
+    "question": "Kèo Rung (In-Play / Running) là gì?",
+    "options": [
+      "Đặt cược trực tiếp trong khi trận đấu đang diễn ra",
+      "Đặt cược trước khi trận đấu bắt đầu 24h",
+      "Kèo cược cho trận đấu bị hoãn",
+      "Kèo cược giao hữu"
+    ],
+    "answer": 0,
+    "explanation": "Kèo Rung diễn ra song song với thời gian lăn bóng trên sân."
+  },
+  {
+    "id": 26,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Đội A chấp Đội B (-0.5) trái. Trận đấu hòa 0-0. Người bắt Đội A thắng hay thua?",
+    "options": [
+      "Thắng đủ",
+      "Thua đủ",
+      "Hoàn tiền",
+      "Thua nửa tiền"
+    ],
+    "answer": 1,
+    "explanation": "Chấp 0.5 trái mà kết quả hòa thì cửa trên thua toàn bộ tiền."
+  },
+  {
+    "id": 27,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Đội A chấp Đội B (-0.5) trái. Trận đấu hòa 0-0. Người bắt Đội B (cửa dưới) như thế nào?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Thắng nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Được chấp 0.5 trái, khi hòa Đội B thắng đủ tiền."
+  },
+  {
+    "id": 28,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Khó",
+    "question": "Bắt Tài 1.75 trái trong Hiệp 1. Tỷ số Hiệp 1 là 1-0 (1 bàn). Vé cược kết toán thế nào?",
+    "options": [
+      "Thắng nửa tiền",
+      "Thua nửa tiền",
+      "Thua đủ tiền",
+      "Thắng đủ tiền"
+    ],
+    "answer": 2,
+    "explanation": "Tài 1.75 tách thành Tài 1.5 (Thua đủ - vì 1 bàn < 1.5) và Tài 2.0 (Thua đủ - vì 1 bàn < 2.0). Cả 2 nhánh đều thua nên vé cược thua đủ tiền."
+  },
+  {
+    "id": 29,
+    "category": "Kèo Phụ (Hai đội cùng ghi bàn)",
+    "difficulty": "Dễ",
+    "question": "Kèo Both Teams To Score (BTTS) - 'Yes'. Trận đấu có tỷ số 1-1. Kết quả là gì?",
+    "options": [
+      "Thắng cược",
+      "Thua cược",
+      "Hoàn tiền",
+      "Hủy vé"
+    ],
+    "answer": 0,
+    "explanation": "Cả 2 đội đều đã ghi ít nhất 1 bàn nên chọn Yes thắng cược."
+  },
+  {
+    "id": 30,
+    "category": "Kèo Phụ (Hai đội cùng ghi bàn)",
+    "difficulty": "Dễ",
+    "question": "Kèo Both Teams To Score (BTTS) - 'Yes'. Trận đấu có tỷ số 3-0. Kết quả ra sao?",
+    "options": [
+      "Thua cược",
+      "Thắng cược",
+      "Thắng nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Chỉ có 1 đội ghi bàn, đội còn lại 0 bàn nên chọn Yes thua cược."
+  },
+  {
+    "id": 31,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Trung bình",
+    "question": "Kèo (-0.25) còn có tên gọi dân gian là gì?",
+    "options": [
+      "Kèo đồng banh nửa trái (0-0.5)",
+      "Kèo nửa một (0.5-1)",
+      "Kèo một hòa (1.0)",
+      "Kèo quả rưỡi (1.5)"
+    ],
+    "answer": 0,
+    "explanation": "Kèo 0.25 nằm giữa 0 và 0.5 nên gọi là đồng banh nửa trái."
+  },
+  {
+    "id": 32,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Trung bình",
+    "question": "Kèo (-0.75) còn có tên gọi dân gian là gì?",
+    "options": [
+      "Kèo nửa một (0.5-1)",
+      "Kèo đồng banh nửa trái",
+      "Kèo một trái rưỡi",
+      "Kèo hai hòa"
+    ],
+    "answer": 0,
+    "explanation": "Kèo 0.75 nằm giữa 0.5 và 1.0 nên gọi là kèo nửa một."
+  },
+  {
+    "id": 33,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Trung bình",
+    "question": "Kèo (-1.25) còn được gọi là gì?",
+    "options": [
+      "Kèo 1 trái 1 trái rưỡi (1-1.5)",
+      "Kèo 1 trái rưỡi 2 trái",
+      "Kèo nửa trái",
+      "Kèo đồng banh"
+    ],
+    "answer": 0,
+    "explanation": "Kèo 1.25 nằm giữa 1.0 và 1.5."
+  },
+  {
+    "id": 34,
+    "category": "Kèo Phụ (Cơ Hội Kép)",
+    "difficulty": "Dễ",
+    "question": "Kèo Cơ Hội Kép (Double Chance) ký hiệu '1X' nghĩa là gì?",
+    "options": [
+      "Đội nhà thắng hoặc Hòa",
+      "Đội khách thắng hoặc Hòa",
+      "Đội nhà thắng hoặc Đội khách thắng",
+      "Chỉ tính kết quả trận đấu hòa"
+    ],
+    "answer": 0,
+    "explanation": "1 = Home, X = Draw. 1X kết hợp 2 cửa Đội nhà thắng hoặc Hòa."
+  },
+  {
+    "id": 35,
+    "category": "Kèo Phụ (Cơ Hội Kép)",
+    "difficulty": "Dễ",
+    "question": "Kèo Cơ Hội Kép (Double Chance) ký hiệu '12' nghĩa là gì?",
+    "options": [
+      "Đội nhà thắng hoặc Đội khách thắng (Không hòa)",
+      "Đội nhà thắng hoặc Hòa",
+      "Đội khách thắng hoặc Hòa",
+      "Trận đấu có tỷ số 1-2"
+    ],
+    "answer": 0,
+    "explanation": "1 = Home, 2 = Away. Chọn 12 thắng khi trận đấu không có tỷ số hòa."
+  },
+  {
+    "id": 36,
+    "category": "Tỷ Lệ Cược (Odds)",
+    "difficulty": "Khó",
+    "question": "Odds Indo là -1.25. Đặt cửa này 100$ nếu thua sẽ mất bao nhiêu tiền?",
+    "options": [
+      "125$",
+      "100$",
+      "80$",
+      "150$"
+    ],
+    "answer": 0,
+    "explanation": "Odds Indo âm (-) tính tiền thua. Thua = Tiền cược x |Odds| = 100 x 1.25 = 125$."
+  },
+  {
+    "id": 37,
+    "category": "Tỷ Lệ Cược (Odds)",
+    "difficulty": "Khó",
+    "question": "Odds MY (Malaysia) là -0.80. Đặt 100$ nếu thắng cược thu về tiền lời bao nhiêu?",
+    "options": [
+      "100$",
+      "80$",
+      "125$",
+      "800$"
+    ],
+    "answer": 0,
+    "explanation": "Odds MY âm (-): Thắng nhận đủ 100% tiền cược (100$), thua chỉ mất 80$ tiền cược."
+  },
+  {
+    "id": 38,
+    "category": "Kèo Phụ (Đội ghi bàn trước)",
+    "difficulty": "Dễ",
+    "question": "Kèo First Goal (FG) là loại cược gì?",
+    "options": [
+      "Dự đoán đội ghi bàn thắng đầu tiên",
+      "Dự đoán đội ghi bàn cuối cùng",
+      "Dự đoán số phút có bàn thắng",
+      "Dự đoán cầu thủ nhận thẻ đầu tiên"
+    ],
+    "answer": 0,
+    "explanation": "First Goal = Bàn thắng đầu tiên trong trận."
+  },
+  {
+    "id": 39,
+    "category": "Kèo Phụ (Việt Vị)",
+    "difficulty": "Trung bình",
+    "question": "Kèo Tài Xỉu Việt Vị (Offsides) 4.5. Trận đấu có 4 lần việt vị. Cửa Xỉu thế nào?",
+    "options": [
+      "Thắng đủ",
+      "Thua đủ",
+      "Hoàn tiền",
+      "Thắng nửa"
+    ],
+    "answer": 0,
+    "explanation": "4 lần việt vị ít hơn mốc 4.5 nên cửa Xỉu thắng đủ tiền."
+  },
+  {
+    "id": 40,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Đội A chấp Đội B (-1.5) trái. Trận đấu kết thúc 2-1. Đội A thắng hay thua kèo?",
+    "options": [
+      "Thua đủ tiền",
+      "Thắng đủ tiền",
+      "Thắng nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Đội A thắng cách biệt 1 bàn, không đủ vượt mức chấp 1.5 nên thua kèo."
+  },
+  {
+    "id": 41,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Đội A chấp Đội B (-1.5) trái. Trận đấu kết thúc 2-0. Đội A thắng hay thua kèo?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền",
+      "Thắng nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "Đội A thắng cách biệt 2 bàn > 1.5 nên thắng đủ tiền."
+  },
+  {
+    "id": 42,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Dễ",
+    "question": "Kèo Tài Xỉu cả trận là 2.0 trái. Trận đấu có tỷ số 1-0. Chọn Xỉu kết quả ra sao?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền",
+      "Thắng nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "1 bàn thắng nhỏ hơn mốc 2.0 nên Xỉu thắng đủ."
+  },
+  {
+    "id": 43,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Trung bình",
+    "question": "Kèo Tài Xỉu 3.25 (3-3.5) trái. Tỷ số là 2-1 (3 bàn). Chọn Tài kết quả thế nào?",
+    "options": [
+      "Thua nửa tiền",
+      "Thua đủ tiền",
+      "Thắng nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Tài 3.25 tách thành Tài 3.0 (Hòa) và Tài 3.5 (Thua) -> Tổng thua nửa tiền."
+  },
+  {
+    "id": 44,
+    "category": "Quy Tắc Cá Cược",
+    "difficulty": "Trung bình",
+    "question": "Nếu trận đấu bị TẠM HOÃN và không thi đấu lại trong vòng 24h-36h, các vé cược đơn sẽ xử lý thế nào?",
+    "options": [
+      "Hủy vé cược và hoàn tiền",
+      "Mặc định tính thua 100%",
+      "Giữ nguyên vé cược chờ thi đấu lại bất kỳ lúc nào",
+      "Xử đội nhà thắng"
+    ],
+    "answer": 0,
+    "explanation": "Theo quy tắc chung của nhà cái, trận đấu bị hủy quá thời gian quy định sẽ hoàn tiền cược."
+  },
+  {
+    "id": 45,
+    "category": "Quy Tắc Cá Cược",
+    "difficulty": "Khó",
+    "question": "Bàn thắng phản lưới nhà (Own Goal) có được tính vào kèo Cầu Thủ Ghi Bàn (Anytime Goalscorer) không?",
+    "options": [
+      "Không được tính",
+      "Được tính bình thường",
+      "Tính nửa tiền",
+      "Tùy thuộc đội nhà hay đội khách"
+    ],
+    "answer": 0,
+    "explanation": "Cầu thủ phản lưới nhà không được tính bàn thắng cho kèo Anytime Goalscorer."
+  },
+  {
+    "id": 46,
+    "category": "Kèo Phụ (Phạt Góc)",
+    "difficulty": "Trung bình",
+    "question": "Kèo Chấp Phạt Góc Đội A (-1.5) quả. Đội A được 6 góc, Đội B được 4 góc. Đội A thắng hay thua kèo góc?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền",
+      "Thắng nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "Cách biệt góc = 6 - 4 = 2 quả > mốc chấp 1.5 nên Đội A thắng kèo góc."
+  },
+  {
+    "id": 47,
+    "category": "Kèo Phụ (Phạt Góc)",
+    "difficulty": "Trung bình",
+    "question": "Quả phạt góc thực hiện lại (do trọng tài thổi còi lại) có được đếm vào tổng phạt góc không?",
+    "options": [
+      "Chỉ tính 1 quả hợp lệ",
+      "Tính thành 2 quả",
+      "Không tính quả nào",
+      "Tùy quyết định nhà cái"
+    ],
+    "answer": 0,
+    "explanation": "Chỉ quả phạt góc thực hiện hợp lệ cuối cùng mới được tính vào hệ thống."
+  },
+  {
+    "id": 48,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Khó",
+    "question": "Bắt cửa dưới được chấp (+0.75) trái. Đội cửa trên thắng 1-0. Kết quả vé cược cửa dưới là gì?",
+    "options": [
+      "Thua nửa tiền",
+      "Thua đủ tiền",
+      "Thắng nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Chấp +0.75 tách thành +0.5 (Thua đủ) và +1.0 (Hòa) -> Tổng thua nửa tiền."
+  },
+  {
+    "id": 49,
+    "category": "Kèo Rung (Running)",
+    "difficulty": "Khó",
+    "question": "Trong Kèo Rung Châu Á (In-Play Handicap), tỷ số trận đấu khi bắt cược được tính như thế nào?",
+    "options": [
+      "Tính từ tỷ số 0-0 tại thời điểm đặt cược",
+      "Tính luôn tỷ số thực tế đang có trên sân",
+      "Mặc định cộng thêm 1 bàn cho đội nhà",
+      "Không áp dụng mốc handicap"
+    ],
+    "answer": 0,
+    "explanation": "Kèo Rung Châu Á mặc định coi tỷ số lúc bấm cược là 0-0."
+  },
+  {
+    "id": 50,
+    "category": "Kèo Rung (Running)",
+    "difficulty": "Khó",
+    "question": "Trong Kèo Rung Tài Xỉu (In-Play Over/Under), mốc Tài Xỉu tính dựa trên cái gì?",
+    "options": [
+      "Tổng số bàn thắng toàn trận (bao gồm cả các bàn đã ghi trước đó)",
+      "Chỉ tính các bàn thắng ghi sau thời điểm đặt cược",
+      "Chỉ tính bàn thắng trong Hiệp 2",
+      "Tính bàn thắng từ chấm 11m"
+    ],
+    "answer": 0,
+    "explanation": "Khác với Kèo Rung Châu Á, Kèo Rung Tài Xỉu cộng dồn tất cả bàn thắng của toàn trận."
+  },
+  {
+    "id": 51,
+    "category": "Kèo Châu Âu (1X2)",
+    "difficulty": "Dễ",
+    "question": "Trong kèo Châu Âu 1X2, ký tự 'X' đại diện cho kết quả nào?",
+    "options": [
+      "Đội chủ nhà thắng",
+      "Đội khách thắng",
+      "Kết quả Hòa",
+      "Trận đấu bị hủy"
+    ],
+    "answer": 2,
+    "explanation": "1 = Home (Chủ nhà thắng), X = Draw (Hòa), 2 = Away (Khách thắng)."
+  },
+  {
+    "id": 52,
+    "category": "Kèo Châu Âu (1X2)",
+    "difficulty": "Trung bình",
+    "question": "So với kèo Châu Á, ưu điểm chính của Kèo Châu Âu 1X2 là gì?",
+    "options": [
+      "Không cần quan tâm đến cách biệt bàn thắng hay tỷ lệ chấp",
+      "Có chấp bàn thắng",
+      "Luôn được trả lại tiền cược",
+      "Odds luôn dưới 1.50"
+    ],
+    "answer": 0,
+    "explanation": "Kèo 1X2 chỉ quan tâm đến đội nào thắng/hòa/thua, không tính số bàn chấp."
+  },
+  {
+    "id": 53,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Dễ",
+    "question": "Kèo Tài Xỉu (Over/Under) trong bóng đá tính dựa trên chỉ số nào?",
+    "options": [
+      "Tổng số bàn thắng của cả hai đội",
+      "Số thẻ phạt trong trận",
+      "Số quả phạt góc",
+      "Số lần việt vị"
+    ],
+    "answer": 0,
+    "explanation": "Mặc định kèo Tài Xỉu tính trên tổng số bàn thắng 2 đội ghi được."
+  },
+  {
+    "id": 54,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Khó",
+    "question": "Bắt Xỉu 1.75 trái. Trận đấu kết thúc tỷ số 1-1 (2 bàn). Kết quả vé cược là gì?",
+    "options": [
+      "Thua đủ tiền",
+      "Thua nửa tiền",
+      "Thắng nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 1,
+    "explanation": "Xỉu 1.75 tách thành Xỉu 1.5 (Thua) và Xỉu 2.0 (Hòa) -> Tổng vé cược thua nửa tiền."
+  },
+  {
+    "id": 55,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Trung bình",
+    "question": "Bắt cửa trên chấp (-0.25). Trận đấu hòa 1-1. Kết quả vé cược thế nào?",
+    "options": [
+      "Thua nửa tiền",
+      "Thua đủ tiền",
+      "Thắng nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Kèo -0.25 tách thành 0.0 (Hòa tiền) và -0.5 (Thua đủ) -> Tổng thua nửa tiền."
+  },
+  {
+    "id": 56,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Trung bình",
+    "question": "Bắt cửa dưới được chấp (+0.25). Trận đấu hòa 1-1. Kết quả vé cược ra sao?",
+    "options": [
+      "Thắng nửa tiền",
+      "Thắng đủ tiền",
+      "Thua nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Được chấp +0.25 khi hòa sẽ ăn nửa tiền."
+  },
+  {
+    "id": 57,
+    "category": "Kèo Tỷ Số (Correct Score)",
+    "difficulty": "Dễ",
+    "question": "Kèo 'AOS' (Any Other Score) trong bảng kèo Tỷ Số Đúng nghĩa là gì?",
+    "options": [
+      "Tỷ số khác ngoài các tỷ số nhà cái liệt kê sẵn",
+      "Tỷ số hòa 0-0",
+      "Tỷ số nghiêng về đội khách",
+      "Trận đấu có trên 5 bàn thắng"
+    ],
+    "answer": 0,
+    "explanation": "AOS là cửa gom tất cả các tỷ số đậm/hiếm gặp không nằm trong bảng niêm yết."
+  },
+  {
+    "id": 58,
+    "category": "Kèo Phụ (Phạt Góc)",
+    "difficulty": "Dễ",
+    "question": "Kèo 'Phạt Góc Đầu Tiên' (First Corner) tính cho đội nào?",
+    "options": [
+      "Đội thực hiện quả phạt góc đầu tiên của trận đấu",
+      "Đội chịu quả phạt góc đầu tiên",
+      "Đội ghi bàn từ quả phạt góc",
+      "Đội chủ nhà mặc định"
+    ],
+    "answer": 0,
+    "explanation": "Đội nào được hưởng và thực hiện quả góc đầu tiên sẽ thắng kèo này."
+  },
+  {
+    "id": 59,
+    "category": "Kèo Phụ (Phạt Góc)",
+    "difficulty": "Dễ",
+    "question": "Kèo 'Phạt Góc Cuối Cùng' (Last Corner) tính cho đội nào?",
+    "options": [
+      "Đội thực hiện quả phạt góc cuối cùng trước khi hết giờ",
+      "Đội có nhiều phạt góc hơn",
+      "Đội bị thủng lưới cuối cùng",
+      "Đội khách"
+    ],
+    "answer": 0,
+    "explanation": "Tính cho đội đá quả phạt góc cuối cùng của trận."
+  },
+  {
+    "id": 61,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Khó",
+    "question": "Đội A chấp Đội B (-2.25) trái. Đội A thắng 2-0. Người đặt Đội A kết quả thế nào?",
+    "options": [
+      "Thua nửa tiền",
+      "Thua đủ tiền",
+      "Thắng nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Kèo -2.25 tách thành -2.0 (Hòa) và -2.5 (Thua) -> Tổng thua nửa tiền."
+  },
+  {
+    "id": 62,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Khó",
+    "question": "Đội A chấp Đội B (-2.25) trái. Đội A thắng 2-0. Người đặt Đội B (cửa dưới) thế nào?",
+    "options": [
+      "Thắng nửa tiền",
+      "Thắng đủ tiền",
+      "Thua nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Cửa dưới được chấp +2.25 khi thua cách biệt 2 bàn sẽ ăn nửa tiền."
+  },
+  {
+    "id": 63,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Dễ",
+    "question": "Kèo Tài Xỉu 0.75 trái Hiệp 1. Hiệp 1 có 1 bàn thắng. Chọn Tài kết quả ra sao?",
+    "options": [
+      "Thắng nửa tiền",
+      "Thắng đủ tiền",
+      "Thua nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Tài 0.75 có 1 bàn thắng vượt qua mốc 0.5 (Thắng) và đạt mốc 1.0 (Ăn nửa)."
+  },
+  {
+    "id": 64,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Trung bình",
+    "question": "Kèo Tài Xỉu 1.5 trái. Trận đấu có 1 bàn thắng. Chọn Tài thắng hay thua?",
+    "options": [
+      "Thua đủ tiền",
+      "Thắng đủ tiền",
+      "Thua nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "1 bàn thắng nhỏ hơn mốc 1.5 nên chọn Tài thua đủ tiền."
+  },
+  {
+    "id": 65,
+    "category": "Quy Tắc Cá Cược",
+    "difficulty": "Trung bình",
+    "question": "Hiệp 1 bị hủy giữa chừng do thời tiết, các vé cược Hiệp 1 đã kết toán (như Kèo Bàn Thắng Đầu Tiên) xử lý ra sao?",
+    "options": [
+      "Vẫn được giữ nguyên kết quả nếu đã phát sinh bàn thắng",
+      "Bị hủy toàn bộ",
+      "Tính thua 50%",
+      "Chờ đá lại"
+    ],
+    "answer": 0,
+    "explanation": "Các kèo đã vô hiệu lực trước thời điểm hủy trận (đã có kết quả rõ ràng) vẫn được tính."
+  },
+  {
+    "id": 66,
+    "category": "Kèo Phụ (Cầu Thủ Ghi Bàn)",
+    "difficulty": "Dễ",
+    "question": "Kèo 'First Goalscorer' là dự đoán điều gì?",
+    "options": [
+      "Cầu thủ ghi bàn thắng đầu tiên của trận đấu",
+      "Đội bóng ghi bàn trước",
+      "Cầu thủ nhận thẻ đầu tiên",
+      "Cầu thủ bị thay ra đầu tiên"
+    ],
+    "answer": 0,
+    "explanation": "First Goalscorer = Cầu thủ ghi bàn mở tỷ số."
+  },
+  {
+    "id": 67,
+    "category": "Kèo Phụ (Việt Vị)",
+    "difficulty": "Dễ",
+    "question": "Kèo Chấp Việt Vị Đội A (-1.0). Đội A bị thổi việt vị 3 lần, Đội B bị 2 lần. Kết quả là gì?",
+    "options": [
+      "Hoàn tiền (Hòa kèo)",
+      "Đội A thắng đủ",
+      "Đội A thua đủ",
+      "Đội B thắng đủ"
+    ],
+    "answer": 0,
+    "explanation": "Cách biệt việt vị = 3 - 2 = 1 trùng với mốc chấp 1.0 nên hoàn tiền."
+  },
+  {
+    "id": 68,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Kèo chấp (-0.5) còn có tên gọi khác là gì?",
+    "options": [
+      "Kèo chấp nửa trái",
+      "Kèo chấp 1 trái",
+      "Kèo chấp nửa một",
+      "Kèo đồng banh"
+    ],
+    "answer": 0,
+    "explanation": "0.5 = Nửa trái (Half handicap)."
+  },
+  {
+    "id": 69,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Kèo chấp (-1.0) còn có tên gọi khác là gì?",
+    "options": [
+      "Kèo 1 hòa (Kèo 1 trái)",
+      "Kèo nửa trái",
+      "Kèo đồng banh",
+      "Kèo trái rưỡi"
+    ],
+    "answer": 0,
+    "explanation": "1.0 = 1 hòa (thắng 1 bàn thì hòa tiền)."
+  },
+  {
+    "id": 70,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Kèo chấp (-1.5) còn có tên gọi khác là gì?",
+    "options": [
+      "Kèo 1 trái rưỡi (1 đứt)",
+      "Kèo 1 hòa",
+      "Kèo nửa một",
+      "Kèo đồng banh"
+    ],
+    "answer": 0,
+    "explanation": "1.5 = Một trái rưỡi."
+  },
+  {
+    "id": 71,
+    "category": "Tỷ Lệ Cược (Odds)",
+    "difficulty": "Trung bình",
+    "question": "Odds US (Mỹ) mang dấu dương như (+150) nghĩa là gì?",
+    "options": [
+      "Đặt 100$ thu về tiền lời 150$",
+      "Đặt 150$ để thu về 100$ lời",
+      "Đặt 100$ thu về tổng 150$",
+      "Cược tối đa 150$"
+    ],
+    "answer": 0,
+    "explanation": "Odds US dương thể hiện số tiền lời nhận được khi cược 100$."
+  },
+  {
+    "id": 72,
+    "category": "Tỷ Lệ Cược (Odds)",
+    "difficulty": "Trung bình",
+    "question": "Odds US (Mỹ) mang dấu âm như (-200) nghĩa là gì?",
+    "options": [
+      "Phải đặt 200$ để thắng được 100$ tiền lời",
+      "Đặt 100$ thắng 200$",
+      "Thua chắc chắn 200$",
+      "Odds dành cho cửa dưới"
+    ],
+    "answer": 0,
+    "explanation": "Odds US âm thể hiện lượng tiền cược cần bỏ ra để ăn 100$ lời."
+  },
+  {
+    "id": 73,
+    "category": "Kèo Phụ (Thẻ Phạt)",
+    "difficulty": "Dễ",
+    "question": "Thẻ phạt rút ra cho HLV hoặc cầu thủ dự bị trên băng ghế chỉ đạo có tính vào Kèo Thẻ không?",
+    "options": [
+      "Hầu hết nhà cái KHÔNG tính",
+      "Luôn tính bình thường",
+      "Tính gấp đôi điểm",
+      "Chỉ tính nếu là thẻ đỏ"
+    ],
+    "answer": 0,
+    "explanation": "Quy định chung chỉ tính thẻ phạt rút ra cho cầu thủ đang thi đấu trên sân."
+  },
+  {
+    "id": 74,
+    "category": "Kèo Phụ (Thẻ Phạt)",
+    "difficulty": "Trung bình",
+    "question": "1 cầu thủ nhận 2 thẻ vàng dẫn đến 1 thẻ đỏ trong trận. Tổng số thẻ/điểm tính cho cầu thủ đó là bao nhiêu?",
+    "options": [
+      "1 thẻ vàng + 1 thẻ đỏ (2 thẻ / 35 điểm)",
+      "Chỉ tính 1 thẻ đỏ",
+      "Chỉ tính 2 thẻ vàng",
+      "Không tính thẻ nào"
+    ],
+    "answer": 0,
+    "explanation": "Theo chuẩn nhà cái: Thẻ vàng 1 = 10đ, Thẻ vàng 2 = 10đ, Thẻ đỏ gián tiếp = 25đ (nếu nhận thẻ vàng thứ 2 thì chỉ tính 1 thẻ vàng trước đó và 1 thẻ đỏ )."
+  },
+  {
+    "id": 75,
+    "category": "Kèo Phụ (Sút Trúng Đích)",
+    "difficulty": "Trung bình",
+    "question": "Kèo Shots on Target (Sút trúng đích) có tính các quả sút trúng cột dọc/xà ngang không?",
+    "options": [
+      "KHÔNG tính (trừ khi bóng đập cột/xà rồi đi vào lưới)",
+      "Luôn tính là 1 lần sút trúng đích",
+      "Tính thành 2 lần",
+      "Tùy trọng tài quyết định"
+    ],
+    "answer": 0,
+    "explanation": "Theo thống kê Opta, bóng đập cột dọc/xà ngang ra ngoài không tính là Shots on Target."
+  },
+  {
+    "id": 76,
+    "category": "Kèo Tỷ Số (Correct Score)",
+    "difficulty": "Dễ",
+    "question": "Đặt tỷ số 2-1 (Chủ thắng). Trận đấu kết thúc 1-2 (Khách thắng). Vé cược thắng hay thua?",
+    "options": [
+      "Thua đủ tiền",
+      "Thắng đủ tiền",
+      "Hoàn tiền",
+      "Ăn nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "Tỷ số đúng đòi hỏi chính xác từng đội, 2-1 khác hoàn toàn 1-2."
+  },
+  {
+    "id": 77,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Dễ",
+    "question": "Kèo Tài Xỉu 0.5 trái. Trận đấu kết thúc 0-0. Cửa Xỉu thế nào?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền",
+      "Thắng nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "0 bàn thắng nhỏ hơn mốc 0.5 nên Xỉu thắng đủ."
+  },
+  {
+    "id": 78,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Dễ",
+    "question": "Kèo Tài Xỉu 0.5 trái. Trận đấu có 1 bàn thắng. Cửa Xỉu thế nào?",
+    "options": [
+      "Thua đủ tiền",
+      "Thắng đủ tiền",
+      "Hoàn tiền",
+      "Thua nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "1 bàn thắng lớn hơn 0.5 nên Xỉu thua đủ."
+  },
+  {
+    "id": 79,
+    "category": "Kèo Phụ (Phạt Góc)",
+    "difficulty": "Khó",
+    "question": "Kèo Tài Xỉu Phạt Góc Hiệp 1 là 4.75. Hiệp 1 có đúng 5 quả góc. Cửa Tài thắng hay thua?",
+    "options": [
+      "Thắng nửa tiền",
+      "Thắng đủ tiền",
+      "Thua nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Tài 4.75 tách thành 4.5 (Thắng) và 5.0 (Hòa) -> Tổng thắng nửa tiền."
+  },
+  {
+    "id": 80,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Kèo Châu Á chấp (-3.0) trái. Đội cửa trên thắng 3-0. Vé cược như thế nào?",
+    "options": [
+      "Hoàn tiền (Hòa kèo)",
+      "Thắng đủ",
+      "Thua đủ",
+      "Thắng nửa"
+    ],
+    "answer": 0,
+    "explanation": "Thắng cách biệt đúng 3 bàn bằng mốc chấp 3.0 nên hòa tiền."
+  },
+  {
+    "id": 81,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Trung bình",
+    "question": "Đội cửa trên chấp (-0.5) trái. Tỷ số chung cuộc 1-0 (cửa trên thắng). Bắt cửa dưới kết quả ra sao?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Thắng nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 1,
+    "explanation": "Cửa dưới được chấp 0.5 mà đội cửa trên thắng trận thì cửa dưới thua đủ."
+  },
+  {
+    "id": 82,
+    "category": "Kèo Phụ (Thay Người)",
+    "difficulty": "Trung bình",
+    "question": "Kèo Tài Xỉu Số Lần Thay Người cả trận mặc định thường là bao nhiêu lần ở các giải chính thức?",
+    "options": [
+      "9.5 lần",
+      "5.5 lần",
+      "3.5 lần",
+      "12.5 lần"
+    ],
+    "answer": 0,
+    "explanation": "Mỗi đội được thay 5 người (tổng 10 người), nên mốc Tài Xỉu thường là 9.5."
+  },
+  {
+    "id": 83,
+    "category": "Kèo Phụ (Thời Gian Bàn Thắng)",
+    "difficulty": "Trung bình",
+    "question": "Kèo 'Lưới rung từ phút 15-30'. Bàn thắng ghi ở phút 14:59 có được tính không?",
+    "options": [
+      "KHÔNG tính (thuộc khoảng 00:00 - 14:59)",
+      "Có tính",
+      "Tính nửa tiền",
+      "Tùy đội ghi bàn"
+    ],
+    "answer": 0,
+    "explanation": "Phút 14:59 nằm trong khung 0-15 phút đầu tiên."
+  },
+  {
+    "id": 84,
+    "category": "Kèo Phụ (Thời Gian Bàn Thắng)",
+    "difficulty": "Trung bình",
+    "question": "Bàn thắng ghi ở phút 90+2 (bù giờ) được tính thuộc khung thời gian nào trong kèo phụ?",
+    "options": [
+      "Thuộc khung từ phút 75 đến hết trận (Phút 75 - Fulltime)",
+      "Thuộc khung Hiệp phụ",
+      "Không được tính",
+      "Tính sang Hiệp 1"
+    ],
+    "answer": 0,
+    "explanation": "Thời gian bù giờ hiệp 2 luôn thuộc khung thời gian cuối cùng của trận đấu."
+  },
+  {
+    "id": 85,
+    "category": "Kèo Xiên (Parlay)",
+    "difficulty": "Khó",
+    "question": "Công thức tính Tỷ lệ ăn (Odds) cho một vé Xiên gồm 3 trận đều THẮNG ĐỦ là gì?",
+    "options": [
+      "Odds Xiên = Odds1 x Odds2 x Odds3",
+      "Odds Xiên = Odds1 + Odds2 + Odds3",
+      "Odds Xiên = (Odds1 + Odds2 + Odds3) / 3",
+      "Odds Xiên = Odds1 x 3"
+    ],
+    "answer": 0,
+    "explanation": "Kèo Xiên thắng đủ sẽ nhân liên tiếp các Odds với nhau."
+  },
+  {
+    "id": 86,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Bạn cược Đội A chấp (-0.5). Đội A thắng 3-2. Bạn thắng hay thua?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền",
+      "Thắng nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "3-2 tức Đội A thắng trận, vượt mốc chấp 0.5 nên thắng đủ."
+  },
+  {
+    "id": 87,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Dễ",
+    "question": "Kèo Tài Xỉu 2.5. Tổng số bàn thắng là 3. Cửa Xỉu thắng hay thua?",
+    "options": [
+      "Thua đủ tiền",
+      "Thắng đủ tiền",
+      "Hoàn tiền",
+      "Thua nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "3 bàn lớn hơn 2.5 nên cửa Xỉu thua toàn bộ tiền."
+  },
+  {
+    "id": 88,
+    "category": "Tỷ Lệ Cược (Odds)",
+    "difficulty": "Dễ",
+    "question": "Odds Decimal là 1.50. Đặt 100$ thắng cược thì thu về lợi nhuận (tiền lời) là bao nhiêu?",
+    "options": [
+      "50$",
+      "150$",
+      "100$",
+      "200$"
+    ],
+    "answer": 0,
+    "explanation": "Lợi nhuận = (100 x 1.50) - 100 = 50$."
+  },
+  {
+    "id": 89,
+    "category": "Kèo Phụ (Phạt Góc)",
+    "difficulty": "Trung bình",
+    "question": "Kèo Chấp Phạt Góc 0.0 (Đồng banh góc). Trận đấu Đội A được 5 góc, Đội B 5 góc. Kết quả là gì?",
+    "options": [
+      "Hoàn tiền cả 2 cửa",
+      "Đội A thắng",
+      "Đội B thắng",
+      "Xử thua cả 2"
+    ],
+    "answer": 0,
+    "explanation": "Kèo đồng banh góc khi hòa số lượng góc sẽ hoàn lại tiền cược."
+  },
+  {
+    "id": 90,
+    "category": "Kèo Phụ (Penalty)",
+    "difficulty": "Dễ",
+    "question": "Kèo 'Có Phạt Đền (Penalty) Hay Không'. Trận đấu có 1 quả 11m nhưng cầu thủ sút HỎNG. Cửa 'Có' thắng hay thua?",
+    "options": [
+      "Vẫn THẮNG cược",
+      "Thua cược",
+      "Hoàn tiền",
+      "Tính nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "Chỉ cần trọng tài thổi phạt đền là cửa 'Có' đã thắng, không phụ thuộc vào sút vào hay hỏng."
+  },
+  {
+    "id": 91,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Khó",
+    "question": "Kèo chấp (+1.25) cho cửa dưới. Đội cửa dưới thua 0-1. Kết quả cửa dưới ra sao?",
+    "options": [
+      "Thắng nửa tiền",
+      "Thua nửa tiền",
+      "Thắng đủ tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "+1.25 tách thành +1.0 (Hòa) và +1.5 (Thắng) -> Cửa dưới thắng nửa tiền."
+  },
+  {
+    "id": 92,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Khó",
+    "question": "Kèo chấp (+1.75) cho cửa dưới. Đội cửa dưới thua 0-2. Kết quả cửa dưới thế nào?",
+    "options": [
+      "Thua nửa tiền",
+      "Thắng nửa tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "+1.75 tách thành +1.5 (Thua) và +2.0 (Hòa) -> Cửa dưới thua nửa tiền."
+  },
+  {
+    "id": 93,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Khó",
+    "question": "Kèo Tài Xỉu 3.75 (3.5-4) trái. Trận đấu có 4 bàn thắng. Cửa Tài kết quả thế nào?",
+    "options": [
+      "Thắng nửa tiền",
+      "Thắng đủ tiền",
+      "Thua nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Tài 3.75 tách thành Tài 3.5 (Thắng đủ) và Tài 4.0 (Hòa) -> Tổng thắng nửa tiền."
+  },
+  {
+    "id": 94,
+    "category": "Kèo Tài Xỉu (Over/Under)",
+    "difficulty": "Khó",
+    "question": "Kèo Tài Xỉu 3.75 (3.5-4) trái. Trận đấu có 4 bàn thắng. Cửa Xỉu kết quả thế nào?",
+    "options": [
+      "Thua nửa tiền",
+      "Thua đủ tiền",
+      "Thắng nửa tiền",
+      "Hoàn tiền"
+    ],
+    "answer": 0,
+    "explanation": "Xỉu 3.75 tách thành Xỉu 3.5 (Thua đủ) và Xỉu 4.0 (Hòa) -> Tổng thua nửa tiền."
+  },
+  {
+    "id": 95,
+    "category": "Kèo Phụ (Bàn Thắng Phút Cuối)",
+    "difficulty": "Trung bình",
+    "question": "Kèo 'Late Goal' (Bàn thắng muộn từ phút 85-90+). Trận đấu không có bàn nào ở giai đoạn này. Cửa 'No' thắng hay thua?",
+    "options": [
+      "Thắng cược",
+      "Thua cược",
+      "Hoàn tiền",
+      "Tính nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "Chọn No (Không có bàn thắng muộn) sẽ thắng cược."
+  },
+  {
+    "id": 96,
+    "category": "Kèo Châu Âu (1X2)",
+    "difficulty": "Dễ",
+    "question": "Đặt cửa '1' trong Kèo Châu Âu 1X2. Trận đấu có tỷ số 0-0. Bạn thắng hay thua?",
+    "options": [
+      "Thua đủ tiền",
+      "Thắng đủ tiền",
+      "Hoàn tiền",
+      "Thua nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "Đặt cửa 1 (Chủ nhà thắng) nhưng hòa thì bị mất toàn bộ tiền cược."
+  },
+  {
+    "id": 97,
+    "category": "Kèo Phụ (Thẻ Phạt)",
+    "difficulty": "Dễ",
+    "question": "Kèo 'Thẻ Phạt Đầu Tiên' (First Card) thuộc về đội nào nếu 2 cầu thủ 2 đội nhận thẻ CÙNG LÚC trong 1 xô xát?",
+    "options": [
+      "Nhà cái xử hoàn tiền hoặc dựa vào cầu thủ bị trọng tài rút thẻ giơ lên trước",
+      "Coi như thua cả 2 đội",
+      "Mặc định tính cho đội chủ nhà",
+      "Mặc định tính cho đội khách"
+    ],
+    "answer": 0,
+    "explanation": "Quy tắc nhà cái sẽ căn cứ vào biên bản trận đấu/hình ảnh đội nào bị giơ thẻ phạt trước."
+  },
+  {
+    "id": 98,
+    "category": "Quy Tắc Cá Cược",
+    "difficulty": "Dễ",
+    "question": "Hiệp phụ (Extra Time) có được tự động tính vào các kèo chấp Châu Á cả trận mặc định không?",
+    "options": [
+      "KHÔNG (Mặc định chỉ tính 90 phút + bù giờ, trừ khi có kèo riêng cho Hiệp phụ)",
+      "CÓ (Luôn tự động cộng thêm)",
+      "Chỉ tính nếu có bàn thắng",
+      "Chỉ tính trong các trận Chung kết"
+    ],
+    "answer": 0,
+    "explanation": "Tất cả các kèo mặc định chỉ áp dụng cho thời gian thi đấu chính thức 90 phút + bù giờ."
+  },
+  {
+    "id": 99,
+    "category": "Quy Tắc Cá Cược",
+    "difficulty": "Dễ",
+    "question": "Loạt sút luân lưu 11m (Penalty Shootout) có được tính vào Kèo Tài Xỉu Bàn Thắng Cả Trận không?",
+    "options": [
+      "KHÔNG tính",
+      "CÓ tính toàn bộ",
+      "Chỉ tính các quả sút thành công",
+      "Tính 50% số bàn"
+    ],
+    "answer": 0,
+    "explanation": "Loạt sút luân lưu không bao giờ được tính vào tổng bàn thắng cả trận."
+  },
+  {
+    "id": 100,
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Kèo đồng banh (0.0). Đội A thắng Đội B tỷ số 1-0. Bắt Đội A thắng hay thua?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Hoàn tiền",
+      "Thắng nửa tiền"
+    ],
+    "answer": 0,
+    "explanation": "Kèo 0.0 khi đội mình chọn thắng trận thì sẽ thắng đủ tiền cược."
+  },
+  {
+    "id": "1790015651415",
+    "category": "Kèo Châu Á (Asian Handicap)",
+    "difficulty": "Dễ",
+    "question": "Khi trong trận đấu đội chủ nhà đang dẫn 2-1. Bạn đặt cược đội chủ nhà 100$ ( -0.25 ) đến khi kết thúc trận đấu tỉ số không thay đổi. Thắng thua thế nào ?",
+    "options": [
+      "Thắng đủ tiền",
+      "Thua đủ tiền",
+      "Thua nửa tiền",
+      "Thắng nửa tiền"
+    ],
+    "answer": 2,
+    "explanation": "Khi tham gia đặt cược chấp HDP tính từ thời gian đặt cược tỉ số là 0-0. đội nhà chấp -0.25 khi hoà sẽ thua nửa số tiền cược"
+  }
+]

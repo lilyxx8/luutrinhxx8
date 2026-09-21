@@ -1,0 +1,565 @@
+[
+  {
+    "ID": "main_gioithieu",
+    "Parent": "main",
+    "Label": "📘 GIỚI THIỆU HƯỚNG DẪN",
+    "Content": "Chào mừng bạn đến với gia đình FK AD88 nhé",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "gt_trangchu",
+    "Label": "TRANG CHỦ AD88",
+    "Parent": "main_gioithieu",
+    "Content": "- Tham quan trang chủ AD88, \n- Tạo tài khoản test game - https://ad88v9.com/",
+    "Image_Captions": "",
+    "File_Url": "",
+    "IsHidden": false
+  },
+  {
+    "ID": "km_88k",
+    "Parent": "main_gioithieu",
+    "Label": "VIP88K",
+    "Content": "- ĐĂNG KÍ NHẬN VIP88K - VIP88K\nSản phẩm áp dụng: Chỉ dành cho các trò chơi Nổ Hũ - Bắn Cá (không áp dụng cho trò chơi hai mặt trong sảnh nổ hũ).\nYêu cầu vòng cược: Phải trải qua 5 vòng cược (tương đương 440 điểm cược hợp lệ).\nThời gian hoàn thành: Cần hoàn thành đặt cược trong vòng 24 giờ sau khi nhận thưởng, nếu không sẽ bị thu hồi.\nGiới hạn rút tiền: Rút 1 lần duy nhất, tiền rút hợp lệ từ 100 điểm đến 300 điểm (phần thừa sẽ bị thu hồi).\n+Quy Định Chống Gian Lận\nMỗi tài khoản, họ tên, thiết bị, IP, SĐT và tài khoản ngân hàng chỉ được nhận thưởng 1 lần.\nNghiêm cấm tạo nhiều tài khoản, sử dụng phần mềm độc hại hoặc thay đổi IP/FP. Vi phạm sẽ bị thu hồi thưởng, đưa vào danh sách đen và từ chối vĩnh viễn các chương trình khuyến mãi.",
+    "File_Url": ""
+  },
+  {
+    "ID": "km_nd01",
+    "Parent": "main_gioithieu",
+    "Label": "ND01",
+    "Content": "- NẠP ĐẦU NHẬN 8888K - ND01\nVòng cược: Cần hoàn thành 03 vòng cược trước khi rút tiền (Tính theo công thức: 1 vòng cược = mốc nhận thưởng + tiền thưởng).\nRút tiền: Không giới hạn số tiền rút tối đa.\nTrò chơi áp dụng: Áp dụng cho tất cả các trò chơi tại AD88.\nNạp tiền bằng CRYPTO (USDT) sẽ nhận thêm 0.6% khuyến mãi trên mỗi lần nạp (nạp càng nhiều thưởng càng cao).",
+    "File_Url": "https://i.ibb.co/nNPQzG3Z/nd01.jpg"
+  },
+  {
+    "ID": "km_diemdanh",
+    "Parent": "main_gioithieu",
+    "Label": "DIEMDANH",
+    "Content": "- ĐIỂM DANH MỖI NGÀY NHẬN 388K - DIEMDANH\nYêu cầu daily: Cần nạp tiền hàng ngày và đạt mức cược hợp lệ để tham gia điểm danh (Thưởng tối đa lên đến 388.00).\nChuỗi điểm danh:\nĐây là sự kiện điểm danh liên tục. Nếu bị gián đoạn (bỏ lỡ 1 ngày), chuỗi sẽ tính lại từ ngày 1.\nTối đa là 15 ngày liên tục, sau đó sẽ tự động bắt đầu lại từ ngày 1.\nCách nhận thưởng: Nhận thủ công trên app hoặc web (iOS, Android, PC). Nếu không bấm nhận, phần thưởng sẽ bị hủy bỏ.\nĐiều Kiện Cược & Rút Tiền\nVòng cược: Tiền thưởng cần trải qua 1.00 vòng cược hợp lệ để có thể rút tiền (không tính tiền gốc).\nNền tảng: Không giới hạn nền tảng đặt cược.",
+    "File_Url": ""
+  },
+  {
+    "ID": "km_n246",
+    "Parent": "main_gioithieu",
+    "Label": "N246",
+    "Content": "- NẠP TIỀN TẶNG 1888K THỨ 2 4 6 - N246\nGiới hạn nhận: Mỗi thành viên chỉ được nhận 1 lần/ngày vào đúng ngày diễn ra chương trình.\nThứ tự thao tác: Phải đăng ký khuyến mãi trước khi đặt cược (đặt cược trước khi đăng ký sẽ mất lượt).\nKhông áp dụng đồng thời: Không dùng chung với các khuyến mãi nạp tiền khác.\nTrò chơi loại trừ: Không áp dụng cho sản phẩm Xổ Số.",
+    "File_Url": "https://i.ibb.co/PsFCVyLM/n246.jpg"
+  },
+  {
+    "ID": "km_vip2nt",
+    "Parent": "main_gioithieu",
+    "Label": "VIP2NT",
+    "Content": "- ĐẶC QUYỀN VIP2 NẠP NHẬN 50% - VIP2NT\nĐối tượng: Áp dụng cho thành viên nâng cấp lên VIP2 tại AD88.\nTần suất: Mỗi tài khoản chỉ được nhận duy nhất 1 lần.\nƯu đãi: Hoàn tiền lên đến 50% giá trị nạp.\nỨng dụng: Cần tải và sử dụng ứng dụng AD88.\nThông tin cá nhân: Phải liên kết đầy đủ ngày sinh, số tài khoản ngân hàng chính xác và xác minh SĐT trước khi đăng ký.\nQuy trình nạp:\n1 Chọn khuyến mãi tại giao diện nạp tiền trước khi chuyển tiền.\n2 Nạp tiền thành công thì chờ hệ thống phát thưởng, không được đặt cược ngay.\nRút tiền: Hoàn thành 03 vòng cược hợp lệ là có thể rút tiền.",
+    "File_Url": "https://i.ibb.co/wGLvVjw/vip2nt.jpg"
+  },
+  {
+    "ID": "km_t5tang50",
+    "Parent": "main_gioithieu",
+    "Label": "T5TANG50",
+    "Content": "- THỨ 5 RỘN RÀNG NẠP 50 TẶNG 50 - T5TANG50\n+ Nội Dung Ưu Đãi\nMức thưởng: Ưu đãi nạp tiền 100% (nạp 50K tặng 50K).\nTrò chơi áp dụng: Chỉ dành cho Bắn Cá - Nổ Hũ (không tính trò chơi hai mặt trong sảnh Nổ Hũ).\nMức cược yêu cầu: 1,200 điểm.\n+ Điều Kiện Tài Khoản\nTài khoản phải có ít nhất 5 lần nạp tiền.\nTổng số tiền nạp từ 500K trở lên.\nTần suất & Thời gian: Đăng ký tối đa 1 lần/ngày (Khung thời gian tính từ 11:00 hôm nay đến 10:59 ngày hôm sau, giờ GMT+7).\nKhông áp dụng đồng thời với các khuyến mãi nạp tiền khác.",
+    "File_Url": ""
+  },
+  {
+    "ID": "km_bhcasino",
+    "Parent": "main_gioithieu",
+    "Label": "BHCASINO",
+    "Content": "- THẮNG THUA SÁT NÚT - BHCASINO\nThua sát nút: Vé cược có kết quả 8 điểm thua 9 điểm sẽ được báo thêm 50% số tiền đặt cược tối đa lên đến 1088K tiền thưởng (Không bốc lá bài thứ 3).\nThắng sít sao: Vé cược có kết quả 1 điểm thắng 0 điểm sẽ được thưởng thêm 20% số tiền đặt cược tối đa lên đến 588K.\n+ Nội Dung Ưu Đãi Baccarat\nTrò chơi áp dụng: Đặt cược cửa Nhà Cái hoặc Nhà Con tại các sảnh Casino.\nĐiều kiện cược: Mức cược tối thiểu từ 50+ điểm.\n+ Điều Kiện & Lưu Ý\nTài khoản: Cần có phát sinh nạp tiền trong ngày.\nRút tiền: Cần trải qua 1 vòng cược.\nTần suất & Thời gian: Đăng ký tối đa 1 lần/ngày; vé cược chỉ có giá trị trong ngày, sang ngày mới không được áp dụng.\nCách nhận: Khi có vé cược đạt yêu cầu, hội viên cần đăng ký điền thông tin sảnh cược và mã vé cược để nhận thưởng.\"",
+    "File_Url": "https://i.ibb.co/qLt5nq7L/bhcasino.jpg"
+  },
+  {
+    "ID": "km_gtb01",
+    "Parent": "main_gioithieu",
+    "Label": "GTB01",
+    "Content": "- GIỚI THIỆU BẠN BÈ NHẬN NGAY 200K - GTB01\n+ Nội Dung Ưu Đãi Mời Bạn Bè\nThưởng rương lì xì Đại Cát: Nhận thưởng 200K khi mời bạn bè gia nhập AD88 (mời càng nhiều người, tiền thưởng càng lớn).\nThưởng hoa hồng: Nhận thêm 0.2% hoa hồng dựa trên tổng điểm đặt cược của người được giới thiệu (bất kể thắng hay thua).\n+ Điều Kiện Người Được Mời\nĐể được tính là 1 lượt mời thành công, người chơi mới cần đạt đủ 3 điều kiện trong thời gian diễn ra sự kiện:\nSố lần nạp tiền: >= 3 lần.\nĐiểm nạp: >= 1000 điểm.\nĐiểm cược hợp lệ: >= 3000 điểm.\n(Lưu ý: Chỉ tính các tài khoản đăng ký mới trong tháng diễn ra chương trình).\n+ Quy Định Nhận Thưởng & Rút Tiền\nThời gian cập nhật: Hệ thống tự động tính toán và cập nhật rương thưởng sau 10 phút kể từ khi bạn bè đạt đủ điều kiện.\nThời hạn mở rương: Rương thưởng có hiệu lực trong 07 ngày, sau thời gian này nếu không mở nhận sẽ tự động hết hạn.\nĐiều kiện rút tiền: Chỉ cần trải qua 01 vòng cược là có thể rút tiền ngay.",
+    "File_Url": ""
+  },
+  {
+    "ID": "km_gtb02",
+    "Parent": "main_gioithieu",
+    "Label": "GTB02",
+    "Content": "- GIỚI THIỆU MỘT LẦN HOA HỒNG TRỌN ĐỜI - GTB02\nCông Thức Tính Hoa Hồng Đại Lý\nLợi nhuận ròng = Thắng thua - Hoàn trả - Khuyến mãi - Chi phí nền nền tảng.\nChi phí nền tảng = Tổng tiền thắng thua X10% (nếu thắng thua dương thì không tính).\nHoa hồng = Lợi nhuận ròng X Tỷ lệ hoa hồng.\nĐiều kiện nhận hoa hồng: Phải có >= 3 thành viên hợp lệ trong tháng.\nThưởng Phát Triển Hội Viên Mới\nChỉ cần có tối thiểu 1 hội viên hợp lệ/tháng để nhận thưởng.\nMức thưởng: 200,000 VND / 1 hội viên hợp lệ (không giới hạn số tiền).\nĐiều kiện hội viên hợp lệ: Nạp >= 1000 điểm và cược hợp lệ >= 3000 điểm.\nQuy Định Quan Trọng\nKhông áp dụng: Nếu doanh thu cược Xổ số chiếm >= 51% tổng cược.\nĐại lý SEO/Google Ads: Chạy từ khóa nội bộ \"AD88\" chỉ áp dụng mức hoa hồng cố định là 15%.\nLợi nhuận dương: Được khấu trừ chuyển sang tháng sau.\nGiảm hoa hồng: Đại lý không phát triển đủ >= 3 hội viên mới/tháng trong 3 tháng liên tiếp sẽ bị giảm hoa hồng xuống 20%.\nVi phạm: Thành viên vi phạm quy định sẽ bị loại khỏi đại lý.\nPhương Thức Nhận Thưởng\nThời gian phát thưởng: Ngày 10 hàng tháng.\nKênh thanh toán: Nhận trực tiếp vào tài khoản đại lý, hỗ trợ rút tiền qua Ngân hàng Việt Nam hoặc USDT.",
+    "File_Url": "https://i.ibb.co/WWhH6S4h/gtb02.jpg"
+  },
+  {
+    "ID": "Slot_nohu",
+    "Parent": "main",
+    "Label": "🎎 TEST GAME - CHẠY CƯỢC",
+    "Content": "Danh sách các nhóm trò chơi có nguy cơ cao bị người chơi lạm dụng lỗ hổng hoặc quy tắc trả thưởng:\n💎 Live Casino: Đặt cược 2 bên (Baccarat, Rồng Hổ, Xóc Đĩa) để bào khuyến mãi / vòng cược.\n💎 Slot Game (Nổ Hũ): Lạm dụng các tính năng Mua Freespin - vòng quay miễn phí, lưu game tích lũy điểm thưởng.\n💎 Bắn Cá: Sử dụng phần mềm tự động bắn (Autoclick) hoặc tool gian lận, tích luỹ dương, tích luỹ LV, tích luỹ mạt chược, tích luỹ tổng cược.\n💎 Thể Thao: Đặt cược đối ứng giữa các trang, cược chéo tỷ lệ Odds lỗi.",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "slot_cuoc0",
+    "Parent": "Slot_nohu",
+    "Label": "☸️FC",
+    "Content": "• FC Điện tử → Cao thủ quét mìn\n• FC Bắn cá → FC Bắn cá vũ trụ\n• FC Bắn cá → FC Bắn cá đại thánh\n• FC Bắn cá → FC Bắn cá kịch tính\n• FC Bắn cá → FC Chữ thần bắn cá",
+    "File_Url": ""
+  },
+  {
+    "ID": "slot_cuoc1",
+    "Parent": "Slot_nohu",
+    "Label": "☸️JILI",
+    "Content": "• JILI Điện tử → Dragon Treasure\n• JILI Điện tử → Ngọc may mắn 2\n• JILI Điện tử → Quan Vân Trường (Giấu vé trận CHIBI)\n• JILI Điện tử → Crazy Hunter\n• JILI Bắn cá → JILI Vua đánh cá\n• JILI Bắn cá → JILI Fortune King jackpot\n• JILI Bắn cá → JILI Jackpot bắn cá\n• JILI Bắn cá → JILI Bán cá vui vẻ",
+    "File_Url": ""
+  },
+  {
+    "ID": "slot_cuoc2",
+    "Parent": "Slot_nohu",
+    "Label": "☸️TP",
+    "Content": "• TP Bắn cá → - Câu cá thư giản\n• TP Bắn cá → Chúa tể đại dương\n• TP Bắn cá → TP Tam Tiên Bắn Cá\n• TP Bắn cá → TP Nhị gia bắn cá\n• TP Bắn cá → Thợ Săn Rồng\n• TP Điện tử → Thần Tài Giáng Lâm\n• TP Điện tử → Thành phố vàng Maya 2\n• TP Game bài 3D → Xóc Đĩa",
+    "File_Url": ""
+  },
+  {
+    "ID": "slot_cuoc3",
+    "Parent": "Slot_nohu",
+    "Label": "☸️JDB + PP",
+    "Content": "• JDB Điện tử → Siêu bò tót B (Bản cao cấp)\n• JDB Bắn cá → JDB BẮN CÁ THẦN TÀI\n• JDB Điện tử → Plinko\n• PP Điện tử → Spaceman",
+    "File_Url": ""
+  },
+  {
+    "ID": "slot_cuoc3",
+    "Parent": "Slot_nohu",
+    "Label": "☸️BLOCKCHAIN",
+    "Content": "• * Spribe » Aviator\n• * Spribe » plinko\n• * Spribe » Hilo\n• * Spribe » Mines 2\n• * AS gaming » PILOT\n• * AS gaming » Plinko\n• * AS gaming » Aviator\n• * AS gaming » Bàn thắng sút",
+    "File_Url": ""
+  },
+  {
+    "ID": "slot_cuoc4",
+    "Parent": "Slot_nohu",
+    "Label": "☸️KHÁC",
+    "Content": "• Spribe → Mines, Aviator, Goal\n• V8 Game bài 3d → Xóc Đĩa, Quạt Quay Hàng\n• PP Điện tử → Cuộn tiền\n• VA Điện tử → Tự Rút Mạt Chược 2\n• KM Game bài 3d → Xóc đĩa 2\n• Gem Điện tử → Limbo, Hilo\n• BSP Bắn cá → BSP VUA BẮN CÁ\n• CQ9 Bắn cá → CQ9 Cá hoàng kim\n• CQ9 → Tài xỉu kiểu thái, Xóc đĩa\n• DG Thật → Fan Tan, Baccarat\n• CHOICE → Tài xỉu, Rồng hổ\n• MW Điện tử → Plinko\n• Sảnh MG → Dice Pop, Plinko Pop\n• VN 30 giây",
+    "File_Url": ""
+  },
+  {
+    "ID": "Bo_don",
+    "Parent": "main",
+    "Label": "🤙 HƯỚNG DẪN DUYỆT ĐƠN",
+    "Content": "Vui lòng chọn danh mục bạn muốn xem",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "Bo_main",
+    "Parent": "main",
+    "Label": "🔶 HƯỚNG DẪN SỬ DỤNG BO",
+    "Content": "Vui lòng chọn danh mục bạn muốn xem",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "bo_thongtin",
+    "Parent": "Bo_main",
+    "Label": "Thông tin",
+    "Content": "Thông báo bảo trì, khuyến mãi, sảnh game",
+    "File_Url": "https://i.ibb.co/wjVnqPs/image.png",
+    "Image_Captions": ""
+  },
+  {
+    "ID": "bo_tttv",
+    "Parent": "Bo_main",
+    "Label": "Thành Viên",
+    "Content": "TẤT CẢ THÀNH VIÊN\nTHẺ THÀNH VIÊN\nCẤP VIP\nNHẬT KÝ THÀNH VIÊN",
+    "File_Url": "https://i.ibb.co/zWwKvxjY/image.png|https://i.ibb.co/YFLnp8vF/image.png|https://i.ibb.co/ksGX9K1Z/image.png|https://i.ibb.co/G4cjTLZt/image.png",
+    "Image_Captions": "TẤT CẢ THÀNH VIÊN\nTất cả thành viên: Tìm kiếm, truy cập thông tin thành viên trên hệ thống AD88\nDanh sách đen: Khi người dùng bị đưa vào danh sách đen, họ sẽ bị cấm đăng nhập vào sảnh chờ.\nSa thải: \nBị hạn chế:|THẺ THẺ THÀNH VIÊN\nCác thẻ/nhãn liên quan đến hoạt động của tài khoản thành viên\nVí dụ: ND01 nghĩa là thành viên đó đã nhận khuyến mãi nạp đầu ND01|CẤP VIP\nThông tin cấp độ VIP và hạn mức rút tiền mỗi ngày của từng cấp độ VIP|NHẬT KÝ THÀNH VIÊN\nLịch sử hoạt động của thành viên tại AD88"
+  },
+  {
+    "ID": "bo_cuoc",
+    "Parent": "Bo_main",
+    "Label": "Trò Chơi",
+    "Content": "LỊCH SỬ ĐẶT CƯỢC\nCÁ CƯỢC THÀNH VIÊN",
+    "File_Url": "https://i.ibb.co/tw9w0gZt/image.png|https://i.ibb.co/BSpbSRD/image.png",
+    "Image_Captions": "LỊCH SỬ ĐẶT CƯỢC\nKiểm tra lịch sử chi tiết cá cược - vé cược - thời gian đặt cược của từng vé|CÁ CƯỢC THÀNH VIÊN\nKiểm tra chi tiết thắng thua tại từng sảnh của thành viên"
+  },
+  {
+    "ID": "bo_daily",
+    "Parent": "Bo_main",
+    "Label": "Đại Lý",
+    "Content": "TẤT CẢ ĐẠI LÝ\nLỊCH SỬ THAY ĐỔI",
+    "File_Url": "https://i.ibb.co/jZ8RbfVS/image.png|https://i.ibb.co/F4Mt98Np/image.png",
+    "Image_Captions": "TẤT CẢ ĐẠI LÝ\nKiểm tra thông tin đại lý - điều chỉnh các hạng mục đại lý|LỊCH SỬ THAY ĐỔI\nKiểm tra thông tin đã thay đổi của đại lý"
+  },
+  {
+    "ID": "bo_km",
+    "Parent": "Bo_main",
+    "Label": "Khuyến mãi",
+    "Content": "TRUNG TÂM SỰ KIỆN\nSỔ TIẾT KIỆM\nCHI TIẾT ƯU ĐÃI\nNHẬN VÀ XEM XÉT",
+    "File_Url": "https://i.ibb.co/4wf6sWZg/image.png|https://i.ibb.co/ZRbhTyG0/image.png|https://i.ibb.co/4nGv8KfP/image.png|https://i.ibb.co/5gN0cWwN/image.png",
+    "Image_Captions": "TRUNG TÂM SỰ KIỆN\nDANH SÁCH SỰ KIỆN: Quản lý - sửa đổi khuyến mãi trên trang chủ \nSỰ KIỆN ĐÃ ĐÓNG: Những khuyến mãi đã ngừng cung cấp tới khách hàng\nCUNG CẤP THÔNG KÊ: Dữ liệu khuyến mãi đã phân phát|SỔ TIẾT KIỆM\nLịch sử Sinh Lời 88% của khách hàng|CHI TIẾT ƯU ĐÃI\nLịch sử đã phân phát khuyến mãi đến tài khoản thành viên|NHẬN VÀ XEM XÉT\nKiểm tra lịch sử nhận - không nhận và huỷ của khuyến mãi đến tài khoản thành viên"
+  },
+  {
+    "ID": "bo_baocao",
+    "Parent": "Bo_main",
+    "Label": "Báo Cáo",
+    "Content": "Biến động số dư: kiểm tra tiền ra vào sảnh, khuyến mã, tất cả liên quan đến tăng giảm điểm của khách hàng \n\nXuất tải xuống: lịch sử các tệp dữ liệu đã tải xuống",
+    "File_Url": "https://i.ibb.co/ZpvwwGcr/image.png"
+  },
+  {
+    "ID": "main_casino",
+    "Parent": "main",
+    "Label": "🎰 Casino Trực Tuyến",
+    "Content": "Chọn trò chơi Casino bạn muốn xem luật:",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "bcr",
+    "Parent": "main_casino",
+    "Label": "🃏 Baccarat (BCR)",
+    "Content": "📖 Luật chơi Baccarat\n- Baccarat gồm 2 bên:\n Nhà Con (Player)\n Nhà Cái (Banker)\n\n- Mỗi bên được chia 2 lá bài ban đầu.\n- Điểm bài được tính theo hàng đơn vị:\n  + A = 1 điểm\n  + 10, J, Q, K = 0 điểm\n  + Các lá còn lại tính theo số trên lá bài.\n\n- Bên nào có tổng điểm gần 9 hơn sẽ thắng.\n- Nếu hai bên có cùng điểm → Kết quả Hòa.\n\n🐉 LONG BẢO\n\nBên đặt cược thắng với chênh lệch điểm theo quy định.\n\n- Chênh lệch 9 điểm: 1:28\n- Chênh lệch 8 điểm: 1:9\n- Chênh lệch 7 điểm: 1:5\n- Chênh lệch 6 điểm: 1:3\n- Chênh lệch 5 điểm: 1:2\n- Chênh lệch 4 điểm: 1:1\n\n- Thắng bằng Bài Tự Nhiên: 1:1\n- Hai bên hòa với Bài Tự Nhiên: Hoàn tiền cược\n\n🃏 LUẬT RÚT LÁ THỨ 3 BACCARAT\n👤 Nhà Con:\n- 0-5 điểm: Rút lá thứ 3.\n- 6-7 điểm: Không rút.\n- 8-9 điểm: Bài tự nhiên.\n\n🏦 Nhà Cái:\n- 0-2 điểm: Luôn rút.\n- 3 điểm: Không rút khi lá thứ 3 Nhà Con là 8.\n- 4 điểm: Không rút khi lá thứ 3 Nhà Con là 0,1,8,9.\n- 5 điểm: Không rút khi lá thứ 3 Nhà Con là 0,1,2,3,8,9.\n- 6 điểm: Không rút khi lá thứ 3 Nhà Con là 0,1,2,3,4,5,8,9.\n- 7 điểm: Không rút.",
+    "File_Url": ""
+  },
+  {
+    "ID": "rongho",
+    "Parent": "main_casino",
+    "Label": "🐉 Rồng Hổ",
+    "Content": "K cao nhất, A thấp nhất.\nMỗi bên nhận 1 lá bài.\nBên có điểm cao hơn thắng. thua 50% nếu về Hoà\nHai lá bằng điểm là Hòa.",
+    "File_Url": ""
+  },
+  {
+    "ID": "xocdia",
+    "Parent": "main_casino",
+    "Label": "🎲 Xóc Đĩa",
+    "Content": "🎲 Cược tổ hợp:\n\n🔴 Lớn:\n3 đỏ 1 trắng hoặc 4 đỏ.\n(2 đỏ 2 trắng: Hoàn tiền cược)\n\n⚪ Nhỏ:\n3 trắng 1 đỏ hoặc 4 trắng.\n(2 đỏ 2 trắng: Hoàn tiền cược)\n\n🔴⚪ Lẻ:\n3 đỏ 1 trắng hoặc 3 trắng 1 đỏ.\n\n⚪🔴 Chẵn:\n4 đỏ, 4 trắng hoặc 2 đỏ 2 trắng.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sicbo",
+    "Parent": "main_casino",
+    "Label": "🎲 Tài Xỉu / Sicbo",
+    "Content": "Trò chơi lắc 3 viên xí ngầu dự đoán tổng điểm Tài (11-17) hoặc Xỉu (4-10)\nCác bộ 3 sẽ không được tính Tài hoặc Xỉu. Chỉ có thể chiến thắng khi đặt vào các cửa Bộ 3\nVí dụ: Dealer đổ ra 3 xúc xắc mặt 6 thì chỉ có các cửa Bão bất kỳ, Bão 6 cụ thể, Cược Tổng 18, Cược số đơn 6 thắng cược. Những mặt cược còn lại sẽ thua",
+    "File_Url": ""
+  },
+  {
+    "ID": "main_xoso",
+    "Parent": "main",
+    "Label": "🎰 Xổ Số Online",
+    "Content": "Chọn loại cược Xổ Số muốn xem luật:",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "xs_dacbiet",
+    "Parent": "main_xoso",
+    "Label": "👑 Đề Đặc Biệt",
+    "Content": "2D: Trúng 2 số cuối Giải Đặc Biệt.\n3D: Trúng 3 số cuối Giải Đặc Biệt.\n4D: Trúng 4 số cuối Giải Đặc Biệt.",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_dedau",
+    "Parent": "main_xoso",
+    "Label": "🎯 Đề Đầu",
+    "Content": "2D: Trúng nếu số đặt cược trùng với giải 8 ( XSMN/XSMT) hoặc giải 7 ( XSMB)\n3D: Trúng nếu số đặt cược trùng với giải 7 ( XSMN/XSMT) hoặc giải 6 ( XSMB)",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_dauduoi",
+    "Parent": "main_xoso",
+    "Label": "🔄 Đầu Đuôi",
+    "Content": "2D: Trúng 2 số cuối ở Giải Đặc Biệt và Giải 8 ( XSMN/XSMT) hoặc giải 7 ( XSMB)\n3D: Trúng 3 số cuối ở Giải Đặc Biệt  và Giải 7 ( XSMN/XSMT) hoặc giải 6 ( XSMB)",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_degiai1",
+    "Parent": "main_xoso",
+    "Label": "🥇 Đề Giải 1",
+    "Content": "2D: Trúng 2 số cuối Giải 1\n3D: Trúng 3 số cuối Giải 1\n4D: Trúng 4 số cuối Giải 1",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_baolo",
+    "Parent": "main_xoso",
+    "Label": "📦 Bao Lô",
+    "Content": "2D: Trúng 2 số cuối tất cả các giải\n3D: Trúng 3 số cuối tất cả các giải\n4D: Trúng 4 số cuối tất cả các giải",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_baolo7",
+    "Parent": "main_xoso",
+    "Label": "⚡ Bao Lô 7",
+    "Content": "2D: Trúng 2 số cuối từ Giải 5 đến Giải 8 và GIẢI ĐẶC BIỆT\n3D: Trúng 3 số cuối từ nhóm số đầu tiên của giải 4, giải 5 đến giải 7, giải đặc biệt tổng cộng có 7 nhóm giải",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_haidauso",
+    "Parent": "main_xoso",
+    "Label": "🔝 Hai Đầu Số",
+    "Content": "Chọn 2 số đầu của Giải Đặc Biệt. Trùng kết quả sẽ thắng.",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_loxien",
+    "Parent": "main_xoso",
+    "Label": "🤯 Lô Xiên",
+    "Content": "PL2: xiên 2 nghĩa là trong 1 vé cược đặt cược 2 con số không trùng nhau. Kết quả sẽ dựa vào 2 số cuối cùng của tất cả các giải trong 1 đài (tỉnh-thành phố) đã chọn.\n\nPL3: xiên 3 nghĩa là trong 1 vé cược đặt 3 con số không trùng nhau. Kết quả dựa vào 2 số cuối cùng trong tất cả các giải trong 1 đài (tỉnh-thành phố) đã chọn.",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_chanle",
+    "Parent": "main_xoso",
+    "Label": "🎲Cược Chẵn Lẻ / Tài Xỉu Xổ Số",
+    "Content": "Dự đoán tổng 2 số cuối Giải Đặc Biệt là Chẵn/Lẻ hoặc Tài (>=50) / Xỉu (<50).",
+    "File_Url": ""
+  },
+  {
+    "ID": "main_thethao",
+    "Parent": "main",
+    "Label": "⚽ Thể Thao",
+    "Content": "Chọn loại kèo Thể Thao muốn xem luật:",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "sp_tilekhuvuc",
+    "Parent": "main_thethao",
+    "Label": "📖 Tỉ Lệ - Kèo",
+    "Content": "1. Tỷ lệ DEC (tỷ lệ thập phân):\nVới kiểu xem cược Châu Âu, tỉ lệ cược đã bao gồm cả tiền vốn cược ban đầu.\n- Ví dụ: Anh cược 100 VND cho tỉ lệ 2.050 thì anh sẽ thắng được (100x2.050)-100 = 105. Thua thì anh sẽ thua 100 VND\n2. Tỷ lệ US:\nĐơn vị tính là 100. Khi anh cược 10 VND cho tỷ lệ:\n- Ví dụ: kèo dương (+131): nếu thắng thì thắng 10x131/100 = 13.1, thua thì anh thua 10 VND.\nkèo âm (-132): nếu thua thì thua (132/100)x10 = 13.2 VND, thắng thì anh thắng 10 VND\n3. Tỷ lệ HK:\nVới kiểu cược HongKong, anh thắng theo tỷ lệ cược và thua chính xác số tiền đã cược.\nVí dụ: anh cược 100 VND cho tỷ lệ 1.060 thì khi thắng anh ăn được 106 và thua thì thua 100\n4. Tỷ lệ MY:\nVới kiểu cược Malay, anh cần lưu ý tỷ lệ dương hoặc âm. Với số tiền cược là 100 VND:\nTỷ lệ dương, anh ăn theo tỷ lệ cược và thua chính xác số tiền anh cược.\nVí dụ: 0.9, nếu thắng thì thắng 100x0.9 = 90, thua thì anh thua 100 VND\nTỷ lệ âm, anh ăn theo chính xác số tiền đã đặt cược và thua theo tỉ lệ cược.\nVí dụ: -0.78 nếu thua thì thua -0.78x100 = -78, ăn thì ăn 100 VND\n5. Tỷ lệ INDO:\nVới kiểu cược Indo, anh cần lưu ý tỷ lệ dương hoặc âm. Với số tiền cược là 100 VND:\nTỷ lệ dương, anh ăn theo tỷ lệ cược và thua chính xác số tiền anh cược.\nVí dụ: 1.08, nếu thắng thì thắng 100x1.08 = 108, thua thì anh thua 100 VND\nTỷ lệ âm, tiền nhà cái thu = tiền cược x tỷ lệ , nếu thắng thì thắng theo tiền cược, nếu thua thì thua đủ tiền nhà cái thu\nVí dụ: -1.15 nếu đặt cược 100 VND, nhà cái sẽ thu 115 VND. Nếu thắng thì thắng 100 VND (nhà cái trả về 215), nếu thua thì thua 115 VND",
+    "File_Url": "https://i.ibb.co/yFzYTXhg/img-v3-0215e-c9c01b1f-85a2-401f-9952-2c66c4f66bix.jpg",
+    "Image_Captions": ""
+  },
+  {
+    "ID": "sp_bankeo",
+    "Parent": "main_thethao",
+    "Label": "💸 Bán Kèo",
+    "Content": "Đổi Tiền Mặt cho phép bạn bán toàn bộ hoặc một phần vé cược trước khi kết quả của sự kiện/trận đấu được xác định. Bán kèo khả dụng khi anh cảm thấy vé cược không an toàn.\nChỉ khả dụng với các thị trường có biểu tượng Đổi Tiền Mặt. Không áp dụng cho Cược xiên, Cược nhiều và Cược miễn phí.\nSố tiền tối thiểu để đổi sang tiền mặt là 20% tiền cược ban đầu.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_hdp",
+    "Parent": "main_thethao",
+    "Label": "🎯 Cược Chấp FT.HDP",
+    "Content": "• Thời gian tính: Kết quả được tính trong 90 phút thi đấu chính thức + thời gian bù giờ (không tính hiệp phụ và luân lưu).\n• Kèo Đồng Banh (0): Đội nào thắng thì cửa đó thắng đủ tiền; nếu hai đội hòa nhau thì hoàn lại tiền cược.\n• Kèo Đồng Banh Nửa Trái (0.25 / 0-0.5):\n\nNếu hòa: Cửa trên thua nửa tiền cược, cửa dưới ăn nửa tiền cược.\n\nNếu có đội thắng: Cửa chọn đội thắng ăn đủ tiền.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_ou",
+    "Parent": "main_thethao",
+    "Label": "📊 Tài Xỉu FT.O/U",
+    "Content": "• Quy tắc chung: Dự đoán tổng số bàn thắng của cả hai đội ghi được trong 90 phút thi đấu chính thức + thời gian bù giờ (không tính hiệp phụ và luân lưu).\n• Ví dụ Kèo Tài Xỉu 2.5 (2 1/2):\n\nTổng từ 3 bàn trở lên (ví dụ: 2-1, 3-0, 2-2...): Đặt Tài (Over) thắng đủ tiền, đặt Xỉu (Under) thua đủ tiền.\n\nTổng từ 2 bàn trở xuống (ví dụ: 0-0, 1-0, 1-1...): Đặt Xỉu (Under) thắng đủ tiền, đặt Tài (Over) thua đủ tiền.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_1x2",
+    "Parent": "main_thethao",
+    "Label": "🏆 FT 1X2",
+    "Content": "1: Đội nhà thắng.\nX: Hòa.\n2: Đội khách thắng.\nVí dụ: cược đội nhà hoặc đội khách nhưng kết quả hoà thì sẽ tính là thua vé cược",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_keoxien",
+    "Parent": "main_thethao",
+    "Label": "🔗 Kèo Xiên",
+    "Content": "1. Xiên Thường (Mix Parlay / Accumulator)\nKhái niệm: Ghép nhiều trận (từ 2 chân trở lên) vào cùng 1 vé cược duy nhất.\nĐiều kiện thắng: Tất cả các chân phải thắng hoặc hòa. Chỉ cần 1 chân thua đủ, toàn bộ vé xiên sẽ bị tính thua hết.\n\n2. Xiên Hệ Thống (System Bet)\nKhái niệm: Cho phép bạn chọn nhiều trận (thường từ 3 trận trở lên), hệ thống sẽ tự động chia nhỏ thành các tập hợp xiên nhỏ hơn (Xiên 2, Xiên 3, Trixie, Yankee...).\nĐiều kiện thắng: Không bắt buộc phải thắng tất cả các trận. Nếu có 1 vài trận thua, các nhánh xiên nhỏ còn lại vẫn thắng và bạn vẫn nhận được tiền thưởng tương ứng.\nVí dụ (Hệ thống 2/3 - System 2/3): Bạn chọn 3 trận A, B, C. Hệ thống sẽ tự chia thành 3 vé xiên 2 nhỏ:\n1, Xiên (A + B)\n2, Xiên (A + C)\n3, Xiên (B + C)\nNếu trận C thua: Vé (A + B) vẫn thắng và bạn vẫn ăn tiền vé đó.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_tinhxien",
+    "Parent": "main_thethao",
+    "Label": "🧮 Cách Tính Tiền Xiên",
+    "Content": "Tỷ lệ Xiên = Tỷ lệ 1 × Tỷ lệ 2 × ... × Tỷ lệ N.\nThắng đủ giữ nguyên tỷ lệ.\nHòa hệ số 1.\nThua nửa = 0.5\nThắng nửa (kèo châu âu): 1+(tỉ lệ - 1)/2\nThắng nửa (kèo châu á): tỉ lệ/2",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_scorebox",
+    "Parent": "main_thethao",
+    "Label": "📦 Score Box",
+    "Content": "Khái niệm: Dự đoán tỉ số chính xác của trận đấu hoặc cược theo nhóm tỉ số có sẵn.\nCơ chế giữ tiền cược: Hệ thống chỉ thực hiện giữ (khóa) đúng số tiền thua tối đa cho vé cược đó, giúp tối ưu hóa lượng vốn khi bạn đặt nhiều lựa chọn tỉ số khác nhau.\nví dụ: khách cược 30 điểm. kèo thua tối đa là -4.9 thì tiền cược bị giữ là 147 (sẽ thanh toán hoàn tiền với kèo tương ứng thắng hoặc thua )",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_nhandoicohoi",
+    "Parent": "main_thethao",
+    "Label": "❌ Nhân đôi cơ hội",
+    "Content": "có 3 lựa chọn:\n\nđội nhà + hoà: nếu đội khách thắng = thua vé cược\nđội khách + hoà: nếu đội nhà thắng = thua vé cược\nđội nhà + đội khách: nếu tỉ số hoà = thua vé cược \n\ntính từ lúc đặt cược tỉ số = 0-0",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_hiep1",
+    "Parent": "main_thethao",
+    "Label": "⏱ Các Kèo Hiệp 1 (HT)",
+    "Content": "Cược Chấp HT.HDP: Tương tự cược chấp cả trận nhưng chỉ tính kết quả trong Hiệp 1.\n\nTài Xỉu HT.O/U: Dự đoán tổng số bàn thắng của Hiệp 1 cao hơn (Tài) hay thấp hơn (Xỉu) tỷ lệ nhà cái đưa ra.\n\nHT 1X2: Đặt cược kết quả Hiệp 1: 1 (Chủ nhà thắng), X (Hòa), 2 (Đội khách thắng).",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_keophu",
+    "Parent": "main_thethao",
+    "Label": "🎯 Các Kèo Phụ Phổ Biến",
+    "Content": "Kèo Phạt Góc (Corner):\n\nChấp góc: Cược đội nào có số quả phạt góc nhiều hơn sau khi cộng/trừ tỷ lệ chấp.\n\nTài xỉu góc: Dự đoán tổng số quả phạt góc của cả trận lớn hơn hoặc nhỏ hơn mốc ấn định.\n\nKèo Thẻ Phạt (Booking): Dự đoán tổng số điểm thẻ phạt (thường 1 thẻ vàng = 1 điểm, 1 thẻ đỏ = 2 điểm) hoặc cược chấp số thẻ giữa 2 đội.\n\nTỷ Số Chính Xác (Correct Score): Dự đoán đúng tỷ số chung cuộc của trận đấu (ví dụ: 1-0, 2-1, 2-2). Tỷ lệ thưởng thường rất cao.\n\nKèo Chẵn / Lẻ (Odd/Even): Dự đoán tổng số bàn thắng của trận đấu là số Chẵn (0, 2, 4...) hay Lẻ (1, 3, 5...).\n\nBàn Thắng Đầu / Cuối (First/Last Goal): Dự đoán đội nào sẽ ghi bàn thắng đầu tiên hoặc bàn thắng cuối cùng trong trận đấu.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_tinhhnang",
+    "Parent": "main_thethao",
+    "Label": "⚙Tính Năng & Quy Định Cần Biết",
+    "Content": "Xả Kèo / Cash Out: Tính năng cho phép bạn rút tiền cược về sớm trước khi trận đấu kết thúc để chốt lời hoặc cắt lỗ.\nCông thức Cashout chuẩn = (Odds ban đầu / Odds hiện tại) * Tiền cược = tiền cash out\n\nLuật Cược Khi Trận Đấu Hoãn/Hủy:\nNếu trận đấu bị hủy/hoãn và không đấu lại trong 12h - 24h, vé cược sẽ bị hủy và hoàn lại tiền cược.\nNếu cược Hiệp 1 đã kết thúc mà Hiệp 2 bị hủy, các vé cược Hiệp 1 vẫn tính là hợp lệ.",
+    "File_Url": ""
+  },
+  {
+    "ID": "main_daga",
+    "Parent": "main",
+    "Label": "🐣 ĐÁ GÀ",
+    "Content": "Bạn muốn xem thông tin:",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "won_daga",
+    "Parent": "main_daga",
+    "Label": "📜 QUY LUẬT",
+    "Content": "Sảnh GA28: Cược tối thiểu 5 điểm/lần - Cược tối đa 20,000 điểm/lần\nSảnh SV128: Cược tối thiểu 5 điểm/lần - Cược tối đa 50,000 điểm/lần - Tổng cược: 100,000 điểm/trận\n\nChân của gà sẽ cột sợi dây Đỏ hoặc Xanh hoặc trên tường tại trường đấu sẽ có bảng màu Đỏ hoặc Xanh.\nGà đỏ (Banker): Meron (Rồng)\nGà xanh (Player): Wala (Phượng)\n\nTrận đấu tối đa 10 phút. Tỷ lệ ăn của Meron và Wala sẽ thay đổi liên tục theo số lượng người đặt cược.",
+    "File_Url": ""
+  },
+  {
+    "ID": "rule_daga",
+    "Parent": "main_daga",
+    "Label": "📖 LUẬT CHUNG",
+    "Content": "Quy định đơn cược: Không thể hủy cược sau khi hệ thống đã xác nhận đăng ký thành công.\nTỷ lệ thanh toán (Odds): Hiển thị mặc định là 1 nếu chưa có cược hoặc tiền cược 2 cửa ngang nhau.\nGà rơi khỏi sàn: Kiểm tra qua video phát lại. Nếu video không rõ, phán quyết chính thức của sàn đấu là kết quả cuối cùng.\nKhông có video xem lại nhưng trận đấu đã bắt đầu, nhà cung cấp sẽ đưa ra phán quyết cuối cùng.\nGián đoạn kết nối: Kết quả dựa theo công bố thực tế tại đấu trường.",
+    "File_Url": ""
+  },
+  {
+    "ID": "hoa_daga",
+    "Parent": "main_daga",
+    "Label": "🤝 HOÀ",
+    "Content": "Hết 10 phút, cả hai con gà vẫn còn trong sàn đấu hoặc không có con gà nào mổ trúng 2 lần.\nCả hai con gà rơi ra ngoài cùng lúc.\nMột con gà bay ra ngoài và con gà thứ hai cũng bay ra trong vòng một giây.\nCả hai con gà đều chết.\n\nToàn bộ tiền cược Meron và Wala được hoàn lại 100% (không mất phí).",
+    "File_Url": ""
+  },
+  {
+    "ID": "huy_daga",
+    "Parent": "main_daga",
+    "Label": "🚫 HUỶ",
+    "Content": "Dao cựa trên con gà bị hỏng, cùn.\nGà chiến bị đặt sai vị trí: Đỏ bắt buộc là MERON. Xanh bắt buộc là WALA.\nTên nhập trận của một hoặc cả hai bên không chính xác.\nHai con gà cùng thuộc một chủ nuôi.\nQuá trình phát video trực tiếp bị gián đoạn (mất điện, internet, thời tiết,...).\nLỗi hệ thống khiến vé cược đặt sau khi trận đấu đã bắt đầu (vé cược không hợp lệ).\nTài khoản đặt cược bị gián đoạn do mạng không ổn định, hết thời gian đặt cược, vé cược không khớp thời gian, cược được đặt sau khi trận đấu bắt đầu,...\n\nToàn bộ tiền cược Meron và Wala được hoàn lại 100% (không mất phí).",
+    "File_Url": ""
+  },
+  {
+    "ID": "duyedon_main",
+    "Parent": "main",
+    "Label": "🏵 LƯU TRÌNH DUYỆT ĐƠN",
+    "Content": "",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "trachnhiem_don",
+    "Parent": "duyedon_main",
+    "Label": "TRÁCH NHIỆM CỦA NHÂN VIÊN DUYỆT ĐƠN",
+    "Content": "1. Kiểm tra Doanh thu & Điều kiện Rút tiền\nDoanh thu & Đặt cược: Kiểm tra tổng cược hiệu quả trong ngày có đủ điều kiện vòng cược theo tiền gửi/khuyến mãi/hoàn trả hay không. Nếu không đủ, ghi rõ lý do và từ chối lệnh rút.\nTỷ lệ cược/thắng bất thường: Rà soát trường hợp cược lớn gấp 5 lần tiền gửi hoặc lợi nhuận lớn gấp 5 lần tiền gốc. Kiểm tra trò chơi có dấu hiệu \"đánh nhỏ thắng lớn\" hoặc cược đối đầu hay không.\n\n2. Xác minh Tài khoản & Kiểm tra Gian lận (IP/Device/FP)\nHội viên mới (dưới 7 ngày) / Rút tiền lần đầu: Kiểm tra trùng khớp IP, Device (FP), thông tin ngân hàng với các tài khoản gian lận/mở nhiều tài khoản từng bị xử lý.\nTài khoản bất thường: Phát hiện cùng IP/FP/Đại lý giữa nhiều tài khoản, hoặc một tài khoản liên tục rút cùng một số tiền mà số dư không đổi. Tạm dừng thao tác để xác minh.\n\n3. Giám sát Nạp/Rút & Lịch sử Đăng nhập\nLệnh xuất tiền lớn đột ngột: Kiểm tra kỹ IP/FP, nhật ký đăng nhập gần nhất và nguồn gốc tiền nạp.\nĐiểm nạp bất thường: Trường hợp lịch sử nạp nhỏ nhưng đột ngột lên điểm vài trăm triệu, phải xác minh lại với bộ phận Nhập khoản.\n\n4. Đánh giá Rủi ro Trò chơi & Đối soát Nhà cung cấp (Game Provider)\nPhân tích thắng/thua: Đánh giá các tài khoản cược lớn, nạp rút tiền lớn nhưng thời gian dài không thua.\nĐối soát kết quả: Giám sát liên tục thời gian và kết quả mở thưởng (nhất là Xổ số) giữa hệ thống nội bộ và nhà cung cấp, tránh lỗi mở thưởng sớm hoặc sai kết quả.\nXác minh thắng lớn: Với các khoản thắng lớn, gửi nhà cung cấp kiểm tra xem có bất thường trong cách chơi/sảnh chơi hay không.\n\n5. Báo cáo & Quản lý Đại lý (Agent)\nPhân tích báo cáo ngày: Kiểm tra tổng thể hiệu suất, phân loại khách hàng (chơi thực tế hay lạm dụng khuyến mãi), đánh giá thắng/thua theo từng loại hình và sảnh game. Lập báo cáo trình cấp trên với các sản phẩm thua lỗ lớn.\nGiám sát khách hàng chất lượng cao / VIP: Theo dõi kỹ các tài khoản lâu năm có sự thay đổi đột ngột về hạn mức cược, cách chơi, IP hoặc thông tin ngân hàng.\nXử lý gian lận theo hệ thống Đại lý: Khi phát hiện gian lận, phải rà soát tổng thể Đại lý quản lý để phân tích đặc điểm chung, phát hiện hành vi chạy chỉ tiêu/số liệu ảo và phối hợp với các bộ phận liên quan để xử lý.\n\n6. Quy định Nghiệp vụ & Xử lý Sự cố Duyệt đơn\nQuy trình duyệt Khuyến mãi: Khi nhận thông tin từ CSKH (Tên đăng nhập, mã cược, mã KM, số tiền), nhân viên duyệt đơn phải đối soát lại trước khi cập nhật.\nXử lý lỗi phát nhầm điểm: Nếu phát sai cấp bậc hoặc gửi nhầm số tiền lớn, lập tức báo cáo cấp trên; đồng thời phối hợp với CSKH giải thích thỏa đáng cho khách hàng.\nNghiêm cấm tự ý cộng điểm: Nhân viên Kỹ thuật/Kiểm soát (FK) tự ý cộng điểm cho khách không qua cấp trên sẽ bị phạt nặng hoặc sa thải.\nXử lý Tiền kẹt: Thường xuyên kiểm tra và cập nhật trạng thái các khoản tiền kẹt. Với các khoản tiền kẹt lớn, phải xin ý kiến cấp trên trước khi thao tác.",
+    "File_Url": ""
+  },
+  {
+    "ID": "kiemkhach_don",
+    "Parent": "duyedon_main",
+    "Label": "KIỂM KHÁCH",
+    "Content": "1. Phân loại & Ưu tiên Xuất khoản\nHội viên mới (Rút lần 1 & lần 2): Ưu tiên kiểm tra trước và xử lý nhanh để tối ưu trải nghiệm.\nHội viên cũ: Phân loại rõ giữa khách chơi bình thường và khách lạm dụng khuyến mãi/gian lận để đẩy nhanh tốc độ duyệt lệnh.\n\n2. Rà soát Khách thắng lớn & Hiệu suất Game\nLọc danh sách thắng lớn: Vào Thống kê hoạt động > Báo cáo chung của thành viên để kiểm tra khách thắng tiền trong ngày, trong tuần hoặc gần đây.\nĐối soát chi tiết: Rà soát nguồn gốc nạp tiền, hành vi đặt cược, kiểm tra dấu hiệu gian lận trước khi khách lên lệnh rút.\nKiểm tra sảnh game/sản phẩm: Phân tích tỷ lệ thắng/thua theo từng sảnh và loại trò chơi; xác định các game có tỷ lệ thắng cao bất thường để truy vết nhóm khách hàng tương ứng.\n\n3. Kiểm tra Chi tiết Thành viên Mới (Nạp & Rút lần 1, 2)\nHội viên mới nạp tiền: Rà soát khách nạp lần 1 và lần 2 trong ngày để theo dõi sớm lịch sử đặt cược.\nHội viên mới rút tiền: Kiểm tra kỹ các lệnh rút tiền lớn, rút lần 1 và lần 2 để tránh bỏ sót đối tượng lạm dụng.\nXác minh IP/FP (Bắt buộc): Bắt buộc đối soát IP và Fingerprint (FP) ở đơn rút lần 1 và lần 2 nhằm ngăn chặn hành vi tạo nhiều tài khoản.\n\n4. Kiểm tra Nhóm Hội viên Nhận Khuyến mãi (KM)\nRà soát nhóm gian lận: Kiểm tra khách nhận KM có thuộc các nhóm bào KM/gian lận hay không.\nĐối soát liên kết: Rà soát trùng lặp IP, chung Đại lý, hoặc có mô hình/cách đánh giống nhau để chủ động xử lý trước khi duyệt lệnh.",
+    "File_Url": "https://i.ibb.co/FbnpQcCH/image.png"
+  },
+  {
+    "ID": "qtdon_don",
+    "Parent": "duyedon_main",
+    "Label": "QUY TRÌNH DUYỆT ĐƠN",
+    "Content": "1. Nguyên tắc Ưu tiên & Xử lý Xuất khoản\nThứ tự ưu tiên: Tập trung xử lý trước các đơn rút lần 1, lần 2 của hội viên mới và các đơn rút tiền lớn.\nĐơn lần 1, lần 2 (Đã kiểm khách): Nếu nhân viên kiểm khách đã kiểm tra và ghi chú (note) an toàn/bình thường, nhân viên duyệt đơn chỉ cần rà soát tổng quát lại; nếu không có gì bất thường thì tiến hành duyệt ngay.\nĐơn lần 1, lần 2 (Chưa kiểm khách): Phân tích sơ bộ tiền nạp, rút, khuyến mãi và cách chơi. Nếu đánh giá hội viên chơi bình thường, ưu tiên duyệt xuất khoản nhanh, tránh kiểm tra quá nhiều bước gây gián đoạn thời gian của khách.\nĐơn của hội viên thua tiền: Nếu tổng thể hội viên đang thua và số dư không có giao dịch bất thường, duyệt xuất khoản trước rồi tiến hành kiểm tra/xử lý sau.\nĐơn thắng lớn hoặc nghi ngờ lạm dụng: Nếu đang chờ phía Kỹ thuật/Nhà cung cấp phản hồi mà thời gian quá lâu, cần tạm thời từ chối lệnh để kiểm tra hoặc xin ý kiến cấp trên xem có xuất khoản trước hay không.\nĐơn rút tiền lớn: Kiểm tra xem nhân viên kiểm khách đã rà soát trước đó chưa, sau đó đối soát nhanh tổng thể số dư và duyệt đơn để đảm bảo tốc độ.\n\n2. Quy định Khóa đơn (Lock Order)\nGiới hạn khóa đơn: Mỗi nhân viên duyệt đơn chỉ được khóa tối đa 4 đơn trong một lần thao tác.\nNghiêm cấm: Không được khóa ồ ạt cùng lúc nhiều đơn. Phải xử lý hoàn tất các đơn đã khóa rồi mới tiếp tục khóa đợt đơn mới.\n\n3. Đối soát Doanh thu & Từ chối Lệnh\nKiểm tra lịch sử: Sau khi khóa đơn, kiểm tra ngay khách nạp lần đầu hay đã từng rút tiền.\nKiểm tra doanh thu: Đối soát xem cược hiệu quả đã đúng và đủ điều kiện rút tiền hay chưa.\nXử lý khi thiếu doanh thu: Nếu chưa đủ doanh thu, từ chối trực tiếp trên hệ thống và đính kèm lý do cụ thể để hội viên tự kiểm tra và nắm thông tin.\n\nNhân viên duyệt đơn cần kiểm tra cách đặt cược của thành viên trước khi tham gia rút tiền, kiểm tra xem đặt cược có vấn đề gì không, không phải chỉ chờ khách tới rút tiền mới đi kiểm tra, khi duyệt đơn cần chú kiểm tra ip, trùng thiết bị, cùng thông tin cá nhân của khách, lần đăng ký khuyến mãi có trùng với các tài khoản khác hay không kèm theo có hành vi đối đầu hay không, nếu phát hiện có bất thường cần note lại, nếu không phát hiện được bất thường thì lập tức cho xuất khoản, nếu như hội viên không vi phạm hay vi phạm nhẹ quy định thì không cần yêu cầu hội viên cung cấp căn cước công dân hoặc video để xác minh.",
+    "File_Url": ""
+  },
+  {
+    "ID": "dtk_don",
+    "Parent": "duyedon_main",
+    "Label": "XỬ LÝ TRỪ TIỀN VÀ ĐÓNG TÀI KHOẢN",
+    "Content": "1. Quy định Đóng Tài khoản\nĐối tượng: Chỉ đóng tài khoản sử dụng tool/công cụ tự động để đăng ký hoặc tài khoản cố tình vi phạm quy định nhiều lần.\nQuy trình: Bắt buộc tham khảo và có sự đồng ý của Tổ trưởng (TT) trước khi thao tác đóng.\n\n2. Quy định về Tiền gốc\nNguyên tắc cốt lõi: Cấm tuyệt đối trừ tiền gốc của khách hàng trong mọi trường hợp. Tiền gốc luôn được đảm bảo để khách hàng rút.\n\n3. Quy định Trừ tiền & Lạm dụng Khuyến mãi\nKhông tự ý trừ tiền: Tuyệt đối không tự ý trừ tiền của khách (bao gồm các trường hợp lạm dụng khuyến mãi nạp đầu, nạp lần 2, Code trải nghiệm...).\nXử lý lạm dụng đã duyệt: Nếu KM đã duyệt thông qua thì cho phép xuất khoản, không trừ tiền (đặc biệt là đơn rút lần đầu). Nhân viên tiến hành ghi chú (note) hậu đài, đưa vào danh sách lạm dụng và phân tích đặc điểm để chặn các tài khoản sau.\nVi phạm nghiêm trọng: Chỉ thực hiện trừ tiền khi có chỉ đạo/ý kiến trực tiếp từ Tổ trưởng (TT).\n\n4. Xử lý Nhóm Lạm dụng / Tool Số lượng lớn\nQuy mô lớn (> 50 tài khoản dùng tool): Tổ trưởng (TT) là người duy nhất quyết định và thông báo chính thức tại nhóm làm việc. Nhân viên Kỹ thuật/Kiểm soát (FK) nghiêm cấm tự ý thao tác trừ tiền.\nLưu ý phân loại: Quy định trên áp dụng cho nhóm dùng tool tự động (không phải người thật). Nếu là nhóm lớn do người thật đăng ký, bắt buộc phải xin ý kiến Tổ trưởng (TT) trước khi xử lý.",
+    "File_Url": ""
+  },
+  {
+    "ID": "xulyld_main",
+    "Parent": "main",
+    "Label": "🙅XỬ LÝ HỘI VIÊN GIAN LẬN",
+    "Content": "",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "ldkm",
+    "Parent": "xulyld_main",
+    "Label": "Lạm dụng KM",
+    "Content": "1. Xử lý gian lận nạp đầu & đối đầu nguy hiểm\nNạp đầu/Nạp lần 2 nhận KM hoặc đối đầu nguy hiểm (ngoài nhà cái, theo nhóm): Thu hồi tiền thắng, hỗ trợ rút tiền nạp gần nhất, đóng tài khoản vĩnh viễn.\n\n2. Xử lý vi phạm lần đầu / Số tiền nhỏ\nGian lận lần đầu nhưng có lịch sử cược hợp lệ & thắng nhỏ: Gửi thư cảnh báo hoặc khóa giới hạn để khách liên hệ CSKH nhắc nhở.\nNhóm gian lận/Lạm dụng KM nhỏ (< 5 triệu và < 4 tài khoản): Tiến hành nhắc nhở lần 1.\n\n3. Xử lý tái phạm (Cố tình vi phạm nhiều lần)\nTái phạm lần 2: Hạn chế nhắc nhở, thu hồi toàn bộ tiền thắng và chỉ cho rút khoản nạp gần nhất.\nTiếp tục tái phạm sau khi đã nhắc nhở: Báo cáo TT, sau đó đóng tài khoản vĩnh viễn.\n\n4. Trường hợp cần xin ý kiến Trưởng phòng (TT)\nGian lận số tiền lớn: Báo cáo TT quyết định (trừ tiền hoặc cho chơi tiếp). Tuyệt đối không tự ý xử lý.\nNhóm gian lận cố tình tạo thêm tài khoản: Thống kê danh sách, gửi nhóm xin chỉ đạo từ TT.\nNghi ngờ cược bất thường (Đá gà, Thể thao...) chưa đủ bằng chứng: Báo cáo nhóm xin ý kiến, yêu cầu tài khoản xác minh (KYC) và chờ phương án xử lý từ cấp trên.",
+    "File_Url": ""
+  },
+  {
+    "ID": "trungtt",
+    "Parent": "xulyld_main",
+    "Label": "Khách trùng thông tin MKT",
+    "Content": "Khách MKT cược đối đầu:\nTrường hợp hội viên đối đầu gian lận: Xử lý theo quy định chung (thu hồi tiền thắng, cho rút gốc nạp gần nhất, khóa tài khoản).\nTrường hợp MKT tự lập tài khoản đối đầu chạy chỉ tiêu: Đóng băng tài khoản và không hỗ trợ rút tiền gốc.\n\nTài khoản trùng IP / Thông tin với MKT:\nBước 1: Yêu cầu xác minh thông tin đầy đủ (bao gồm CCCD).\nBước 2: Phản ánh tới Trưởng bộ phận MKT để đối soát.\nBước 3: \nNếu cược bình thường, không lạm dụng KM: Nhắc nhở và cho phép tiếp tục tham gia.\nNếu lạm dụng KM, cược bất thường hoặc chạy chỉ tiêu: Cho rút tiền nạp gần nhất và đóng băng tài khoản.",
+    "File_Url": ""
+  },
+  {
+    "ID": "dlyngoai",
+    "Parent": "xulyld_main",
+    "Label": "Hội viên đại lý ngoài gian lận",
+    "Content": "Nếu đại lý ngoài phát triển hội viên đối đầu gian lận tiền hoa hồng hoặc chạy số dư ảo cần phải liên hệ với bộ phận đại lý thông báo nhắc nhở đại lý đó, trường hợp nghiêm trọng không hỗ trợ thanh toán hoa hồng.",
+    "File_Url": ""
+  },
+  {
+    "ID": "taonhieutk",
+    "Parent": "xulyld_main",
+    "Label": "Tạo nhiều tài khoản",
+    "Content": "Tạo nhiều tài khoản nhưng CƯỢC BÌNH THƯỜNG (Không cố ý lạm dụng KM):\nTài khoản được ưu tiên giữ lại: Chọn tài khoản nạp đầu tiên. Trường hợp tài khoản nạp đầu đã lâu không giao dịch, ưu tiên giữ tài khoản có giao dịch nạp gần nhất.\nCác tài khoản còn lại: Đưa vào nhóm \"Nhiều tài khoản\" và không tính chỉ tiêu Đại lý.\n\nTạo nhiều tài khoản để LẠM DỤNG KHUYẾN MÃI:\nKhông cần đóng tài khoản; tiến hành đưa vào nhóm \"Lạm dụng nặng\" và tiếp tục hỗ trợ tham gia chơi bình thường (không nhận KM).\n\n⚠️ QUY ĐỊNH PHÊ DUYỆT ĐẶC BIỆT (BẮT BUỘC):\nTất cả các tài khoản có TỔNG NẠP TỪ 50 TRIỆU TRỞ LÊN: Mọi thao tác đưa vào danh sách Lạm dụng, Đóng tài khoản hoặc Khấu trừ tiền BẮT BUỘC phải thông qua Tổ trưởng / Quản lý xét duyệt trước khi xử lý.",
+    "File_Url": ""
+  },
+  {
+    "ID": "duyetkm",
+    "Parent": "xulyld_main",
+    "Label": "Duyệt khuyến mãi",
+    "Content": "Quy định nhận KM nạp đầu:\nMỗi thành viên chỉ được nhận 1 lần.\nNếu phát hiện từ 2 tài khoản trở lên, tất cả tài khoản tạo sau sẽ không được hỗ trợ nhận KM nạp đầu.\n\nKiểm soát nhóm \"bào\" Khuyến mãi:\nKhi duyệt KM: Chủ động soi các điểm chung (IP, thiết bị, thông tin, hành vi...) để nhận diện nhóm có dấu hiệu bào KM. Nếu xác định đúng là 1 nhóm, từ chối/chặn ngay từ đầu, không cho nhận KM.\nDấu hiệu bào hoàn trả (Bắn cá/Quay hũ): Nhóm nạp tiền ít nhưng chạy vòng cược cao để lấy hoàn trả.\nTheo dõi: Giám sát liên tục trong nhiều ngày.\nXử lý: Lần 1: Nhắc nhở cược đúng quy định. Tái phạm: Thu hồi toàn bộ tiền thắng và tiền khuyến mãi.\n\nQuy định đối với KM Trải nghiệm & Free:\nKM Trải nghiệm 88k: Áp dụng cơ chế duyệt nới lỏng hơn các KM khác. Tài khoản đã có giao dịch nạp sẽ không hỗ trợ nhận.\nKM Free khác (Chưa nạp tiền): Hỗ trợ rút tiền thắng tối đa 10.000 điểm/lần và không giới hạn số lần rút.",
+    "File_Url": ""
+  },
+  {
+    "ID": "hilo_ad88",
+    "Parent": "main",
+    "Label": "📱LIÊN HỆ HỖ TRỢ - HƯỚNG DẪN",
+    "Content": "Vui lòng liên hệ trực tiếp qua telegram: hiload88ne",
+    "File_Url": ""
+  },
+  {
+    "ID": "item_1788820286437",
+    "Parent": "Bo_don",
+    "Label": "Kiểm tra cơ bản",
+    "Content": "- Các bước cơ bản cần phải biết \n",
+    "File_Url": "https://i.ibb.co/1JJR31Zm/1.jpg|https://i.ibb.co/4nxcjY0N/2.jpg|https://i.ibb.co/Pv9XqTp5/3.jpg|https://i.ibb.co/LzF2QLJB/image.png|https://i.ibb.co/4gjc7PWt/5.jpg",
+    "Image_Captions": "Khoá đơn: khoá đơn lại thì mới có thể xuất đơn cho XNK|Kiểm tra: Kiểm tra các thông tin\n-Thẻ thành viên - Cấp độ thành viên\n-Số dư còn lại - Số dư tiết kiệm\n-Số tiền đã nạp - Số tiền đã rút\n-Số tiền nạp hôm nay - Số tiền rút hôm nay\n-Số tiền nạp gần nhất - thời gian nạp tiền gần nhất \n-Số tiền đang rút|Kiểm tra: Tổng quan thành viên\n- IP Đăng nhập - Thời gian tham gia \n- Thông tin ngân hàng - Các thông tin cần thiết\n- Nhận xét|Kiểm tra: lịch sử khuyến mãi \nkiểm tra khuyến mãi đã nhận|Kiểm tra: Lịch sử đặt cược\nKiểm tra tiền thắng được từ sảnh nào"
+  },
+  {
+    "ID": "item_1788822786488",
+    "Parent": "Bo_don",
+    "Label": "Đơn đầu VIP88K",
+    "Content": "\n-Kiểm tra IP, Tên thật\n-Thời gian tham gia ( 24H )\n-Trò chơi Đã tham gia\n-Thông tin ngân hàng ( khi duyệt đơn cần để ý các nhóm này )\n-Số lần rút tiền ( chỉ hỗ trợ rút tiền km 1 lần duy nhất )",
+    "File_Url": "https://i.ibb.co/qFcLZhp2/image.png|https://i.ibb.co/hJRFwG9W/image.png|https://i.ibb.co/ccLWSHRV/image.png|https://i.ibb.co/WW2cW9XL/image.png",
+    "Image_Captions": "Cách nhận biết\n-Tài khoản chưa tham gia nạp tiền\n-Phần thưởng sự kiện:từ 88 trở lên ( nhấp vào tiền thưởng để xem km đã nhận là gì )|Kiểm tra: Tên thật\n-Tần suất đăng kí tài khoản \n-Nạp rút của từng tài khoản|Kiểm tra IP\n-Kiểm tra các tài khoản thuộc IP đó có lạm dụng KM không\n-Kiểm tra nạp rút của các tài khoản thuộc IP đó|Kiểm tra trò chơi\n-Kiểm tra sảnh sản phẩm đã đúng theo quy định\n-Kiểm tra tần suất các tài khoản rút VIP88K có cùng tham gia cùng 1 trò chơi này không"
+  },
+  {
+    "ID": "item_1788823778939",
+    "Parent": "Bo_don",
+    "Label": "Đơn đầu",
+    "Content": "Tài khoản đã nạp tiền và rút tiền lần đầu\nKiểm tra nhanh chóng hỗ trợ xuất nhanh ( ưu tiên trải nghiệm của khách hàng )\nNhững tài khoản lạm dụng ND01 vẫn hỗ trợ xuất \n( tần suất 1 nhóm lạm dụng nhiều báo cáo cấp trên hỗ trợ xử lý )\nTuyệt đối không tự ý trả đơn khách",
+    "File_Url": "https://i.ibb.co/mVqxjLNG/image.png|https://i.ibb.co/zhXZt10d/image.png|https://i.ibb.co/VYnWqTY0/image.png",
+    "Image_Captions": "Kiểm tra:\n-Số dư - Tiết kiệm\n-Thẻ + Cấp độ thành viên\n-Số tiền đã nạp - Phần thưởng sự kiện\n-Số tiền rút ra|Kiểm tra: lịch sử cá cược\n- Kiểm tra khách thắng tiền từ đâu \n- Tham gia trò chơi nào \n- Có tham gia chạy cược hay không|Xuất đơn: Sau khi kiểm tra hoàn tất tại phần ( Ghi chú backend )\ntài khoản bình thường: OK LOLOHILO  ( OK + tên người xuất đơn )\ntài khoản lạm dụng: OKQS LOLOHILO  ( QS + tên người xuất đơn )"
+  },
+  {
+    "ID": "item_1788825953823",
+    "Parent": "Bo_don",
+    "Label": "Đơn thứ",
+    "Content": "Đơn rút tiền từ lần thứ 2 trở lên\n-Kiểm tra tổng quan\n-Kiểm tra biến động số dư\n-Kiểm tra lịch sử đặt cược",
+    "File_Url": "https://i.ibb.co/jP0SM3Y8/image.png|https://i.ibb.co/v6tsLbNB/image.png|https://i.ibb.co/N2w88FKp/image.png|https://i.ibb.co/0yQctTPP/image.png",
+    "Image_Captions": "Kiểm tra tổng quan\n-Kiểm tra các thông tin nhanh chóng|Kiểm tra biến động số dư\n-Kiểm tra lịch sử tham gia các sảnh - nhận khuyến mãi - nạp tiền|Kiểm tra lịch sử đặt cược\n-Kiểm tra các cược - thắng tiền từ trò chơi nào \n-Thắng tiền với số tiền lớn - Kiểm tra chi tiết vé cược|Sau khi kiểm tra hoàn tất tại phần ( Ghi chú backend )\ntài khoản bình thường: FK LOLOHILO ( FK + tên người xử lý )\ntài khoản bất thường: báo cáo cấp trên hỗ trợ xử lý ( không tự ý xuất đơn )"
+  },
+  {
+    "ID": "item_1788827074688",
+    "Parent": "Bo_don",
+    "Label": "Xử lý VIP88K",
+    "Content": "Xử lý lạm dụng or Xử lý sai sảnh VIP88K or Rút tiền quá lần quy định",
+    "File_Url": "https://i.ibb.co/ZzNf816X/image.png|https://i.ibb.co/6RYGwxC4/image.png",
+    "Image_Captions": "NOTE BO + LARK\nLạm dụng:  » tổ trưởng xử lý, khách lên tìm CSKH thông báo cho tổ trưởng !    \nSai sảnh : » Nhận VIP88K cược sai sảnh → ( sảnh sai ) → ( trò chơi )→ thu hồi hết tiền khuyến mãi + tiền thắng theo quy định → Đã xử lý\nRút trên 1 lần:  » Nhận VIP88K rút tối thiểu 100 » tối đa 300, chỉ rút được 1 lần duy nhất. Thu hồi số dư còn lại » Đã xử lý|TRẢ ĐƠN + THU HỒI\n-Tài khoản:  điền tên tài khoản cần thu hồi \n-Loại hình: Khấu trừ thủ công\n-Số tiền: số tiền cần thu hồi \n-Hướng dẫn: Thu hồi VIP88K \n-Ghi chú: Thu hồi VIP88K \nXÁC NHẬN THU HỒI"
+  },
+  {
+    "ID": "item_1788827635965",
+    "Parent": "Bo_don",
+    "Label": "Xử lý đối đầu",
+    "Content": "Có file bắt đối đầu hoàn chỉnh - chính xác \nKhông tự ý thu hồi tiền của khách - cho khách lên gặp CSKH để xử lý",
+    "File_Url": "https://i.ibb.co/xSPBhN2w/image.png|https://i.ibb.co/MxzfCB3f/image.png",
+    "Image_Captions": "Xử lý nhắc nhở:  -cược đối đầu sảnh (  )-nhắc nhở khách tham gia đúng quy định-hỗ trợ với lần nạp gần nhất- nhắc nhở lần (   ) - chờ xử lý   ( NOTE BO + GỬI HẬU ĐÀI )\nHỗ trợ khách tham gia với lần nạp gần nhất - Kéo cấp độ - gắn thẻ thành viên\nLưu ý: Báo cấp trên đóng băng tài khoản tạm thời tránh trường hợp khách đối đầu ra bên ngoài|Tiếp tục vi phạm đối đầu sau khi nhắc nhở\nXử lý đóng tài khoản:  » tổ trưởng xử lý, khách lên tìm CSKH thông báo cho tổ trưởng !    ( NOTE BO + GỬI HẬU ĐÀI )\nKéo cấp độ - gắn thẻ thành viên\nLưu ý: Báo cấp trên đóng băng tài khoản tạm thời tránh trường hợp khách đối đầu ra bên ngoài"
+  }
+]
