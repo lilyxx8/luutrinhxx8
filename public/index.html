@@ -225,6 +225,33 @@
 
         <!-- TAB LƯU TRÌNH -->
         <div id="view-luutrinh" style="display: none;">
+            <!-- BẢNG QUẢN LÝ DANH MỤC / THƯ MỤC LƯU TRÌNH -->
+            <div class="card p-3 mb-3 shadow-sm border" id="folderManageCard">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h6 class="fw-bold text-primary mb-0"><i class="fa-solid fa-folder-tree me-2"></i>Quản Lý Danh Mục Thư Mục</h6>
+                    <button class="btn btn-sm btn-outline-primary fw-bold" onclick="addNewFolderItem()">
+                        <i class="fa-solid fa-plus me-1"></i>Thêm Danh Mục Mới
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle text-center mb-0" style="font-size: 12px;">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 200px;">Mã Thư Mục (ID)</th>
+                                <th>Tên Danh Mục Hiển Thị</th>
+                                <th style="width: 120px;">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="folderManageTableBody"></tbody>
+                    </table>
+                </div>
+                <div class="mt-2 text-end">
+                    <button class="btn btn-sm btn-success fw-bold" onclick="saveFolderMapConfig()">
+                        <i class="fa-solid fa-floppy-disk me-1"></i>LƯU THAY ĐỔI DANH MỤC
+                    </button>
+                </div>
+            </div>
+
             <div class="action-bar">
                 <button class="btn btn-sm btn-primary btn-perm-add_new" onclick="openDocModal()"><i class="fa-solid fa-plus me-1"></i>Thêm bài viết lưu trình mới</button>
                 <button class="btn btn-sm btn-outline-secondary" onclick="loadDocs()"><i class="fa-solid fa-rotate me-1"></i>Làm mới</button>
@@ -624,7 +651,8 @@
     };
     let activeTab = 'luutrinh';
 
-    const FOLDER_MAP = [
+    // Chuyển FOLDER_MAP sang biến let để hỗ trợ lưu/sửa/xóa động
+    let FOLDER_MAP = [
         { id: 'main_gioithieu', name: 'Giới Thiệu Hướng Dẫn' },
         { id: 'Slot_nohu', name: 'Test Game - Chạy Cược' },
         { id: 'Bo_don', name: 'Hướng Dẫn Duyệt Đơn' },
@@ -1296,8 +1324,92 @@
         reader.readAsDataURL(file);
     }
 
+    /* QUẢN LÝ THƯ MỤC / DANH MỤC LƯU TRÌNH (FOLDER_MAP) */
+
+    function renderFolderManageTable() {
+        const tbody = document.getElementById('folderManageTableBody');
+        if (!tbody) return;
+
+        tbody.innerHTML = FOLDER_MAP.map((folder, index) => `
+            <tr>
+                <td>
+                    <input type="text" class="form-control form-control-sm text-center folder-cfg-id" value="${folder.id}">
+                </td>
+                <td>
+                    <input type="text" class="form-control form-control-sm folder-cfg-name" value="${folder.name}">
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="removeFolderItem(${index})">
+                        <i class="fa-solid fa-trash"></i> Xóa
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function addNewFolderItem() {
+        const newId = 'folder_' + Date.now().toString().slice(-4);
+        FOLDER_MAP.push({ id: newId, name: 'Danh Mục Mới' });
+        renderFolderManageTable();
+    }
+
+    function removeFolderItem(index) {
+        if (confirm("Bạn có chắc chắn muốn xóa danh mục này?")) {
+            FOLDER_MAP.splice(index, 1);
+            renderFolderManageTable();
+        }
+    }
+
+    async function saveFolderMapConfig() {
+        if (!hasPerm('config_ui')) {
+            alert("Tài khoản của bạn không được phân quyền thay đổi Danh mục / Giao diện!");
+            return;
+        }
+
+        const idInputs = document.querySelectorAll('.folder-cfg-id');
+        const nameInputs = document.querySelectorAll('.folder-cfg-name');
+
+        const updatedFolders = [];
+        idInputs.forEach((el, idx) => {
+            const idVal = el.value.trim();
+            const nameVal = nameInputs[idx].value.trim();
+            if (idVal && nameVal) {
+                updatedFolders.push({ id: idVal, name: nameVal });
+            }
+        });
+
+        FOLDER_MAP = updatedFolders;
+
+        try {
+            const res = await fetch(`${API_URL}/folders-config`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(FOLDER_MAP)
+            });
+
+            if (res.ok) {
+                alert("Đã cập nhật và lưu danh mục thành công!");
+                renderFolderTabs();
+                renderDocTable();
+            } else {
+                alert("Lưu danh mục thất bại. Vui lòng kiểm tra lại Server API!");
+            }
+        } catch (e) {
+            console.error("Lỗi khi lưu danh mục:", e);
+            alert("Không thể kết nối đến API Server!");
+        }
+    }
+
     async function loadDocs() {
         try {
+            // Tải cấu hình danh mục từ server nếu đã có
+            const folderRes = await fetch(`${API_URL}/folders-config`);
+            if (folderRes.ok) {
+                FOLDER_MAP = await folderRes.json();
+            }
+
+            renderFolderManageTable();
+
             const res = await fetch(`${API_URL}/camnangad88`);
             if (res.ok) {
                 rawDocsData = await res.json();
@@ -1402,7 +1514,7 @@
             document.getElementById('docModalTitle').innerText = "Chỉnh Sửa Bài Viết Lưu Trình";
             document.getElementById('docId').value = doc.ID;
             document.getElementById('docId').readOnly = true;
-            document.getElementById('docParent').value = doc.Parent || FOLDER_MAP[0].id;
+            document.getElementById('docParent').value = doc.Parent || (FOLDER_MAP[0] ? FOLDER_MAP[0].id : '');
             document.getElementById('docLabel').value = doc.Label || '';
             document.getElementById('docContentText').value = doc.Content || '';
 
@@ -1415,7 +1527,7 @@
             document.getElementById('docModalTitle').innerText = "Thêm Bài Viết Lưu Trình Mới";
             document.getElementById('docId').value = 'DOC_' + Date.now().toString().slice(-4);
             document.getElementById('docId').readOnly = false;
-            document.getElementById('docParent').value = selectedFolder || FOLDER_MAP[0].id;
+            document.getElementById('docParent').value = selectedFolder || (FOLDER_MAP[0] ? FOLDER_MAP[0].id : '');
             document.getElementById('docLabel').value = '';
             document.getElementById('docContentText').value = '';
         }
