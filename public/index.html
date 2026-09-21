@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trung Tâm Quản Trị Hệ Thống XX8</title>
+    <title>Trung Tâm Quản Trị Hệ Thống AD88</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -108,7 +108,7 @@
 <!-- MÀN HÌNH ĐĂNG NHẬP -->
 <div id="loginScreen">
     <div class="login-card">
-        <h4 class="text-center font-weight-bold mb-4 text-primary"><i class="fa-solid fa-shield-halved me-2"></i>XX8 BACKEND</h4>
+        <h4 class="text-center font-weight-bold mb-4 text-primary"><i class="fa-solid fa-shield-halved me-2"></i>AD88 BACKEND</h4>
         <div id="loginAlert" class="alert alert-danger py-2 d-none" style="font-size: 12px;"></div>
         <form id="loginForm" onsubmit="handleLogin(event)">
             <div class="mb-3">
@@ -130,10 +130,10 @@
     </div>
 </div>
 
-<!-- GIAO DIỆN CHÍNH XX8 -->
+<!-- GIAO DIỆN CHÍNH AD88 -->
 <div id="adminMainScreen" style="display: none;">
     <div class="sys-navbar">
-        <div class="sys-logo"><i class="fa-solid fa-layer-group me-1"></i> XX8 SYSTEM</div>
+        <div class="sys-logo"><i class="fa-solid fa-layer-group me-1"></i> AD88 SYSTEM</div>
         <div class="sys-nav-center" id="topNavContainer"></div>
 
         <div class="admin-dropdown-container">
@@ -1039,29 +1039,500 @@
                 return `
                     <tr>
                         <td>${index + 1}</td>
-                        <td class="fw-bold">${item.category || '-'}</td>
-                        <td class="text-start">${item.question || item.title || '-'}</td>
-                        <td class="text-start">
-                            <div style="font-size:11px;">
-                                <div><strong>A.</strong> ${opts[0] || ''}</div>
-                                <div><strong>B.</strong> ${opts[1] || ''}</div>
-                                <div><strong>C.</strong> ${opts[2] || ''}</div>
-                                <div><strong>D.</strong> ${opts[3] || ''}</div>
-                            </div>
+                        <td><span class="badge bg-secondary">${item.category || 'Chung'}</span><br><small class="text-muted">(${item.difficulty || 'Dễ'})</small></td>
+                        <td class="text-start fw-bold">${item.question || item.title || ''}</td>
+                        <td class="text-start" style="font-size: 11px;">
+                            <div>A: ${opts[0] || ''}</div>
+                            <div>B: ${opts[1] || ''}</div>
+                            <div>C: ${opts[2] || ''}</div>
+                            <div>D: ${opts[3] || ''}</div>
                         </td>
-                        <td><span class="badge bg-success">${optChar}</span></td>
-                        <td class="text-start text-muted">${item.explanation || '-'}</td>
+                        <td><span class="badge bg-success">${optChar}: ${opts[correctAnsIdx] || ''}</span></td>
+                        <td class="text-start text-muted" style="font-size: 11px;">${item.explanation || item.note || '-'}</td>
                         <td>
-                            <span class="action-link" onclick='openDynamicDetailModal(${JSON.stringify(item)})'>Xem</span>
-                            ${hasPerm('edit') ? `<span class="action-link" onclick='openDynamicRowModal("${tabId}", ${JSON.stringify(item)})'>Sửa</span>` : ''}
-                            ${hasPerm('delete') ? `<span class="action-link delete" onclick='deleteDynamicRow("${tabId}", "${item.id}")'>Xóa</span>` : ''}
+                            <span class="action-link text-info" onclick='openDynamicDetailModal(${JSON.stringify(item)})'>Chi tiết</span>
+                            ${hasPerm('edit') ? `<span class="action-link" onclick='editDynamicRow("${tabId}", ${JSON.stringify(item)})'>Sửa</span>` : ''}
+                            ${hasPerm('delete') ? `<span class="action-link delete" onclick="deleteDynamicRow('${tabId}', '${item.id}')">Xóa</span>` : ''}
                         </td>
                     </tr>
                 `;
             }).join('');
         } catch (e) {
-            console.error(e);
+            console.error("Lỗi tải danh sách câu hỏi:", e);
         }
+    }
+
+    function openDynamicDetailModal(item) {
+        document.getElementById('previewCategory').innerText = item.category || 'Chung';
+        document.getElementById('previewDifficulty').innerText = item.difficulty || 'Dễ';
+        document.getElementById('previewQuestion').innerText = item.question || item.title || '';
+        
+        const opts = Array.isArray(item.options) ? item.options : [item.optionA || '', item.optionB || '', item.optionC || '', item.optionD || ''];
+        const correctIdx = parseInt(item.answer !== undefined ? item.answer : 0);
+        
+        const optLabels = ['A', 'B', 'C', 'D'];
+        let optsHtml = '';
+        
+        opts.forEach((optText, i) => {
+            const isCorrect = (i === correctIdx);
+            optsHtml += `
+                <div class="p-2 rounded border ${isCorrect ? 'bg-success text-white fw-bold' : 'bg-white text-dark'}">
+                    ${optLabels[i]}. ${optText} ${isCorrect ? '<i class="fa-solid fa-check ms-2"></i> (Đáp án đúng)' : ''}
+                </div>
+            `;
+        });
+        
+        document.getElementById('previewOptionsList').innerHTML = optsHtml;
+        document.getElementById('previewExplanation').innerText = item.explanation || item.note || 'Không có giải thích.';
+        
+        const modal = new bootstrap.Modal(document.getElementById('dynamicDetailModal'));
+        modal.show();
+    }
+
+    function openDynamicRowModal(tabId) {
+        if (!hasPerm('add_new')) {
+            alert("Tài khoản của bạn không được phân quyền Thêm Mới!");
+            return;
+        }
+
+        document.getElementById('dynTabId').value = tabId;
+        document.getElementById('dynRowId').value = Date.now();
+        document.getElementById('dynCategory').value = 'Kèo Châu Á (Asian Handicap)';
+        document.getElementById('dynDifficulty').value = 'Dễ';
+        document.getElementById('dynQuestion').value = '';
+        document.getElementById('opt_0').value = '';
+        document.getElementById('opt_1').value = '';
+        document.getElementById('opt_2').value = '';
+        document.getElementById('opt_3').value = '';
+        document.getElementById('dynAnswer').value = '0';
+        document.getElementById('dynExplanation').value = '';
+
+        const modal = new bootstrap.Modal(document.getElementById('dynamicRowModal'));
+        modal.show();
+    }
+
+    function editDynamicRow(tabId, item) {
+        if (!hasPerm('edit')) {
+            alert("Tài khoản của bạn không được phân quyền Chỉnh Sửa!");
+            return;
+        }
+
+        document.getElementById('dynTabId').value = tabId;
+        document.getElementById('dynRowId').value = item.id;
+        document.getElementById('dynCategory').value = item.category || 'Chung';
+        document.getElementById('dynDifficulty').value = item.difficulty || 'Dễ';
+        document.getElementById('dynQuestion').value = item.question || item.title || '';
+
+        const opts = Array.isArray(item.options) ? item.options : [item.optionA || '', item.optionB || '', item.optionC || '', item.optionD || ''];
+        document.getElementById('opt_0').value = opts[0] || '';
+        document.getElementById('opt_1').value = opts[1] || '';
+        document.getElementById('opt_2').value = opts[2] || '';
+        document.getElementById('opt_3').value = opts[3] || '';
+
+        document.getElementById('dynAnswer').value = item.answer !== undefined ? item.answer : 0;
+        document.getElementById('dynExplanation').value = item.explanation || item.note || '';
+
+        const modal = new bootstrap.Modal(document.getElementById('dynamicRowModal'));
+        modal.show();
+    }
+
+    async function saveDynamicRow() {
+        const tabId = document.getElementById('dynTabId').value;
+        const body = {
+            id: document.getElementById('dynRowId').value,
+            category: document.getElementById('dynCategory').value.trim(),
+            difficulty: document.getElementById('dynDifficulty').value,
+            question: document.getElementById('dynQuestion').value.trim(),
+            options: [
+                document.getElementById('opt_0').value.trim(),
+                document.getElementById('opt_1').value.trim(),
+                document.getElementById('opt_2').value.trim(),
+                document.getElementById('opt_3').value.trim()
+            ],
+            answer: parseInt(document.getElementById('dynAnswer').value),
+            explanation: document.getElementById('dynExplanation').value.trim()
+        };
+
+        await fetch(`${API_URL}/dynamic-table/${tabId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+
+        bootstrap.Modal.getInstance(document.getElementById('dynamicRowModal')).hide();
+        loadDynamicTableData(tabId);
+    }
+
+    async function deleteDynamicRow(tabId, rowId) {
+        if (!hasPerm('delete')) {
+            alert("Tài khoản của bạn không có quyền Xóa!");
+            return;
+        }
+
+        if (confirm("Bạn có chắc muốn xóa câu hỏi này?")) {
+            await fetch(`${API_URL}/dynamic-table/${tabId}/${rowId}`, { method: 'DELETE' });
+            loadDynamicTableData(tabId);
+        }
+    }
+
+    function renderNavItemsConfigTable() {
+        const tbody = document.getElementById('navItemsTableBody');
+        tbody.innerHTML = currentConfig.navItems.map((item, index) => `
+            <tr>
+                <td><input type="text" class="form-control form-control-sm text-center cfg-nav-id" value="${item.id}" ${item.id === 'luutrinh' ? 'readonly' : ''}></td>
+                <td><input type="text" class="form-control form-control-sm cfg-nav-name text-center mx-auto" style="max-width: 130px;" value="${item.name}"></td>
+                <td>
+                    <select class="form-select form-select-sm cfg-nav-type" ${item.id === 'luutrinh' ? 'disabled' : ''}>
+                        <option value="luutrinh" ${item.type === 'luutrinh' ? 'selected' : ''}>Bài viết / Lưu trình</option>
+                        <option value="table" ${item.type === 'table' ? 'selected' : ''}>Bảng danh sách (Test...)</option>
+                    </select>
+                </td>
+                <td><input type="text" class="form-control form-control-sm cfg-nav-icon" value="${item.icon}"></td>
+                <td><textarea class="form-control form-control-sm cfg-nav-css font-monospace" rows="1" placeholder="Code CSS riêng...">${item.customCss || ''}</textarea></td>
+                <td>
+                    ${item.id !== 'luutrinh' ? `<button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="removeNavItem(${index})"><i class="fa-solid fa-trash"></i></button>` : '<span class="badge bg-secondary">Cố định</span>'}
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function addNewNavItem() {
+        const newId = 'item_' + Date.now().toString().slice(-4);
+        currentConfig.navItems.push({ id: newId, name: 'MỤC MỚI', type: 'table', icon: 'fa-folder', customCss: '' });
+        renderNavItemsConfigTable();
+    }
+
+    function removeNavItem(index) {
+        currentConfig.navItems.splice(index, 1);
+        renderNavItemsConfigTable();
+    }
+
+    async function saveLayoutConfig() {
+        if (!hasPerm('config_ui')) {
+            alert("Tài khoản của bạn không được phân quyền Tùy chỉnh Giao diện!");
+            return;
+        }
+
+        const ids = document.querySelectorAll('.cfg-nav-id');
+        const names = document.querySelectorAll('.cfg-nav-name');
+        const types = document.querySelectorAll('.cfg-nav-type');
+        const icons = document.querySelectorAll('.cfg-nav-icon');
+        const csses = document.querySelectorAll('.cfg-nav-css');
+
+        const updatedNavItems = [];
+        ids.forEach((el, idx) => {
+            updatedNavItems.push({
+                id: el.value.trim(),
+                name: names[idx].value.trim(),
+                type: types[idx].value,
+                icon: icons[idx].value.trim(),
+                customCss: csses[idx] ? csses[idx].value : ''
+            });
+        });
+
+        const bgType = document.getElementById('cfgBgType').value;
+        let bgUrl = document.getElementById('cfgBgUrl').value.trim();
+        if (bgType === 'file') {
+            bgUrl = document.getElementById('cfgBgFileUploadedUrl').value || currentConfig.theme.bgUrl;
+        }
+
+        const newConfig = {
+            theme: {
+                bgType: bgType,
+                bgColor: document.getElementById('cfgBgColor').value,
+                bgUrl: bgUrl,
+                primaryColor: document.getElementById('cfgPrimaryColor').value,
+                customCss: document.getElementById('cfgCustomCss').value
+            },
+            navItems: updatedNavItems
+        };
+
+        const res = await fetch(`${API_URL}/layout-config`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newConfig)
+        });
+        const data = await res.json();
+        if (data.success) {
+            alert("Đã lưu vĩnh viễn cấu hình giao diện!");
+            await fetchConfig();
+        }
+    }
+
+    function populateConfigForm() {
+        const t = currentConfig.theme || {};
+        document.getElementById('cfgPrimaryColor').value = t.primaryColor || '#1677ff';
+        document.getElementById('cfgBgType').value = t.bgType || 'color';
+        document.getElementById('cfgBgColor').value = t.bgColor || '#f4f6f9';
+        document.getElementById('cfgBgUrl').value = t.bgUrl || '';
+        document.getElementById('cfgCustomCss').value = t.customCss || '';
+        toggleBgInputs();
+    }
+
+    function toggleBgInputs() {
+        const type = document.getElementById('cfgBgType').value;
+        document.getElementById('bgOptionColor').classList.toggle('d-none', type !== 'color');
+        document.getElementById('bgOptionUrl').classList.toggle('d-none', type !== 'url');
+        document.getElementById('bgOptionFile').classList.toggle('d-none', type !== 'file');
+    }
+
+    async function handleUploadBgFile(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+            const res = await fetch('/api/upload-bg-image', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ imageBase64: event.target.result })
+            });
+            const data = await res.json();
+            if (data.success) {
+                document.getElementById('cfgBgFileUploadedUrl').value = data.url;
+                alert("Đã upload ảnh nền thành công!");
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+
+    async function loadDocs() {
+        try {
+            const res = await fetch(`${API_URL}/camnangad88`);
+            if (res.ok) {
+                rawDocsData = await res.json();
+                if (!selectedFolder && FOLDER_MAP.length > 0) selectedFolder = FOLDER_MAP[0].id;
+                renderFolderTabs();
+                renderDocTable();
+            }
+        } catch (e) { console.error("Lỗi tải lưu trình:", e); }
+    }
+
+    function renderFolderTabs() {
+        const container = document.getElementById('folderContainer');
+        container.innerHTML = FOLDER_MAP.map(f => `
+            <div class="folder-tab-btn ${selectedFolder === f.id ? 'active' : ''}" onclick="selectFolder('${f.id}')">
+                <i class="fa-solid fa-folder"></i>${f.name}
+            </div>
+        `).join('');
+    }
+
+    function selectFolder(fId) {
+        selectedFolder = fId;
+        renderFolderTabs();
+        renderDocTable();
+    }
+
+    function renderDocTable() {
+        const tbody = document.getElementById('docTableBody');
+        const list = rawDocsData.filter(d => (d.Parent || 'main') === selectedFolder);
+
+        if (list.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Không có bài viết trong thư mục này.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = list.map(item => `
+            <tr>
+                <td><span class="badge bg-secondary">${item.ID}</span></td>
+                <td><span class="clickable-title" onclick='openDetailModal(${JSON.stringify(item)})'>${item.Label || 'Chưa có tiêu đề'}</span></td>
+                <td><span class="badge bg-info text-dark">${getFolderName(item.Parent)}</span></td>
+                <td class="text-start text-muted">${(item.Content || '').substring(0, 80)}...</td>
+                <td>
+                    <span class="badge ${item.IsHidden ? 'bg-danger' : 'bg-success'}">${item.IsHidden ? 'Đang Ẩn' : 'Hiển Thị'}</span>
+                </td>
+                <td>
+                    <span class="action-link text-info" onclick='openDetailModal(${JSON.stringify(item)})'>Chi tiết</span>
+                    ${hasPerm('edit') ? `<span class="action-link" onclick='openDocModal(${JSON.stringify(item)})'>Sửa</span>` : ''}
+                    ${hasPerm('toggle_hide') ? `<span class="action-link ${item.IsHidden ? 'toggle-show' : 'toggle-hide'}" onclick="toggleHideDoc('${item.ID}')">${item.IsHidden ? 'Hiện' : 'Ẩn'}</span>` : ''}
+                    ${hasPerm('delete') ? `<span class="action-link delete" onclick="deleteDoc('${item.ID}')">Xóa</span>` : ''}
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function openDetailModal(item) {
+        document.getElementById('detailTitle').innerText = item.Label || 'Chi tiết bài viết';
+        document.getElementById('detailID').innerText = item.ID;
+        document.getElementById('detailParent').innerText = getFolderName(item.Parent);
+
+        let html = '';
+        if (item.Content) {
+            html += `<div class="p-3 bg-white rounded border mb-3" style="white-space: pre-wrap;">${item.Content}</div>`;
+        }
+
+        if (item.File_Url) {
+            const urls = item.File_Url.split('|');
+            const caps = item.Image_Captions ? item.Image_Captions.split('|') : [];
+
+            urls.forEach((u, idx) => {
+                const url = u.trim();
+                if (!url) return;
+                html += `
+                    <div class="content-block-item">
+                        <img src="${url}" class="block-img" onclick="openImageViewer('${url}')">
+                        <div class="block-text">${caps[idx] || ''}</div>
+                    </div>
+                `;
+            });
+        }
+
+        document.getElementById('contentContainer').innerHTML = html;
+        const modal = new bootstrap.Modal(document.getElementById('detailModal'));
+        modal.show();
+    }
+
+    function openDocModal(doc = null) {
+        if (doc && !hasPerm('edit')) {
+            alert("Tài khoản của bạn không được phân quyền Sửa bài viết!");
+            return;
+        }
+        if (!doc && !hasPerm('add_new')) {
+            alert("Tài khoản của bạn không được phân quyền Thêm mới bài viết!");
+            return;
+        }
+
+        const select = document.getElementById('docParent');
+        select.innerHTML = FOLDER_MAP.map(f => `<option value="${f.id}">${f.name}</option>`).join('');
+
+        const container = document.getElementById('imageBlocksContainer');
+        container.innerHTML = '';
+
+        if (doc) {
+            document.getElementById('docModalTitle').innerText = "Chỉnh Sửa Bài Viết Lưu Trình";
+            document.getElementById('docId').value = doc.ID;
+            document.getElementById('docId').readOnly = true;
+            document.getElementById('docParent').value = doc.Parent || FOLDER_MAP[0].id;
+            document.getElementById('docLabel').value = doc.Label || '';
+            document.getElementById('docContentText').value = doc.Content || '';
+
+            if (doc.File_Url) {
+                const urls = doc.File_Url.split('|');
+                const caps = doc.Image_Captions ? doc.Image_Captions.split('|') : [];
+                urls.forEach((u, i) => addNewImageBlock(u.trim(), caps[i] || ''));
+            }
+        } else {
+            document.getElementById('docModalTitle').innerText = "Thêm Bài Viết Lưu Trình Mới";
+            document.getElementById('docId').value = 'DOC_' + Date.now().toString().slice(-4);
+            document.getElementById('docId').readOnly = false;
+            document.getElementById('docParent').value = selectedFolder || FOLDER_MAP[0].id;
+            document.getElementById('docLabel').value = '';
+            document.getElementById('docContentText').value = '';
+        }
+
+        const modal = new bootstrap.Modal(document.getElementById('docModal'));
+        modal.show();
+    }
+
+    function addNewImageBlock(url = '', caption = '') {
+        const container = document.getElementById('imageBlocksContainer');
+        const blockId = 'img_block_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+
+        const div = document.createElement('div');
+        div.className = 'card p-2 mb-2 bg-light border';
+        div.id = blockId;
+        div.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center mb-1">
+                <small class="fw-bold text-secondary">Khối hình ảnh & ghi chú</small>
+                <button type="button" class="btn btn-sm btn-link text-danger p-0 text-decoration-none" onclick="document.getElementById('${blockId}').remove()"><i class="fa-solid fa-xmark"></i> Xóa</button>
+            </div>
+            <input type="text" class="form-control form-control-sm mb-1 img-block-url" placeholder="URL hình ảnh (https://...)" value="${url}">
+            <textarea class="form-control form-control-sm img-block-cap" rows="2" placeholder="Chú thích ảnh...">${caption}</textarea>
+        `;
+        container.appendChild(div);
+    }
+
+    async function saveDoc() {
+        const id = document.getElementById('docId').value.trim();
+        const parent = document.getElementById('docParent').value;
+        const label = document.getElementById('docLabel').value.trim();
+        const content = document.getElementById('docContentText').value.trim();
+
+        const urlInputs = document.querySelectorAll('.img-block-url');
+        const capInputs = document.querySelectorAll('.img-block-cap');
+
+        const urls = [];
+        const caps = [];
+
+        urlInputs.forEach((input, i) => {
+            if (input.value.trim() !== '') {
+                urls.push(input.value.trim());
+                caps.push(capInputs[i].value.trim());
+            }
+        });
+
+        const body = {
+            ID: id,
+            Parent: parent,
+            Label: label,
+            Content: content,
+            File_Url: urls.join('|'),
+            Image_Captions: caps.join('|')
+        };
+
+        const res = await fetch(`${API_URL}/camnangad88`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+
+        if (res.ok) {
+            bootstrap.Modal.getInstance(document.getElementById('docModal')).hide();
+            await loadDocs();
+        }
+    }
+
+    async function toggleHideDoc(id) {
+        if (!hasPerm('toggle_hide')) {
+            alert("Tài khoản của bạn không có quyền Ẩn/Hiện bài viết!");
+            return;
+        }
+
+        await fetch(`${API_URL}/camnangad88/${id}/toggle-hide`, { method: 'PATCH' });
+        loadDocs();
+    }
+
+    async function deleteDoc(id) {
+        if (!hasPerm('delete')) {
+            alert("Tài khoản của bạn không có quyền Xóa!");
+            return;
+        }
+
+        if (confirm("Bạn có chắc muốn xóa bài viết này?")) {
+            await fetch(`${API_URL}/camnangad88/${id}`, { method: 'DELETE' });
+            loadDocs();
+        }
+    }
+
+    async function submitChangePassword() {
+        const oldPassword = document.getElementById('oldPassInput').value;
+        const newPassword = document.getElementById('newPassInput').value;
+        const username = localStorage.getItem('admin_username');
+
+        const res = await fetch(`${API_URL}/admin/change-password`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, oldPassword, newPassword })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+            alert("Đổi mật khẩu thành công!");
+            bootstrap.Modal.getInstance(document.getElementById('changePasswordModal')).hide();
+        } else {
+            const alertBox = document.getElementById('passAlert');
+            alertBox.innerText = data.message;
+            alertBox.classList.remove('d-none');
+        }
+    }
+
+    function openImageViewer(url) {
+        document.getElementById('imageViewerImg').src = url;
+        document.getElementById('imageViewerModal').classList.add('active');
+    }
+
+    function closeImageViewer() {
+        document.getElementById('imageViewerModal').classList.remove('active');
     }
 </script>
 </body>

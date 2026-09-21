@@ -54,7 +54,7 @@ const DEFAULT_CONFIG = {
     navItems: [
         { 
             id: 'trangchu', 
-            name: 'TRANG CHỦ XX8', 
+            name: 'TRANG CHỦ AD88', 
             type: 'link', 
             url: 'https://ad88v9.com/', 
             icon: 'fa-house',
@@ -483,4 +483,4 @@ app.delete('/api/camnangad88/:id', (req, res) => {
 
 // Chạy Server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server XX8 đang chạy tại http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server AD88 đang chạy tại http://localhost:${PORT}`));
