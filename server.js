@@ -15,13 +15,29 @@ if (!fs.existsSync(UPLOADS_DIR)) {
     fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 }
 
-// Đường dẫn lưu trữ file dữ liệu quiz & dữ liệu hệ thống
+// Đường dẫn lưu trữ file dữ liệu quiz, danh mục thư mục & dữ liệu hệ thống
 const ABSOLUTE_QUIZ_FILE = path.join(__dirname, 'public', 'sports_quiz_100.json');
 const DATA_FILE = path.join(__dirname, 'data.json');
 const DYNAMIC_TABLES_FILE = path.join(__dirname, 'dynamic_tables.json');
 const CONFIG_FILE = path.join(__dirname, 'layout-config.json');
 const QUIZ_HTML_FILE = path.join(__dirname, 'public', 'quiz_client.html');
 const USERS_FILE = path.join(__dirname, 'users.json');
+const FOLDERS_FILE = path.join(__dirname, 'folders.json');
+
+// Cấu hình danh mục thư mục mặc định
+const DEFAULT_FOLDERS = [
+    { id: 'main_gioithieu', name: 'Giới Thiệu Hướng Dẫn' },
+    { id: 'Slot_nohu', name: 'Test Game - Chạy Cược' },
+    { id: 'Bo_don', name: 'Hướng Dẫn Duyệt Đơn' },
+    { id: 'Bo_main', name: 'Hướng Dẫn Sử Dụng Bo' },
+    { id: 'main_casino', name: 'Casino Trực Tuyến' },
+    { id: 'main_xoso', name: 'Xổ Số Online' },
+    { id: 'main_thethao', name: 'Thể Thao' },
+    { id: 'main_daga', name: 'Đá Gà' },
+    { id: 'duyedon_main', name: 'Lưu Trình Duyệt Đơn' },
+    { id: 'xulyld_main', name: 'Xử Lý Hội Viên Gian Lận' },
+    { id: 'main', name: 'Liên Hệ Hỗ Trợ - Hướng Dẫn' }
+];
 
 // Cấu hình danh sách người dùng mặc định (Mặc định tài khoản tối cao hiload88)
 const DEFAULT_USERS = [
@@ -111,6 +127,7 @@ let docsData = readJsonFile(DATA_FILE, []);
 let dynamicTablesData = readJsonFile(DYNAMIC_TABLES_FILE, {});
 let layoutConfig = readJsonFile(CONFIG_FILE, DEFAULT_CONFIG);
 let usersData = readJsonFile(USERS_FILE, DEFAULT_USERS);
+let foldersData = readJsonFile(FOLDERS_FILE, DEFAULT_FOLDERS);
 
 // Điều hướng trang tĩnh
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
@@ -124,7 +141,61 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'client.h
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* =========================================================
-   1. API QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG & ĐĂNG NHẬP (PHÂN QUYỀN CHI TIẾT)
+   1. API QUẢN LÝ THƯ MỤC CHÍNH (FOLDERS)
+   ========================================================= */
+
+// Lấy danh sách thư mục
+app.get('/api/folders', (req, res) => {
+    res.json(foldersData);
+});
+
+// Thêm hoặc Cập nhật thư mục
+app.post('/api/folders', (req, res) => {
+    const { id, name, oldId } = req.body;
+
+    if (!id || !name) {
+        return res.status(400).json({ success: false, message: "Thiếu thông tin Mã ID hoặc Tên thư mục!" });
+    }
+
+    if (oldId) {
+        // Chỉnh sửa thư mục đã có
+        const folderIndex = foldersData.findIndex(f => f.id === oldId);
+        if (folderIndex !== -1) {
+            foldersData[folderIndex] = { id, name };
+
+            // Nếu thay đổi ID thư mục, tự động cập nhật liên kết trong danh sách bài viết
+            if (oldId !== id) {
+                docsData.forEach(doc => {
+                    if (doc.Parent === oldId) doc.Parent = id;
+                });
+                writeJsonFile(DATA_FILE, docsData);
+            }
+        } else {
+            return res.status(404).json({ success: false, message: "Không tìm thấy thư mục cần sửa!" });
+        }
+    } else {
+        // Thêm thư mục mới
+        const exists = foldersData.some(f => f.id === id);
+        if (exists) {
+            return res.status(400).json({ success: false, message: "Mã ID thư mục đã tồn tại!" });
+        }
+        foldersData.push({ id, name });
+    }
+
+    writeJsonFile(FOLDERS_FILE, foldersData);
+    res.json({ success: true, message: "Đã lưu thư mục thành công!", data: foldersData });
+});
+
+// Xóa thư mục
+app.delete('/api/folders/:id', (req, res) => {
+    const { id } = req.params;
+    foldersData = foldersData.filter(f => f.id !== id);
+    writeJsonFile(FOLDERS_FILE, foldersData);
+    res.json({ success: true, message: "Đã xóa thư mục thành công!", data: foldersData });
+});
+
+/* =========================================================
+   2. API QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG & ĐĂNG NHẬP
    ========================================================= */
 
 // API Đăng nhập
@@ -137,7 +208,7 @@ app.post('/api/admin/login', (req, res) => {
             success: true, 
             username: user.username, 
             role: user.role || 'custom',
-            permissions: user.permissions || [], // Trả về mảng danh sách quyền thao tác
+            permissions: user.permissions || [],
             token: "mock-token-" + Date.now() 
         });
     }
@@ -167,11 +238,10 @@ app.get('/api/users', (req, res) => {
     })));
 });
 
-// API Tạo tài khoản người dùng & Phân quyền thao tác (Ràng buộc CHỈ hiload88 MỚI ĐƯỢC PHÉP TẠO)
+// API Tạo tài khoản (Chỉ hiload88)
 app.post('/api/users', (req, res) => {
     const { currentUser, username, password, role, permissions } = req.body;
 
-    // Ràng buộc bảo mật ở Backend: Chỉ duy nhất tài khoản 'hiload88' mới có quyền khởi tạo
     if (!currentUser || currentUser.toLowerCase() !== 'hiload88') {
         return res.status(403).json({ 
             success: false, 
@@ -202,7 +272,7 @@ app.post('/api/users', (req, res) => {
     return res.json({ success: true, message: "Tạo tài khoản và phân quyền thành công!" });
 });
 
-// API Chỉnh sửa thông tin/mật khẩu/quyền người dùng (Chỉ hiload88)
+// API Chỉnh sửa người dùng (Chỉ hiload88)
 app.put('/api/users/:username', (req, res) => {
     const { currentUser, password, permissions } = req.body;
     const { username } = req.params;
@@ -228,7 +298,7 @@ app.put('/api/users/:username', (req, res) => {
     return res.json({ success: true, message: "Cập nhật tài khoản thành công!" });
 });
 
-// API Xóa tài khoản người dùng (Chỉ hiload88)
+// API Xóa tài khoản (Chỉ hiload88)
 app.delete('/api/users/:username', (req, res) => {
     const { currentUser } = req.body;
     const { username } = req.params;
@@ -253,7 +323,7 @@ app.delete('/api/users/:username', (req, res) => {
 });
 
 /* =========================================================
-   2. API QUẢN LÝ DỮ LIỆU CÂU HỎI & GIAO DIỆN TRẮC NGHIỆM (QUIZ)
+   3. API QUẢN LÝ DỮ LIỆU CÂU HỎI & GIAO DIỆN TRẮC NGHIỆM (QUIZ)
    ========================================================= */
 
 app.get('/api/questions', (req, res) => {
@@ -301,7 +371,7 @@ app.get('/api/sports-quiz/get-html', (req, res) => {
 });
 
 /* =========================================================
-   3. API BẢNG DANH SÁCH ĐỘNG & IMPORT JSON BẢO LƯU FILE
+   4. API BẢNG DANH SÁCH ĐỘNG & IMPORT JSON BẢO LƯU FILE
    ========================================================= */
 
 app.get('/api/dynamic-table/:tabId', (req, res) => {
@@ -405,7 +475,7 @@ app.delete('/api/dynamic-table/:tabId/:rowId', (req, res) => {
 });
 
 /* =========================================================
-   4. API HỆ THỐNG TÙY CHỈNH GIAO DIỆN & LƯU TRÌNH BÀI VIẾT
+   5. API HỆ THỐNG TÙY CHỈNH GIAO DIỆN & LƯU TRÌNH BÀI VIẾT
    ========================================================= */
 
 app.get('/api/layout-config', (req, res) => res.json(layoutConfig));
