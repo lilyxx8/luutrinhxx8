@@ -1326,6 +1326,23 @@
 
     /* QUẢN LÝ THƯ MỤC / DANH MỤC LƯU TRÌNH (FOLDER_MAP) */
 
+    function syncFolderInputs() {
+        const idInputs = document.querySelectorAll('.folder-cfg-id');
+        const nameInputs = document.querySelectorAll('.folder-cfg-name');
+        
+        if (idInputs.length > 0) {
+            const updatedFolders = [];
+            idInputs.forEach((el, idx) => {
+                const idVal = el.value.trim();
+                const nameVal = nameInputs[idx].value.trim();
+                if (idVal || nameVal) {
+                    updatedFolders.push({ id: idVal, name: nameVal });
+                }
+            });
+            FOLDER_MAP = updatedFolders;
+        }
+    }
+
     function renderFolderManageTable() {
         const tbody = document.getElementById('folderManageTableBody');
         if (!tbody) return;
@@ -1348,6 +1365,7 @@
     }
 
     function addNewFolderItem() {
+        syncFolderInputs();
         const newId = 'folder_' + Date.now().toString().slice(-4);
         FOLDER_MAP.push({ id: newId, name: 'Danh Mục Mới' });
         renderFolderManageTable();
@@ -1355,6 +1373,7 @@
 
     function removeFolderItem(index) {
         if (confirm("Bạn có chắc chắn muốn xóa danh mục này?")) {
+            syncFolderInputs();
             FOLDER_MAP.splice(index, 1);
             renderFolderManageTable();
         }
@@ -1366,19 +1385,7 @@
             return;
         }
 
-        const idInputs = document.querySelectorAll('.folder-cfg-id');
-        const nameInputs = document.querySelectorAll('.folder-cfg-name');
-
-        const updatedFolders = [];
-        idInputs.forEach((el, idx) => {
-            const idVal = el.value.trim();
-            const nameVal = nameInputs[idx].value.trim();
-            if (idVal && nameVal) {
-                updatedFolders.push({ id: idVal, name: nameVal });
-            }
-        });
-
-        FOLDER_MAP = updatedFolders;
+        syncFolderInputs();
 
         try {
             const res = await fetch(`${API_URL}/folders-config`, {
