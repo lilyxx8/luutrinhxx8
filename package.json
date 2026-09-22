@@ -1,10 +1,9 @@
 {
-  "name": "luutrinhxx8",
+  "name": "webluutrinh",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,8 +13,6 @@
   "dependencies": {
     "body-parser": "^2.3.0",
     "cors": "^2.8.6",
-    "dotenv": "^18.0.3",
-    "express": "^5.2.1",
-    "mongoose": "^9.10.1"
+    "express": "^5.2.1"
   }
 }

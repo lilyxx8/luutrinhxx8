@@ -56,7 +56,7 @@ const DEFAULT_CONFIG = {
             id: 'trangchu', 
             name: 'TRANG CHỦ XX8', 
             type: 'link', 
-            url: 'https://xx8v88.com/', 
+            url: 'https://ad88v9.com/', 
             icon: 'fa-house',
             customCss: ''  
         },
