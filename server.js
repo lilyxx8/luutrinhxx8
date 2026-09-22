@@ -23,6 +23,7 @@ const CONFIG_FILE = path.join(__dirname, 'layout-config.json');
 const QUIZ_HTML_FILE = path.join(__dirname, 'public', 'quiz_client.html');
 const USERS_FILE = path.join(__dirname, 'users.json');
 const FOLDERS_FILE = path.join(__dirname, 'folders.json');
+const LOGS_FILE = path.join(__dirname, 'logs.json');
 
 // Cấu hình danh mục thư mục mặc định
 const DEFAULT_FOLDERS = [
@@ -142,6 +143,24 @@ let dynamicTablesData = readJsonFile(DYNAMIC_TABLES_FILE, {});
 let layoutConfig = readJsonFile(CONFIG_FILE, DEFAULT_CONFIG);
 let usersData = readJsonFile(USERS_FILE, DEFAULT_USERS);
 let foldersData = readJsonFile(FOLDERS_FILE, DEFAULT_FOLDERS);
+let logsData = readJsonFile(LOGS_FILE, []);
+
+// Hàm ghi nhận lịch sử thao tác (Audit Log)
+function addAuditLog({ username, action, section, oldValue = null, newValue = null }) {
+    const logItem = {
+        id: 'LOG_' + Date.now(),
+        timestamp: new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }),
+        username: username || 'System',
+        section: section || 'Chung',
+        action: action,
+        oldValue: oldValue ? JSON.stringify(oldValue) : 'N/A',
+        newValue: newValue ? JSON.stringify(newValue) : 'N/A'
+    };
+    logsData.unshift(logItem); // Đưa bản ghi mới nhất lên đầu
+    // Giới hạn tối đa 500 bản ghi lịch sử
+    if (logsData.length > 500) logsData = logsData.slice(0, 500);
+    writeJsonFile(LOGS_FILE, logsData);
+}
 
 // Điều hướng trang tĩnh
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
@@ -155,6 +174,24 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'client.h
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* =========================================================
+   0. API LỊCH SỬ THAY ĐỔI (AUDIT LOGS)
+   ========================================================= */
+
+app.get('/api/audit-logs', (req, res) => {
+    res.json(logsData);
+});
+
+app.delete('/api/audit-logs', (req, res) => {
+    const currentUser = req.headers['x-user'] || req.body.currentUser;
+    if (!currentUser || currentUser.toLowerCase() !== 'hiload88') {
+        return res.status(403).json({ success: false, message: "Chỉ tài khoản tối cao (hiload88) mới có quyền xóa lịch sử!" });
+    }
+    logsData = [];
+    writeJsonFile(LOGS_FILE, logsData);
+    res.json({ success: true, message: "Đã xóa toàn bộ lịch sử thay đổi!" });
+});
+
+/* =========================================================
    1. API QUẢN LÝ THƯ MỤC CHÍNH (FOLDERS)
    ========================================================= */
 
@@ -164,6 +201,7 @@ app.get('/api/folders', (req, res) => {
 
 app.post('/api/folders', (req, res) => {
     const { id, name, oldId } = req.body;
+    const currentUser = req.headers['x-user'] || 'Unknown';
 
     if (!id || !name) {
         return res.status(400).json({ success: false, message: "Thiếu thông tin Mã ID hoặc Tên thư mục!" });
@@ -172,6 +210,7 @@ app.post('/api/folders', (req, res) => {
     if (oldId) {
         const folderIndex = foldersData.findIndex(f => f.id === oldId);
         if (folderIndex !== -1) {
+            const oldFolder = { ...foldersData[folderIndex] };
             foldersData[folderIndex] = { id, name };
 
             if (oldId !== id) {
@@ -180,6 +219,7 @@ app.post('/api/folders', (req, res) => {
                 });
                 writeJsonFile(DATA_FILE, docsData);
             }
+            addAuditLog({ username: currentUser, action: 'Sửa thư mục', section: 'Quản lý thư mục', oldValue: oldFolder, newValue: { id, name } });
         } else {
             return res.status(404).json({ success: false, message: "Không tìm thấy thư mục cần sửa!" });
         }
@@ -188,7 +228,9 @@ app.post('/api/folders', (req, res) => {
         if (exists) {
             return res.status(400).json({ success: false, message: "Mã ID thư mục đã tồn tại!" });
         }
-        foldersData.push({ id, name });
+        const newFolder = { id, name };
+        foldersData.push(newFolder);
+        addAuditLog({ username: currentUser, action: 'Thêm thư mục', section: 'Quản lý thư mục', oldValue: null, newValue: newFolder });
     }
 
     writeJsonFile(FOLDERS_FILE, foldersData);
@@ -197,8 +239,13 @@ app.post('/api/folders', (req, res) => {
 
 app.delete('/api/folders/:id', (req, res) => {
     const { id } = req.params;
+    const currentUser = req.headers['x-user'] || 'Unknown';
+    const deletedFolder = foldersData.find(f => f.id === id);
+
     foldersData = foldersData.filter(f => f.id !== id);
     writeJsonFile(FOLDERS_FILE, foldersData);
+
+    addAuditLog({ username: currentUser, action: 'Xóa thư mục', section: 'Quản lý thư mục', oldValue: deletedFolder, newValue: null });
     res.json({ success: true, message: "Đã xóa thư mục thành công!", data: foldersData });
 });
 
@@ -208,21 +255,27 @@ app.get('/api/folders-config', (req, res) => {
 
 app.post('/api/folders-config', (req, res) => {
     const newFolders = req.body;
+    const currentUser = req.headers['x-user'] || 'Unknown';
+
     if (Array.isArray(newFolders)) {
+        const oldFolders = [...foldersData];
         foldersData = newFolders;
         writeJsonFile(FOLDERS_FILE, foldersData);
+        addAuditLog({ username: currentUser, action: 'Cập nhật cấu hình danh mục', section: 'Cấu hình thư mục', oldValue: oldFolders, newValue: newFolders });
         return res.json({ success: true, message: "Đã lưu danh mục thành công!", data: foldersData });
     }
     if (typeof newFolders === 'object' && newFolders !== null) {
         const { id, name } = newFolders;
         if (id && name) {
             const index = foldersData.findIndex(f => f.id === id);
+            const oldFolder = index !== -1 ? { ...foldersData[index] } : null;
             if (index !== -1) {
                 foldersData[index] = { id, name };
             } else {
                 foldersData.push({ id, name });
             }
             writeJsonFile(FOLDERS_FILE, foldersData);
+            addAuditLog({ username: currentUser, action: 'Lưu danh mục', section: 'Cấu hình thư mục', oldValue: oldFolder, newValue: { id, name } });
             return res.json({ success: true, message: "Đã lưu danh mục thành công!", data: foldersData });
         }
     }
@@ -238,6 +291,7 @@ app.post('/api/admin/login', (req, res) => {
     const user = usersData.find(u => u.username === username && u.password === password);
     
     if (user) {
+        addAuditLog({ username: user.username, action: 'Đăng nhập', section: 'Hệ thống', oldValue: null, newValue: { status: 'Thành công' } });
         return res.json({ 
             success: true, 
             username: user.username, 
@@ -256,6 +310,7 @@ app.post('/api/admin/change-password', (req, res) => {
     if (userIndex !== -1) {
         usersData[userIndex].password = newPassword;
         writeJsonFile(USERS_FILE, usersData);
+        addAuditLog({ username: username, action: 'Đổi mật khẩu', section: 'Tài khoản', oldValue: '******', newValue: '******' });
         return res.json({ success: true, message: "Đổi mật khẩu thành công!" });
     }
     return res.json({ success: false, message: "Mật khẩu cũ không chính xác!" });
@@ -300,6 +355,8 @@ app.post('/api/users', (req, res) => {
     usersData.push(newUser);
     writeJsonFile(USERS_FILE, usersData);
 
+    addAuditLog({ username: currentUser, action: 'Tạo tài khoản', section: 'Quản lý tài khoản', oldValue: null, newValue: { username, role: newUser.role, permissions } });
+
     return res.json({ success: true, message: "Tạo tài khoản và phân quyền thành công!" });
 });
 
@@ -316,6 +373,8 @@ app.put('/api/users/:username', (req, res) => {
         return res.json({ success: false, message: "Không tìm thấy tài khoản!" });
     }
 
+    const oldUserData = { ...usersData[userIndex] };
+
     if (password) {
         usersData[userIndex].password = password;
     }
@@ -325,6 +384,8 @@ app.put('/api/users/:username', (req, res) => {
     }
 
     writeJsonFile(USERS_FILE, usersData);
+    addAuditLog({ username: currentUser, action: 'Cập nhật tài khoản', section: 'Quản lý tài khoản', oldValue: { username, role: oldUserData.role, permissions: oldUserData.permissions }, newValue: { username, role: usersData[userIndex].role, permissions: usersData[userIndex].permissions } });
+
     return res.json({ success: true, message: "Cập nhật tài khoản thành công!" });
 });
 
@@ -340,11 +401,13 @@ app.delete('/api/users/:username', (req, res) => {
         return res.json({ success: false, message: "Không thể xóa tài khoản Tối Cao hiload88!" });
     }
 
+    const deletedUser = usersData.find(u => u.username.toLowerCase() === username.toLowerCase());
     const initialLength = usersData.length;
     usersData = usersData.filter(u => u.username.toLowerCase() !== username.toLowerCase());
 
     if (usersData.length < initialLength) {
         writeJsonFile(USERS_FILE, usersData);
+        addAuditLog({ username: currentUser, action: 'Xóa tài khoản', section: 'Quản lý tài khoản', oldValue: { username: deletedUser.username, role: deletedUser.role }, newValue: null });
         return res.json({ success: true, message: "Đã xóa tài khoản vĩnh viễn!" });
     }
 
@@ -368,9 +431,11 @@ app.get('/api/sports-quiz', (req, res) => {
 app.post('/api/sports-quiz/update-json', (req, res) => {
     try {
         const { rawJson } = req.body;
+        const currentUser = req.headers['x-user'] || 'Unknown';
         let parsedData = typeof rawJson === 'string' ? JSON.parse(rawJson) : rawJson;
         
         writeJsonFile(ABSOLUTE_QUIZ_FILE, parsedData);
+        addAuditLog({ username: currentUser, action: 'Cập nhật trực tiếp JSON Quiz', section: 'Trắc nghiệm Quiz', oldValue: 'Mã JSON cũ', newValue: 'Mã JSON mới' });
         res.json({ success: true, message: "Đã cập nhật trực tiếp file sports_quiz_100.json thành công!" });
     } catch (err) {
         res.status(400).json({ success: false, message: "Định dạng JSON không hợp lệ: " + err.message });
@@ -380,11 +445,13 @@ app.post('/api/sports-quiz/update-json', (req, res) => {
 app.post('/api/sports-quiz/update-html', (req, res) => {
     try {
         const { htmlContent } = req.body;
+        const currentUser = req.headers['x-user'] || 'Unknown';
         if (!htmlContent) {
             return res.status(400).json({ success: false, message: "Nội dung Code không được để trống!" });
         }
         
         fs.writeFileSync(QUIZ_HTML_FILE, htmlContent, 'utf8');
+        addAuditLog({ username: currentUser, action: 'Cập nhật HTML Quiz', section: 'Giao diện Quiz', oldValue: 'Code cũ', newValue: 'Code mới' });
         res.json({ success: true, message: "Đã lưu trực tiếp mã nguồn Frontend Quiz vào file HTML!" });
     } catch (err) {
         res.status(500).json({ success: false, message: "Lỗi khi lưu file HTML: " + err.message });
@@ -416,6 +483,7 @@ app.post('/api/dynamic-table/:tabId/import', (req, res) => {
     try {
         const { tabId } = req.params;
         const questions = req.body;
+        const currentUser = req.headers['x-user'] || 'Unknown';
 
         if (!Array.isArray(questions)) {
             return res.status(400).json({ success: false, message: "Dữ liệu JSON phải là dạng mảng []." });
@@ -438,6 +506,8 @@ app.post('/api/dynamic-table/:tabId/import', (req, res) => {
             writeJsonFile(DYNAMIC_TABLES_FILE, dynamicTablesData);
         }
 
+        addAuditLog({ username: currentUser, action: `Import JSON (${formattedQuestions.length} dòng)`, section: `Bảng động: ${tabId}`, oldValue: null, newValue: `Đã import ${formattedQuestions.length} bản ghi` });
+
         return res.json({ 
             success: true, 
             message: "Import thành công!", 
@@ -452,6 +522,7 @@ app.post('/api/dynamic-table/:tabId/import', (req, res) => {
 app.post('/api/dynamic-table/:tabId', (req, res) => {
     const { tabId } = req.params;
     const rowItem = req.body;
+    const currentUser = req.headers['x-user'] || 'Unknown';
 
     let targetData = [];
     const isQuizTab = (tabId === 'test' || tabId === 'quiz' || tabId === 'sports_quiz' || tabId === 'testsanpham');
@@ -463,10 +534,14 @@ app.post('/api/dynamic-table/:tabId', (req, res) => {
     }
 
     const index = targetData.findIndex(r => String(r.id) === String(rowItem.id));
+    const oldValue = index !== -1 ? targetData[index] : null;
+
     if (index !== -1) {
         targetData[index] = rowItem;
+        addAuditLog({ username: currentUser, action: 'Sửa bản ghi', section: `Bảng động: ${tabId}`, oldValue, newValue: rowItem });
     } else {
         targetData.push(rowItem);
+        addAuditLog({ username: currentUser, action: 'Thêm bản ghi mới', section: `Bảng động: ${tabId}`, oldValue: null, newValue: rowItem });
     }
 
     if (isQuizTab) {
@@ -481,6 +556,7 @@ app.post('/api/dynamic-table/:tabId', (req, res) => {
 
 app.delete('/api/dynamic-table/:tabId/:rowId', (req, res) => {
     const { tabId, rowId } = req.params;
+    const currentUser = req.headers['x-user'] || 'Unknown';
 
     let targetData = [];
     const isQuizTab = (tabId === 'test' || tabId === 'quiz' || tabId === 'sports_quiz' || tabId === 'testsanpham');
@@ -491,6 +567,7 @@ app.delete('/api/dynamic-table/:tabId/:rowId', (req, res) => {
         targetData = dynamicTablesData[tabId] || [];
     }
 
+    const deletedItem = targetData.find(r => String(r.id) === String(rowId));
     targetData = targetData.filter(r => String(r.id) !== String(rowId));
 
     if (isQuizTab) {
@@ -499,6 +576,8 @@ app.delete('/api/dynamic-table/:tabId/:rowId', (req, res) => {
         dynamicTablesData[tabId] = targetData;
         writeJsonFile(DYNAMIC_TABLES_FILE, dynamicTablesData);
     }
+
+    addAuditLog({ username: currentUser, action: 'Xóa bản ghi', section: `Bảng động: ${tabId}`, oldValue: deletedItem, newValue: null });
 
     res.json({ success: true, message: "Đã xóa bản ghi thành công!" });
 });
@@ -510,6 +589,8 @@ app.delete('/api/dynamic-table/:tabId/:rowId', (req, res) => {
 app.get('/api/layout-config', (req, res) => res.json(layoutConfig));
 
 app.post('/api/layout-config', (req, res) => {
+    const currentUser = req.headers['x-user'] || 'Unknown';
+    const oldConfig = { ...layoutConfig };
     layoutConfig = req.body;
     writeJsonFile(CONFIG_FILE, layoutConfig);
 
@@ -519,6 +600,8 @@ app.post('/api/layout-config', (req, res) => {
             fs.writeFileSync(QUIZ_HTML_FILE, quizItem.customCss, 'utf8');
         }
     }
+
+    addAuditLog({ username: currentUser, action: 'Cập nhật giao diện bối cảnh', section: 'Cấu hình giao diện', oldValue: oldConfig, newValue: layoutConfig });
 
     res.json({ success: true, message: "Đã lưu tất cả tùy chỉnh giao diện!" });
 });
@@ -547,12 +630,17 @@ app.get('/api/camnangad88', (req, res) => res.json(docsData));
 
 app.post('/api/camnangad88', (req, res) => {
     const newItem = req.body;
+    const currentUser = req.headers['x-user'] || 'Unknown';
     const index = docsData.findIndex(item => item.ID === newItem.ID);
+
     if (index !== -1) {
+        const oldItem = { ...docsData[index] };
         docsData[index] = { ...docsData[index], ...newItem };
+        addAuditLog({ username: currentUser, action: 'Sửa bài viết', section: 'Lưu trình', oldValue: oldItem, newValue: newItem });
     } else {
         newItem.IsHidden = false;
         docsData.push(newItem);
+        addAuditLog({ username: currentUser, action: 'Thêm bài viết mới', section: 'Lưu trình', oldValue: null, newValue: newItem });
     }
     writeJsonFile(DATA_FILE, docsData);
     res.json({ success: true, message: "Đã lưu thành công!" });
@@ -560,10 +648,21 @@ app.post('/api/camnangad88', (req, res) => {
 
 app.patch('/api/camnangad88/:id/toggle-hide', (req, res) => {
     const { id } = req.params;
+    const currentUser = req.headers['x-user'] || 'Unknown';
     const index = docsData.findIndex(item => item.ID === id);
+
     if (index !== -1) {
         docsData[index].IsHidden = !docsData[index].IsHidden;
         writeJsonFile(DATA_FILE, docsData);
+
+        addAuditLog({ 
+            username: currentUser, 
+            action: docsData[index].IsHidden ? 'Ẩn bài viết' : 'Hiện bài viết', 
+            section: 'Lưu trình', 
+            oldValue: { ID: id, IsHidden: !docsData[index].IsHidden }, 
+            newValue: { ID: id, IsHidden: docsData[index].IsHidden } 
+        });
+
         return res.json({ 
             success: true, 
             isHidden: docsData[index].IsHidden, 
@@ -575,8 +674,14 @@ app.patch('/api/camnangad88/:id/toggle-hide', (req, res) => {
 
 app.delete('/api/camnangad88/:id', (req, res) => {
     const { id } = req.params;
+    const currentUser = req.headers['x-user'] || 'Unknown';
+    const deletedItem = docsData.find(item => item.ID === id);
+
     docsData = docsData.filter(item => item.ID !== id);
     writeJsonFile(DATA_FILE, docsData);
+
+    addAuditLog({ username: currentUser, action: 'Xóa bài viết', section: 'Lưu trình', oldValue: deletedItem, newValue: null });
+
     res.json({ success: true, message: "Đã xóa thành công!" });
 });
 
