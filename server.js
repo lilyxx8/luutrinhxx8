@@ -57,7 +57,7 @@ const DEFAULT_USERS = [
     }
 ];
 
-// Cấu hình mặc định hệ thống
+// Cấu hình mặc định hệ thống (Thêm Tab DANH MỤC lên Menu chính)
 const DEFAULT_CONFIG = {
     theme: {
         bgType: 'color',
@@ -75,6 +75,13 @@ const DEFAULT_CONFIG = {
             url: 'https://xx8v88.com/', 
             icon: 'fa-house',
             customCss: ''  
+        },
+        { 
+            id: 'danhmuc', 
+            name: 'DANH MỤC', 
+            type: 'danhmuc', 
+            icon: 'fa-folder-tree', 
+            customCss: '' 
         },
         { 
             id: 'luutrinh', 
@@ -144,12 +151,10 @@ app.use(express.static(path.join(__dirname, 'public')));
    1. API QUẢN LÝ THƯ MỤC CHÍNH (FOLDERS)
    ========================================================= */
 
-// Lấy danh sách thư mục
 app.get('/api/folders', (req, res) => {
     res.json(foldersData);
 });
 
-// Thêm hoặc Cập nhật thư mục
 app.post('/api/folders', (req, res) => {
     const { id, name, oldId } = req.body;
 
@@ -158,12 +163,10 @@ app.post('/api/folders', (req, res) => {
     }
 
     if (oldId) {
-        // Chỉnh sửa thư mục đã có
         const folderIndex = foldersData.findIndex(f => f.id === oldId);
         if (folderIndex !== -1) {
             foldersData[folderIndex] = { id, name };
 
-            // Nếu thay đổi ID thư mục, tự động cập nhật liên kết trong danh sách bài viết
             if (oldId !== id) {
                 docsData.forEach(doc => {
                     if (doc.Parent === oldId) doc.Parent = id;
@@ -174,7 +177,6 @@ app.post('/api/folders', (req, res) => {
             return res.status(404).json({ success: false, message: "Không tìm thấy thư mục cần sửa!" });
         }
     } else {
-        // Thêm thư mục mới
         const exists = foldersData.some(f => f.id === id);
         if (exists) {
             return res.status(400).json({ success: false, message: "Mã ID thư mục đã tồn tại!" });
@@ -186,7 +188,6 @@ app.post('/api/folders', (req, res) => {
     res.json({ success: true, message: "Đã lưu thư mục thành công!", data: foldersData });
 });
 
-// Xóa thư mục
 app.delete('/api/folders/:id', (req, res) => {
     const { id } = req.params;
     foldersData = foldersData.filter(f => f.id !== id);
@@ -194,7 +195,6 @@ app.delete('/api/folders/:id', (req, res) => {
     res.json({ success: true, message: "Đã xóa thư mục thành công!", data: foldersData });
 });
 
-/* --- BỔ SUNG THÊM API /api/folders-config CHO FRONTEND CỦA BẠN GỌI --- */
 app.get('/api/folders-config', (req, res) => {
     res.json(foldersData);
 });
@@ -206,7 +206,6 @@ app.post('/api/folders-config', (req, res) => {
         writeJsonFile(FOLDERS_FILE, foldersData);
         return res.json({ success: true, message: "Đã lưu danh mục thành công!", data: foldersData });
     }
-    // Trường hợp gửi dạng Object đơn lẻ
     if (typeof newFolders === 'object' && newFolders !== null) {
         const { id, name } = newFolders;
         if (id && name) {
@@ -227,7 +226,6 @@ app.post('/api/folders-config', (req, res) => {
    2. API QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG & ĐĂNG NHẬP
    ========================================================= */
 
-// API Đăng nhập
 app.post('/api/admin/login', (req, res) => {
     const { username, password } = req.body;
     const user = usersData.find(u => u.username === username && u.password === password);
@@ -244,7 +242,6 @@ app.post('/api/admin/login', (req, res) => {
     return res.json({ success: false, message: "Tài khoản hoặc mật khẩu không chính xác!" });
 });
 
-// API Đổi mật khẩu
 app.post('/api/admin/change-password', (req, res) => {
     const { username, oldPassword, newPassword } = req.body;
     const userIndex = usersData.findIndex(u => u.username === username && u.password === oldPassword);
@@ -257,7 +254,6 @@ app.post('/api/admin/change-password', (req, res) => {
     return res.json({ success: false, message: "Mật khẩu cũ không chính xác!" });
 });
 
-// API Lấy danh sách người dùng
 app.get('/api/users', (req, res) => {
     res.json(usersData.map(u => ({ 
         username: u.username, 
@@ -267,7 +263,6 @@ app.get('/api/users', (req, res) => {
     })));
 });
 
-// API Tạo tài khoản (Chỉ hiload88)
 app.post('/api/users', (req, res) => {
     const { currentUser, username, password, role, permissions } = req.body;
 
@@ -301,7 +296,6 @@ app.post('/api/users', (req, res) => {
     return res.json({ success: true, message: "Tạo tài khoản và phân quyền thành công!" });
 });
 
-// API Chỉnh sửa người dùng (Chỉ hiload88)
 app.put('/api/users/:username', (req, res) => {
     const { currentUser, password, permissions } = req.body;
     const { username } = req.params;
@@ -327,7 +321,6 @@ app.put('/api/users/:username', (req, res) => {
     return res.json({ success: true, message: "Cập nhật tài khoản thành công!" });
 });
 
-// API Xóa tài khoản (Chỉ hiload88)
 app.delete('/api/users/:username', (req, res) => {
     const { currentUser } = req.body;
     const { username } = req.params;
