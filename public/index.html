@@ -249,6 +249,15 @@
             </div>
         </div>
 
+        <!-- TAB QUẢN LÝ -->
+        <div id="view-quanly" style="display: none;">
+            <div class="card p-3 shadow-sm">
+                <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-list-check me-2"></i>Giao Diện Quản Lý</h6>
+                <div id="quanlyFolderTabsContainer"></div>
+                <div id="quanlyDocTableContainer" class="mt-3"></div>
+            </div>
+        </div>
+
         <!-- CONTAINER CHO CÁC MỤC ĐỘNG -->
         <div id="dynamicViewsContainer"></div>
     </div>
@@ -712,7 +721,7 @@
         let html = '';
 
         currentConfig.navItems.forEach(item => {
-            if (item.id === 'luutrinh') return;
+            if (item.id === 'luutrinh' || item.id === 'quanly') return;
 
             if (item.type === 'table' || item.id === 'test' || item.id === 'testsanpham') {
                 html += `
@@ -728,7 +737,10 @@
                                 </button>
                             </div>
                             
-                            <div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-primary fw-bold" onclick="handleExportJson('${item.id}')">
+                                    <i class="fa-solid fa-file-export me-1"></i>Xuất JSON
+                                </button>
                                 ${hasPerm('import_json') ? `
                                 <input type="file" id="jsonFileInput_${item.id}" accept=".json" style="display: none;" onchange="handleImportJson(event, '${item.id}')">
                                 <button class="btn btn-sm btn-success fw-bold" onclick="document.getElementById('jsonFileInput_${item.id}').click()">
@@ -963,17 +975,63 @@
         const viewLuuTrinh = document.getElementById('view-luutrinh');
         if (viewLuuTrinh) viewLuuTrinh.style.display = (tabName === 'luutrinh') ? 'block' : 'none';
 
+        // --- ĐOẠN MỚI THÊM CHO QUẢN LÝ ---
+        const viewQuanLy = document.getElementById('view-quanly');
+        if (viewQuanLy) {
+            viewQuanLy.style.display = (tabName === 'quanly') ? 'block' : 'none';
+            if (tabName === 'quanly') {
+                renderQuanLyFolderTabs();
+                renderQuanLyDocTable();
+            }
+        }
+
         currentConfig.navItems.forEach(item => {
-            if (item.id !== 'luutrinh') {
-                const el = document.getElementById(`view-${item.id}`);
-                if (el) {
-                    el.style.display = (tabName === item.id) ? 'block' : 'none';
-                    if (tabName === item.id && (item.type === 'table' || item.id === 'test')) {
-                        loadDynamicTableData(item.id);
-                    }
+            // Bỏ qua cả 'luutrinh' và 'quanly' vì 2 tab này có giao diện riêng
+            if (item.id === 'luutrinh' || item.id === 'quanly') return;
+
+            const el = document.getElementById(`view-${item.id}`);
+            if (el) {
+                el.style.display = (tabName === item.id) ? 'block' : 'none';
+                if (tabName === item.id && (item.type === 'table' || item.id === 'test')) {
+                    loadDynamicTableData(item.id);
                 }
             }
         });
+    }
+
+    function renderQuanLyFolderTabs() {
+        const container = document.getElementById('quanlyFolderTabsContainer');
+        if (container) {
+            container.innerHTML = '<div class="alert alert-info py-2">Thư mục quản lý mở rộng</div>';
+        }
+    }
+
+    function renderQuanLyDocTable() {
+        const container = document.getElementById('quanlyDocTableContainer');
+        if (container) {
+            container.innerHTML = '<div class="text-muted text-center py-3">Nội dung quản lý đang cập nhật...</div>';
+        }
+    }
+
+    async function handleExportJson(tabId) {
+        try {
+            const res = await fetch(`${API_URL}/dynamic-table/${tabId}`);
+            if (!res.ok) {
+                alert("Không thể lấy dữ liệu để xuất JSON!");
+                return;
+            }
+            const data = await res.json();
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `${tabId}_questions.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        } catch (e) {
+            console.error("Lỗi xuất JSON:", e);
+            alert("Có lỗi xảy ra khi xuất file JSON!");
+        }
     }
 
     async function handleImportJson(event, tabId) {
