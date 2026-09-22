@@ -96,6 +96,13 @@ const DEFAULT_CONFIG = {
             type: 'table', 
             icon: 'fa-vial-circle-check', 
             customCss: '' 
+        },
+        { 
+            id: 'test', 
+            name: 'QUẢN LÝ DANH MỤC', 
+            type: 'table', 
+            icon: 'fa-vial-circle-check', 
+            customCss: '' 
         }
     ]
 };
