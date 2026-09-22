@@ -232,7 +232,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
-        /* STYLES CHO GIAO DIỆN CÂU HỎI / QUIZ */
         .quiz-card {
             background: rgba(15, 23, 42, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -343,28 +342,16 @@
     let activeDocId = null;
     let isImageViewerOpen = false;
 
-    // QUẢN LÝ TRẠNG THÁI QUIZ / CÂU HỎI
     let quizQuestions = [];
     let currentQuizIndex = 0;
     let userScore = 0;
     let isAnswered = false;
 
-    const FOLDER_MAP = [
-        { id: 'main_gioithieu', name: 'Giới Thiệu HƯỚNG DẪN' },
-        { id: 'Slot_nohu', name: 'Test Game - Chạy Cược' },
-        { id: 'Bo_don', name: 'Hướng Dẫn Duyệt Đơn' },
-        { id: 'Bo_main', name: 'Hướng Dẫn Sử Dụng Bo' },
-        { id: 'main_casino', name: 'Casino Trực Tuyến' },
-        { id: 'main_xoso', name: 'Xổ Số Online' },
-        { id: 'main_thethao', name: 'Thể Thao' },
-        { id: 'main_daga', name: 'Đá Gà' },
-        { id: 'duyedon_main', name: 'Lưu Trình Duyệt Đơn' },
-        { id: 'xulyld_main', name: 'Xử Lý Hội Viên Gian Lận' },
-        { id: 'main', name: 'Liên Hệ Hỗ Trợ - Hướng Dẫn' }
-    ];
+    let FOLDER_MAP = [];
 
     document.addEventListener("DOMContentLoaded", async () => {
         await fetchClientConfig();
+        await fetchClientCategories();
         await loadDocs();
 
         history.replaceState({ screen: 'home' }, '', window.location.pathname);
@@ -391,12 +378,28 @@
         });
     });
 
+    async function fetchClientCategories() {
+        try {
+            const res = await fetch(`${API_URL}/categories`);
+            if (res.ok) {
+                const data = await res.json();
+                // LOẠI BỎ DANH MỤC ĐANG BỊ ẨN TRÊN FRONTEND
+                FOLDER_MAP = data.filter(cat => !cat.isHidden);
+            }
+        } catch (e) {
+            console.error("Lỗi lấy danh mục client:", e);
+        }
+    }
+
     async function refreshCurrentData() {
         const toast = document.getElementById('refreshToast');
         toast.style.display = 'block';
 
+        await fetchClientCategories();
         await loadDocs();
+        
         if (selectedFolder) {
+            renderFolderTabs(FOLDER_MAP);
             renderClientDocs();
             if (activeDocId) {
                 const activeDoc = rawDocsData.find(d => String(d.ID) === String(activeDocId));
@@ -420,7 +423,7 @@
             document.getElementById('mainHomeScreen').style.display = 'none';
             document.getElementById('subContentScreen').style.display = 'block';
             
-            selectedFolder = state.folder || FOLDER_MAP[0].id;
+            selectedFolder = state.folder || (FOLDER_MAP[0] ? FOLDER_MAP[0].id : '');
             renderFolderTabs(FOLDER_MAP);
             renderClientDocs();
 
@@ -500,7 +503,7 @@
         container.innerHTML = html;
     }
 
-    function openTarget(id) {
+    async function openTarget(id) {
         if (id === 'trangchu') {
             showHomeScreen();
             return;
@@ -518,6 +521,7 @@
             document.getElementById('luuTrinhSection').style.display = 'flex';
             document.getElementById('dynamicSection').style.display = 'none';
 
+            await fetchClientCategories();
             selectedFolder = FOLDER_MAP[0]?.id || '';
             renderFolderTabs(FOLDER_MAP);
             renderClientDocs();
@@ -641,213 +645,6 @@
         const displayArea = document.getElementById('contentDisplayArea');
         if (displayArea) displayArea.classList.remove('active');
         renderClientDocs();
-    }
-
-    /* XỬ LÝ PHẦN CÂU HỎI TRẮC NGHIỆM / DYNAMIC QUIZ */
-
-    async function loadDynamicClientData(tabId) {
-        const container = document.getElementById('dynamicSection');
-        container.innerHTML = '<div class="text-center text-white p-5"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><p class="mt-2">Đang tải dữ liệu câu hỏi...</p></div>';
-
-        try {
-            const res = await fetch(`${API_URL}/dynamic-table/${tabId}`);
-            const list = res.ok ? await res.json() : [];
-
-            if (!Array.isArray(list) || list.length === 0) {
-                container.innerHTML = '<div class="text-center text-white-50 p-5">Chưa có câu hỏi trắc nghiệm nào cho mục này.</div>';
-                return;
-            }
-
-            quizQuestions = list;
-            currentQuizIndex = 0;
-            userScore = 0;
-
-            renderQuizSelectionScreen(tabId);
-        } catch (e) {
-            console.error("Lỗi tải dữ liệu quiz:", e);
-            container.innerHTML = '<div class="text-center text-danger p-5">Có lỗi xảy ra khi tải dữ liệu.</div>';
-        }
-    }
-
-    function renderQuizSelectionScreen(tabId) {
-        const container = document.getElementById('dynamicSection');
-        const total = quizQuestions.length;
-
-        container.innerHTML = `
-            <div class="quiz-card text-center">
-                <h4 class="fw-bold text-info mb-3"><i class="fa-solid fa-graduation-cap me-2"></i>BỘ CÂU HỎI TRẮC NGHIỆM</h4>
-                <p class="text-light mb-4">Tổng số câu hỏi hiện có trong hệ thống: <strong class="text-warning">${total} câu</strong></p>
-                
-                <div class="mb-4">
-                    <label class="form-label text-white-50 fw-bold d-block mb-2">Chọn số lượng câu hỏi bạn muốn thực hành:</label>
-                    <div class="d-flex justify-content-center gap-2 flex-wrap">
-                        ${[5, 10, 15, 20, 30].filter(n => n <= total || total > 0).map((num, idx) => `
-                            <button class="btn btn-outline-info btn-amount-select ${idx === 0 ? 'active' : ''}" onclick="selectQuizAmount(this, ${num})">${num} câu</button>
-                        `).join('')}
-                        <button class="btn btn-outline-warning btn-amount-select" onclick="selectQuizAmount(this, ${total})">Tất cả (${total})</button>
-                    </div>
-                </div>
-
-                <button class="btn btn-primary fw-bold px-4 py-2" onclick="startQuizSession()">
-                    <i class="fa-solid fa-play me-1"></i> BẮT ĐẦU LÀM BÀI
-                </button>
-            </div>
-        `;
-    }
-
-    let selectedQuizAmount = 5;
-
-    function selectQuizAmount(btn, amount) {
-        document.querySelectorAll('.btn-amount-select').forEach(b => b.classList.remove('active', 'btn-info'));
-        btn.classList.add('active');
-        selectedQuizAmount = Math.min(amount, quizQuestions.length);
-    }
-
-    function startQuizSession() {
-        // Trộn ngẫu nhiên câu hỏi (Shuffle)
-        const shuffled = [...quizQuestions].sort(() => 0.5 - Math.random());
-        quizQuestions = shuffled.slice(0, selectedQuizAmount || 5);
-        
-        currentQuizIndex = 0;
-        userScore = 0;
-        renderCurrentQuestion();
-    }
-
-    function renderCurrentQuestion() {
-        const container = document.getElementById('dynamicSection');
-        const q = quizQuestions[currentQuizIndex];
-        if (!q) {
-            renderQuizResult();
-            return;
-        }
-
-        isAnswered = false;
-        const opts = Array.isArray(q.options) ? q.options : [q.optionA || '', q.optionB || '', q.optionC || '', q.optionD || ''];
-        const optLabels = ['A', 'B', 'C', 'D'];
-
-        container.innerHTML = `
-            <div class="quiz-card">
-                <div class="d-flex justify-content-between align-items-center mb-3 text-white-50">
-                    <span>Câu hỏi <strong class="text-info">${currentQuizIndex + 1}</strong> / ${quizQuestions.length}</span>
-                    <div>
-                        <span class="badge bg-secondary me-1">${q.category || 'Chung'}</span>
-                        <span class="badge bg-info text-dark">${q.difficulty || 'Dễ'}</span>
-                    </div>
-                </div>
-
-                <h5 class="fw-bold text-white mb-4" style="line-height: 1.6;">${q.question || q.title || ''}</h5>
-
-                <div class="options-group mb-3">
-                    ${opts.map((optText, idx) => `
-                        <button class="quiz-option-btn" id="opt_btn_${idx}" onclick="handleAnswer(${idx})">
-                            <span><strong>${optLabels[idx]}.</strong>${optText}</span>
-                            <i class="fa-regular fa-circle icon-status"></i>
-                        </button>
-                    `).join('')}
-                </div>
-
-                <div id="explanationContainer" style="display: none;"></div>
-
-                <div class="d-flex justify-content-end mt-4">
-                    <button id="btnNextQuestion" class="btn btn-primary fw-bold" style="display: none;" onclick="nextQuestion()">
-                        Câu tiếp theo <i class="fa-solid fa-arrow-right ms-1"></i>
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-
-    function handleAnswer(selectedIdx) {
-        if (isAnswered) return;
-        isAnswered = true;
-
-        const q = quizQuestions[currentQuizIndex];
-        const correctIdx = parseInt(q.answer !== undefined ? q.answer : 0);
-
-        const buttons = document.querySelectorAll('.quiz-option-btn');
-        buttons.forEach((btn, idx) => {
-            btn.disabled = true;
-            const icon = btn.querySelector('.icon-status');
-
-            if (idx === correctIdx) {
-                btn.classList.add('correct');
-                if (icon) icon.className = 'fa-solid fa-circle-check';
-            }
-
-            if (idx === selectedIdx && selectedIdx !== correctIdx) {
-                btn.classList.add('incorrect');
-                if (icon) icon.className = 'fa-solid fa-circle-xmark';
-            }
-        });
-
-        if (selectedIdx === correctIdx) {
-            userScore++;
-        }
-
-        const expContainer = document.getElementById('explanationContainer');
-        if (expContainer) {
-            expContainer.style.display = 'block';
-            expContainer.innerHTML = `
-                <div class="explanation-box">
-                    <strong class="d-block mb-1"><i class="fa-solid fa-lightbulb me-1"></i> Lời giải thích:</strong>
-                    <div>${q.explanation || q.note || 'Không có giải thích chi tiết cho câu hỏi này.'}</div>
-                </div>
-            `;
-        }
-
-        const btnNext = document.getElementById('btnNextQuestion');
-        if (btnNext) btnNext.style.display = 'inline-block';
-    }
-
-    function nextQuestion() {
-        currentQuizIndex++;
-        if (currentQuizIndex < quizQuestions.length) {
-            renderCurrentQuestion();
-        } else {
-            renderQuizResult();
-        }
-    }
-
-    function renderQuizResult() {
-        const container = document.getElementById('dynamicSection');
-        const total = quizQuestions.length;
-        const percentage = Math.round((userScore / total) * 100);
-
-        let resultMessage = '';
-        let resultClass = '';
-
-        if (percentage >= 80) {
-            resultMessage = 'Xuất sắc! Bạn đã nắm rất vững kiến thức.';
-            resultClass = 'text-success';
-        } else if (percentage >= 50) {
-            resultMessage = 'Khá tốt! Hãy tiếp tục rèn luyện để đạt điểm tối đa.';
-            resultClass = 'text-warning';
-        } else {
-            resultMessage = 'Bạn cần ôn tập lại kiến thức bài học kỹ hơn nhé!';
-            resultClass = 'text-danger';
-        }
-
-        container.innerHTML = `
-            <div class="quiz-card text-center">
-                <h3 class="fw-bold text-info mb-3"><i class="fa-solid fa-trophy me-2"></i>KẾT QUẢ BÀI KIỂM TRA</h3>
-                
-                <div class="my-4">
-                    <div class="display-3 fw-bold ${resultClass}">${userScore} / ${total}</div>
-                    <div class="fs-5 text-white-50 mt-1">Đạt tỷ lệ: <strong class="text-white">${percentage}%</strong></div>
-                </div>
-
-                <p class="fs-6 text-light mb-4">${resultMessage}</p>
-
-                <div class="d-flex justify-content-center gap-3">
-                    <button class="btn btn-outline-light fw-bold" onclick="startQuizSession()">
-                        <i class="fa-solid fa-rotate-left me-1"></i> LÀM LẠI BÀI TEST
-                    </button>
-                    <button class="btn btn-primary fw-bold" onclick="showHomeScreen()">
-                        <i class="fa-solid fa-house me-1"></i> VỀ TRANG CHỦ
-                    </button>
-                </div>
-            </div>
-        `;
     }
 
     function openImageViewer(url) {

@@ -686,19 +686,7 @@
     };
     let activeTab = 'luutrinh';
 
-    let FOLDER_MAP = [
-        { id: 'main_gioithieu', name: 'Giới Thiệu Hướng Dẫn', isHidden: false },
-        { id: 'Slot_nohu', name: 'Test Game - Chạy Cược', isHidden: false },
-        { id: 'Bo_don', name: 'Hướng Dẫn Duyệt Đơn', isHidden: false },
-        { id: 'Bo_main', name: 'Hướng Dẫn Sử Dụng Bo', isHidden: false },
-        { id: 'main_casino', name: 'Casino Trực Tuyến', isHidden: false },
-        { id: 'main_xoso', name: 'Xổ Số Online', isHidden: false },
-        { id: 'main_thethao', name: 'Thể Thao', isHidden: false },
-        { id: 'main_daga', name: 'Đá Gà', isHidden: false },
-        { id: 'duyedon_main', name: 'Lưu Trình Duyệt Đơn', isHidden: false },
-        { id: 'xulyld_main', name: 'Xử Lý Hội Viên Gian Lận', isHidden: false },
-        { id: 'main', name: 'Liên Hệ Hỗ Trợ - Hướng Dẫn', isHidden: false }
-    ];
+    let FOLDER_MAP = [];
 
     function getFolderName(folderId) {
         const found = FOLDER_MAP.find(f => f.id === folderId);
@@ -721,11 +709,23 @@
         } catch(e) { userPermissions = []; }
 
         if (token && username) {
+            await fetchCategories();
             await fetchConfig();
             showAdminDashboard(username, role);
         }
         document.addEventListener('keydown', (e) => { if (e.key === "Escape") closeImageViewer(); });
     });
+
+    async function fetchCategories() {
+        try {
+            const res = await fetch(`${API_URL}/categories`);
+            if (res.ok) {
+                FOLDER_MAP = await res.json();
+            }
+        } catch (e) {
+            console.error("Lỗi tải danh mục:", e);
+        }
+    }
 
     async function fetchConfig() {
         try {
@@ -846,6 +846,7 @@
             userPermissions = data.permissions || [];
             localStorage.setItem("admin_permissions", JSON.stringify(userPermissions));
 
+            await fetchCategories();
             await fetchConfig();
             showAdminDashboard(data.username, data.role || 'custom');
         } else {
@@ -1360,10 +1361,14 @@
 
     async function loadDocs() {
         try {
+            await fetchCategories();
             const res = await fetch(`${API_URL}/camnangad88`);
             if (res.ok) {
                 rawDocsData = await res.json();
-                if (!selectedFolder && FOLDER_MAP.length > 0) selectedFolder = FOLDER_MAP[0].id;
+                if (!selectedFolder && FOLDER_MAP.length > 0) {
+                    const firstAvailable = FOLDER_MAP.find(f => !f.isHidden) || FOLDER_MAP[0];
+                    selectedFolder = firstAvailable ? firstAvailable.id : '';
+                }
                 renderFolderTabs();
                 renderDocTable();
             }
@@ -1465,7 +1470,7 @@
             document.getElementById('docModalTitle').innerText = "Chỉnh Sửa Bài Viết Lưu Trình";
             document.getElementById('docId').value = doc.ID;
             document.getElementById('docId').readOnly = true;
-            document.getElementById('docParent').value = doc.Parent || FOLDER_MAP[0].id;
+            document.getElementById('docParent').value = doc.Parent || (FOLDER_MAP[0] ? FOLDER_MAP[0].id : '');
             document.getElementById('docLabel').value = doc.Label || '';
             document.getElementById('docContentText').value = doc.Content || '';
 
@@ -1478,7 +1483,7 @@
             document.getElementById('docModalTitle').innerText = "Thêm Bài Viết Lưu Trình Mới";
             document.getElementById('docId').value = 'DOC_' + Date.now().toString().slice(-4);
             document.getElementById('docId').readOnly = false;
-            document.getElementById('docParent').value = selectedFolder || FOLDER_MAP[0].id;
+            document.getElementById('docParent').value = selectedFolder || (FOLDER_MAP[0] ? FOLDER_MAP[0].id : '');
             document.getElementById('docLabel').value = '';
             document.getElementById('docContentText').value = '';
         }
@@ -1598,7 +1603,7 @@
         document.getElementById('imageViewerModal').classList.remove('active');
     }
 
-    /* QUẢN LÝ DANH MỤC LỚN (FOLDER_MAP) */
+    /* QUẢN LÝ DANH MỤC LỚN (FOLDER_MAP) ĐỒNG BỘ MÁY CHỦ */
 
     function openCategoryManageModal() {
         renderCategoryManageTable();
@@ -1632,15 +1637,24 @@
         `).join('');
     }
 
-    function addNewCategoryPrompt() {
+    async function addNewCategoryPrompt() {
         const name = prompt("Nhập tên danh mục mới:");
         if (!name || !name.trim()) return;
 
         const id = 'cat_' + Date.now().toString().slice(-6);
-        FOLDER_MAP.push({ id, name: name.trim(), isHidden: false });
+        const newCat = { id, name: name.trim(), isHidden: false };
         
-        renderCategoryManageTable();
-        renderFolderTabs();
+        const res = await fetch(`${API_URL}/categories`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newCat)
+        });
+
+        if (res.ok) {
+            await fetchCategories();
+            renderCategoryManageTable();
+            renderFolderTabs();
+        }
     }
 
     function openEditCategoryModal(id, currentName) {
@@ -1652,7 +1666,7 @@
         modal.show();
     }
 
-    function saveCategoryEdit() {
+    async function saveCategoryEdit() {
         const id = document.getElementById('editCatId').value;
         const newName = document.getElementById('editCatNameInput').value.trim();
 
@@ -1661,42 +1675,50 @@
             return;
         }
 
-        const target = FOLDER_MAP.find(c => c.id === id);
-        if (target) {
-            target.name = newName;
+        const res = await fetch(`${API_URL}/categories/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: newName })
+        });
+
+        if (res.ok) {
+            await fetchCategories();
+            renderCategoryManageTable();
+            renderFolderTabs();
+            renderDocTable();
+            bootstrap.Modal.getInstance(document.getElementById('editCategoryModal')).hide();
+        }
+    }
+
+    async function toggleCategoryHide(id) {
+        const res = await fetch(`${API_URL}/categories/${id}/toggle-hide`, { method: 'PATCH' });
+        if (res.ok) {
+            await fetchCategories();
+            renderCategoryManageTable();
+            renderFolderTabs();
+            
+            if (selectedFolder === id) {
+                const firstVisible = FOLDER_MAP.find(f => !f.isHidden);
+                selectedFolder = firstVisible ? firstVisible.id : '';
+            }
+            renderDocTable();
+        }
+    }
+
+    async function deleteCategory(id) {
+        if (!confirm("Bạn có chắc chắn muốn xóa danh mục này? Tất cả dữ liệu của danh mục sẽ bị xóa.")) return;
+
+        const res = await fetch(`${API_URL}/categories/${id}`, { method: 'DELETE' });
+        if (res.ok) {
+            await fetchCategories();
+            if (selectedFolder === id) {
+                const firstVisible = FOLDER_MAP.find(f => !f.isHidden);
+                selectedFolder = firstVisible ? firstVisible.id : '';
+            }
             renderCategoryManageTable();
             renderFolderTabs();
             renderDocTable();
         }
-
-        bootstrap.Modal.getInstance(document.getElementById('editCategoryModal')).hide();
-    }
-
-    function toggleCategoryHide(id) {
-        const target = FOLDER_MAP.find(c => c.id === id);
-        if (target) {
-            target.isHidden = !target.isHidden;
-            renderCategoryManageTable();
-            renderFolderTabs();
-            if (selectedFolder === id) {
-                const firstVisible = FOLDER_MAP.find(f => !f.isHidden);
-                selectedFolder = firstVisible ? firstVisible.id : '';
-                renderDocTable();
-            }
-        }
-    }
-
-    function deleteCategory(id) {
-        if (!confirm("Bạn có chắc chắn muốn xóa danh mục này?")) return;
-
-        FOLDER_MAP = FOLDER_MAP.filter(c => c.id !== id);
-        if (selectedFolder === id) {
-            const firstVisible = FOLDER_MAP.find(f => !f.isHidden);
-            selectedFolder = firstVisible ? firstVisible.id : '';
-        }
-        renderCategoryManageTable();
-        renderFolderTabs();
-        renderDocTable();
     }
 </script>
 </body>
