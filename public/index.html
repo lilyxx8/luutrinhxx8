@@ -228,6 +228,7 @@
             <div class="action-bar">
                 <button class="btn btn-sm btn-primary btn-perm-add_new" onclick="openDocModal()"><i class="fa-solid fa-plus me-1"></i>Thêm bài viết lưu trình mới</button>
                 <button class="btn btn-sm btn-outline-secondary" onclick="loadDocs()"><i class="fa-solid fa-rotate me-1"></i>Làm mới</button>
+                <button class="btn btn-sm btn-danger fw-bold" onclick="openCategoryManageModal()"><i class="fa-solid fa-folder-tree me-1"></i>QUẢN LÝ DANH MỤC</button>
             </div>
 
             <div class="folder-nav-bar" id="folderContainer"></div>
@@ -608,6 +609,67 @@
     </div>
 </div>
 
+<!-- MODAL QUẢN LÝ DANH MỤC LỚN -->
+<div class="modal fade" id="categoryManageModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h6 class="modal-title fw-bold"><i class="fa-solid fa-folder-tree me-2"></i>Quản Lý Danh Mục Web Frontend</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <p class="mb-0 text-muted" style="font-size: 12px;">Quản lý danh sách các danh mục lớn hiển thị ở thanh Menu Web Frontend.</p>
+                    <button class="btn btn-sm btn-success fw-bold" onclick="addNewCategoryPrompt()"><i class="fa-solid fa-plus me-1"></i>Thêm Danh Mục Mới</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle text-center" style="font-size: 12px;">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 120px;">Mã Thư Mục (ID)</th>
+                                <th>Tên Danh Mục</th>
+                                <th style="width: 120px;">Trạng Thái</th>
+                                <th style="width: 180px;">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categoryManageTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL SỬA DANH MỤC -->
+<div class="modal fade" id="editCategoryModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h6 class="modal-title fw-bold"><i class="fa-solid fa-pen-to-square me-2"></i>Sửa Tên Danh Mục</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editCatId">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Mã ID Danh Mục</label>
+                    <input type="text" id="editCatIdDisplay" class="form-control form-control-sm bg-light" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Tên Hiển Thị Mới</label>
+                    <input type="text" id="editCatNameInput" class="form-control form-control-sm" placeholder="Nhập tên danh mục..." required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-sm btn-primary fw-bold" onclick="saveCategoryEdit()"><i class="fa-solid fa-floppy-disk me-1"></i>Lưu Thay Đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     const API_URL = '/api';
@@ -624,18 +686,18 @@
     };
     let activeTab = 'luutrinh';
 
-    const FOLDER_MAP = [
-        { id: 'main_gioithieu', name: 'Giới Thiệu Hướng Dẫn' },
-        { id: 'Slot_nohu', name: 'Test Game - Chạy Cược' },
-        { id: 'Bo_don', name: 'Hướng Dẫn Duyệt Đơn' },
-        { id: 'Bo_main', name: 'Hướng Dẫn Sử Dụng Bo' },
-        { id: 'main_casino', name: 'Casino Trực Tuyến' },
-        { id: 'main_xoso', name: 'Xổ Số Online' },
-        { id: 'main_thethao', name: 'Thể Thao' },
-        { id: 'main_daga', name: 'Đá Gà' },
-        { id: 'duyedon_main', name: 'Lưu Trình Duyệt Đơn' },
-        { id: 'xulyld_main', name: 'Xử Lý Hội Viên Gian Lận' },
-        { id: 'main', name: 'Liên Hệ Hỗ Trợ - Hướng Dẫn' }
+    let FOLDER_MAP = [
+        { id: 'main_gioithieu', name: 'Giới Thiệu Hướng Dẫn', isHidden: false },
+        { id: 'Slot_nohu', name: 'Test Game - Chạy Cược', isHidden: false },
+        { id: 'Bo_don', name: 'Hướng Dẫn Duyệt Đơn', isHidden: false },
+        { id: 'Bo_main', name: 'Hướng Dẫn Sử Dụng Bo', isHidden: false },
+        { id: 'main_casino', name: 'Casino Trực Tuyến', isHidden: false },
+        { id: 'main_xoso', name: 'Xổ Số Online', isHidden: false },
+        { id: 'main_thethao', name: 'Thể Thao', isHidden: false },
+        { id: 'main_daga', name: 'Đá Gà', isHidden: false },
+        { id: 'duyedon_main', name: 'Lưu Trình Duyệt Đơn', isHidden: false },
+        { id: 'xulyld_main', name: 'Xử Lý Hội Viên Gian Lận', isHidden: false },
+        { id: 'main', name: 'Liên Hệ Hỗ Trợ - Hướng Dẫn', isHidden: false }
     ];
 
     function getFolderName(folderId) {
@@ -1310,7 +1372,8 @@
 
     function renderFolderTabs() {
         const container = document.getElementById('folderContainer');
-        container.innerHTML = FOLDER_MAP.map(f => `
+        const visibleFolders = FOLDER_MAP.filter(f => !f.isHidden);
+        container.innerHTML = visibleFolders.map(f => `
             <div class="folder-tab-btn ${selectedFolder === f.id ? 'active' : ''}" onclick="selectFolder('${f.id}')">
                 <i class="fa-solid fa-folder"></i>${f.name}
             </div>
@@ -1533,6 +1596,107 @@
 
     function closeImageViewer() {
         document.getElementById('imageViewerModal').classList.remove('active');
+    }
+
+    /* QUẢN LÝ DANH MỤC LỚN (FOLDER_MAP) */
+
+    function openCategoryManageModal() {
+        renderCategoryManageTable();
+        const modal = new bootstrap.Modal(document.getElementById('categoryManageModal'));
+        modal.show();
+    }
+
+    function renderCategoryManageTable() {
+        const tbody = document.getElementById('categoryManageTableBody');
+        tbody.innerHTML = FOLDER_MAP.map(cat => `
+            <tr>
+                <td><code>${cat.id}</code></td>
+                <td class="fw-bold text-start">${cat.name}</td>
+                <td>
+                    <span class="badge ${cat.isHidden ? 'bg-danger' : 'bg-success'}">
+                        ${cat.isHidden ? 'Đang Ẩn' : 'Hiển Thị'}
+                    </span>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary py-0 me-1" onclick="openEditCategoryModal('${cat.id}', '${cat.name.replace(/'/g, "\\'")}')">
+                        <i class="fa-solid fa-pen-to-square"></i> Sửa
+                    </button>
+                    <button class="btn btn-sm ${cat.isHidden ? 'btn-outline-success' : 'btn-outline-warning'} py-0 me-1" onclick="toggleCategoryHide('${cat.id}')">
+                        <i class="fa-solid ${cat.isHidden ? 'fa-eye' : 'fa-eye-slash'}"></i> ${cat.isHidden ? 'Hiện' : 'Ẩn'}
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger py-0" onclick="deleteCategory('${cat.id}')">
+                        <i class="fa-solid fa-trash"></i> Xóa
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function addNewCategoryPrompt() {
+        const name = prompt("Nhập tên danh mục mới:");
+        if (!name || !name.trim()) return;
+
+        const id = 'cat_' + Date.now().toString().slice(-6);
+        FOLDER_MAP.push({ id, name: name.trim(), isHidden: false });
+        
+        renderCategoryManageTable();
+        renderFolderTabs();
+    }
+
+    function openEditCategoryModal(id, currentName) {
+        document.getElementById('editCatId').value = id;
+        document.getElementById('editCatIdDisplay').value = id;
+        document.getElementById('editCatNameInput').value = currentName;
+
+        const modal = new bootstrap.Modal(document.getElementById('editCategoryModal'));
+        modal.show();
+    }
+
+    function saveCategoryEdit() {
+        const id = document.getElementById('editCatId').value;
+        const newName = document.getElementById('editCatNameInput').value.trim();
+
+        if (!newName) {
+            alert("Tên danh mục không được để trống!");
+            return;
+        }
+
+        const target = FOLDER_MAP.find(c => c.id === id);
+        if (target) {
+            target.name = newName;
+            renderCategoryManageTable();
+            renderFolderTabs();
+            renderDocTable();
+        }
+
+        bootstrap.Modal.getInstance(document.getElementById('editCategoryModal')).hide();
+    }
+
+    function toggleCategoryHide(id) {
+        const target = FOLDER_MAP.find(c => c.id === id);
+        if (target) {
+            target.isHidden = !target.isHidden;
+            renderCategoryManageTable();
+            renderFolderTabs();
+            if (selectedFolder === id) {
+                const firstVisible = FOLDER_MAP.find(f => !f.isHidden);
+                selectedFolder = firstVisible ? firstVisible.id : '';
+                renderDocTable();
+            }
+        }
+    }
+
+    function deleteCategory(id) {
+        if (!confirm("Bạn có chắc chắn muốn xóa danh mục này?")) return;
+
+        FOLDER_MAP = FOLDER_MAP.filter(c => c.id !== id);
+        if (selectedFolder === id) {
+            const firstVisible = FOLDER_MAP.find(f => !f.isHidden);
+            selectedFolder = firstVisible ? firstVisible.id : '';
+        }
+        renderCategoryManageTable();
+        renderFolderTabs();
+        renderDocTable();
     }
 </script>
 </body>
