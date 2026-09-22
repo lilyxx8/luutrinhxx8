@@ -496,46 +496,40 @@
                 `;
             });
         }
+
         container.innerHTML = html;
     }
 
-    function openTarget(type) {
-        if (type === 'trangchu') {
-            window.open('https://xx8v88.com/', '_blank');
+    function openTarget(id) {
+        if (id === 'trangchu') {
+            showHomeScreen();
             return;
         }
 
+        const item = clientConfig?.navItems?.find(i => i.id === id);
+        if (!item) return;
+
         document.getElementById('mainHomeScreen').style.display = 'none';
         document.getElementById('subContentScreen').style.display = 'block';
+        document.getElementById('subPageTitle').innerText = item.name.toUpperCase();
 
-        if (type === 'luutrinh') {
-            document.getElementById('subPageTitle').innerText = 'LƯU TRÌNH HƯỚNG DẪN';
+        if (item.type === 'luutrinh' || id === 'luutrinh') {
             document.getElementById('luuTrinhSectionTop').style.display = 'block';
             document.getElementById('luuTrinhSection').style.display = 'flex';
             document.getElementById('dynamicSection').style.display = 'none';
 
-            if (!selectedFolder && FOLDER_MAP.length > 0) {
-                selectedFolder = FOLDER_MAP[0].id;
-            }
+            selectedFolder = FOLDER_MAP[0]?.id || '';
             renderFolderTabs(FOLDER_MAP);
             renderClientDocs();
 
-            history.pushState({ screen: 'sub', folder: selectedFolder, docId: null }, '', '#luutrinh');
+            history.pushState({ screen: 'sub', type: 'luutrinh', folder: selectedFolder }, '', window.location.pathname);
         } else {
-            const currentItem = clientConfig ? clientConfig.navItems.find(i => i.id === type) : null;
-            const title = currentItem ? currentItem.name : 'NỘI DUNG CHI TIẾT';
-
-            document.getElementById('subPageTitle').innerText = title;
             document.getElementById('luuTrinhSectionTop').style.display = 'none';
             document.getElementById('luuTrinhSection').style.display = 'none';
             document.getElementById('dynamicSection').style.display = 'block';
 
-            if (type === 'test' || type === 'testsanpham' || title.toUpperCase().includes('TEST SẢN PHẨM')) {
-                renderQuizStartScreen();
-            } else {
-                loadDynamicTableData(type, title);
-            }
-            history.pushState({ screen: 'sub', folder: null, docId: null }, '', '#' + type);
+            loadDynamicClientData(id);
+            history.pushState({ screen: 'sub', type: 'dynamic', tabId: id }, '', window.location.pathname);
         }
     }
 
@@ -543,287 +537,272 @@
         document.getElementById('mainHomeScreen').style.display = 'block';
         document.getElementById('subContentScreen').style.display = 'none';
         hideDocDetail();
+
         history.pushState({ screen: 'home' }, '', window.location.pathname);
     }
 
     async function loadDocs() {
         try {
             const res = await fetch(`${API_URL}/camnangad88`);
-            if (res.ok) rawDocsData = await res.json();
-        } catch (err) { console.error("Lỗi tải dữ liệu bài viết!", err); }
+            if (res.ok) {
+                rawDocsData = await res.json();
+            }
+        } catch (e) {
+            console.error("Lỗi tải bài viết:", e);
+        }
     }
 
     function renderFolderTabs(folders) {
-        let html = '';
-        (folders || []).forEach(folder => {
-            html += `<div class="folder-tab-btn ${selectedFolder === folder.id ? 'active' : ''}" onclick="selectFolder('${folder.id}')"><i class="fa-solid fa-folder me-1"></i> ${folder.name}</div>`;
-        });
-        document.getElementById('clientFolderContainer').innerHTML = html;
+        const container = document.getElementById('clientFolderContainer');
+        if (!container) return;
+
+        container.innerHTML = folders.map(f => `
+            <div class="folder-tab-btn ${selectedFolder === f.id ? 'active' : ''}" onclick="selectClientFolder('${f.id}')">
+                <i class="fa-solid fa-folder me-1"></i>${f.name}
+            </div>
+        `).join('');
     }
 
-    function selectFolder(folderId) {
-        selectedFolder = folderId;
+    function selectClientFolder(fId) {
+        selectedFolder = fId;
+        activeDocId = null;
         hideDocDetail();
         renderFolderTabs(FOLDER_MAP);
         renderClientDocs();
-        history.pushState({ screen: 'sub', folder: selectedFolder, docId: null }, '', '#folder-' + folderId);
+
+        history.pushState({ screen: 'sub', type: 'luutrinh', folder: selectedFolder }, '', window.location.pathname);
     }
 
     function renderClientDocs() {
-        const filtered = rawDocsData.filter(item => (item.Parent || 'main') === selectedFolder && !item.IsHidden);
         const container = document.getElementById('clientDocList');
-
         if (!container) return;
 
-        if (filtered.length === 0) {
-            container.innerHTML = '<div class="text-muted p-2">Chưa có bài viết.</div>';
+        const list = rawDocsData.filter(d => (d.Parent || 'main') === selectedFolder && !d.IsHidden);
+
+        if (list.length === 0) {
+            container.innerHTML = '<div class="text-white-50 p-3 text-center">Không có tài liệu trong thư mục này.</div>';
             return;
         }
 
-        let html = '';
-        filtered.forEach(item => {
-            const isActive = String(item.ID) === String(activeDocId);
-            html += `
-                <div class="folder-item-card ${isActive ? 'active' : ''}" onclick="viewDocDetail('${item.ID}')">
-                    <div class="folder-item-title">
-                        <i class="fa-solid fa-file-lines text-info"></i>
-                        <span>${item.Label || 'Không có tiêu đề'}</span>
-                    </div>
-                    <span class="badge bg-secondary" style="font-size: 10px;">${item.ID || 'N/A'}</span>
+        container.innerHTML = list.map(item => `
+            <div class="folder-item-card ${activeDocId === String(item.ID) ? 'active' : ''}" onclick="selectDocItem('${item.ID}')">
+                <div class="folder-item-title">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span>${item.Label || 'Không có tiêu đề'}</span>
                 </div>
-            `;
-        });
-
-        container.innerHTML = html;
+                <i class="fa-solid fa-chevron-right text-white-50" style="font-size: 10px;"></i>
+            </div>
+        `).join('');
     }
 
-    function viewDocDetail(docId) {
-        activeDocId = docId;
+    function selectDocItem(id) {
+        activeDocId = String(id);
         renderClientDocs();
-        renderDocContent(docId);
-        history.pushState({ screen: 'sub', folder: selectedFolder, docId: docId }, '', '#doc-' + docId);
+        renderDocContent(id);
+
+        history.pushState({ screen: 'sub', type: 'luutrinh', folder: selectedFolder, docId: activeDocId }, '', window.location.pathname);
     }
 
-    function renderDocContent(docId) {
-        const item = rawDocsData.find(d => String(d.ID) === String(docId));
-        if (!item || item.IsHidden) {
-            hideDocDetail();
-            return;
+    function renderDocContent(id) {
+        const item = rawDocsData.find(d => String(d.ID) === String(id));
+        const displayArea = document.getElementById('contentDisplayArea');
+        const displayBody = document.getElementById('contentDisplayBody');
+
+        if (!item) return;
+
+        let html = `<h4 class="fw-bold mb-3 text-info">${item.Label || ''}</h4>`;
+
+        if (item.Content) {
+            html += `<div class="mb-4 text-light" style="white-space: pre-wrap; line-height: 1.7;">${item.Content}</div>`;
         }
 
-        let html = `
-            <h4 class="text-info fw-bold mb-2"><i class="fa-solid fa-file-lines me-2"></i>${item.Label || 'Không có tiêu đề'}</h4>
-            <div class="mb-3 text-secondary"><span class="badge bg-dark border border-secondary">Mã: ${item.ID || 'N/A'}</span></div>
-            <hr class="my-3 border-secondary">
-        `;
+        if (item.File_Url) {
+            const urls = item.File_Url.split('|');
+            const caps = item.Image_Captions ? item.Image_Captions.split('|') : [];
 
-        if (item.Content && item.Content.trim() !== '') {
-            html += `<div class="mb-3 text-light" style="line-height: 1.7; font-size: 14px; white-space: pre-wrap; word-break: break-word;">${item.Content}</div>`;
-        }
-
-        if (item.File_Url && item.File_Url.trim() !== '') {
-            const urls = item.File_Url.split('|').map(s => s.trim());
-            const captions = item.Image_Captions ? item.Image_Captions.split('|').map(s => s.trim()) : [];
-
-            urls.forEach((url, idx) => {
+            urls.forEach((u, idx) => {
+                const url = u.trim();
                 if (!url) return;
                 html += `
                     <div class="content-block-item">
-                        <img src="${url}" class="block-img" onclick="openImageViewer('${url}')" onerror="this.onerror=null; this.src='https://via.placeholder.com/240x180?text=Loi+Anh';">
-                        <div class="block-text">${captions[idx] || ''}</div>
+                        <img src="${url}" class="block-img" onclick="openImageViewer('${url}')" alt="Hình minh họa">
+                        <div class="block-text">${caps[idx] || ''}</div>
                     </div>
                 `;
             });
         }
 
-        document.getElementById('contentDisplayBody').innerHTML = html;
-        document.getElementById('contentDisplayArea').classList.add('active');
+        displayBody.innerHTML = html;
+        displayArea.classList.add('active');
     }
 
     function hideDocDetail() {
         activeDocId = null;
-        document.getElementById('contentDisplayArea').classList.remove('active');
+        const displayArea = document.getElementById('contentDisplayArea');
+        if (displayArea) displayArea.classList.remove('active');
         renderClientDocs();
     }
 
-    // ==========================================
-    // LOGIC & GIAO DIỆN QUIZ / KIỂM TRA SẢN PHẨM
-    // ==========================================
+    /* XỬ LÝ PHẦN CÂU HỎI TRẮC NGHIỆM / DYNAMIC QUIZ */
 
-    function renderQuizStartScreen() {
+    async function loadDynamicClientData(tabId) {
         const container = document.getElementById('dynamicSection');
+        container.innerHTML = '<div class="text-center text-white p-5"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><p class="mt-2">Đang tải dữ liệu câu hỏi...</p></div>';
+
+        try {
+            const res = await fetch(`${API_URL}/dynamic-table/${tabId}`);
+            const list = res.ok ? await res.json() : [];
+
+            if (!Array.isArray(list) || list.length === 0) {
+                container.innerHTML = '<div class="text-center text-white-50 p-5">Chưa có câu hỏi trắc nghiệm nào cho mục này.</div>';
+                return;
+            }
+
+            quizQuestions = list;
+            currentQuizIndex = 0;
+            userScore = 0;
+
+            renderQuizSelectionScreen(tabId);
+        } catch (e) {
+            console.error("Lỗi tải dữ liệu quiz:", e);
+            container.innerHTML = '<div class="text-center text-danger p-5">Có lỗi xảy ra khi tải dữ liệu.</div>';
+        }
+    }
+
+    function renderQuizSelectionScreen(tabId) {
+        const container = document.getElementById('dynamicSection');
+        const total = quizQuestions.length;
+
         container.innerHTML = `
-            <div class="quiz-card text-center py-5">
-                <i class="fa-solid fa-graduation-cap text-info mb-3" style="font-size: 50px;"></i>
-                <h3 class="fw-bold text-light mb-2">HỆ THỐNG TRẮC NGHIỆM KIỂM TRA SẢN PHẨM</h3>
-                <p class="text-secondary mb-4">Vui lòng chọn số lượng câu hỏi bạn muốn thực hiện để bắt đầu bài test.</p>
+            <div class="quiz-card text-center">
+                <h4 class="fw-bold text-info mb-3"><i class="fa-solid fa-graduation-cap me-2"></i>BỘ CÂU HỎI TRẮC NGHIỆM</h4>
+                <p class="text-light mb-4">Tổng số câu hỏi hiện có trong hệ thống: <strong class="text-warning">${total} câu</strong></p>
                 
-                <div class="d-flex justify-content-center gap-2 flex-wrap mb-4">
-                    <button class="btn btn-outline-info btn-amount-select py-2 px-3" onclick="startQuiz(10)">10 Câu</button>
-                    <button class="btn btn-outline-info btn-amount-select py-2 px-3" onclick="startQuiz(20)">20 Câu</button>
-                    <button class="btn btn-outline-info btn-amount-select py-2 px-3" onclick="startQuiz(30)">30 Câu</button>
-                    <button class="btn btn-outline-info btn-amount-select py-2 px-3" onclick="startQuiz(50)">50 Câu</button>
-                    <button class="btn btn-outline-info btn-amount-select py-2 px-3" onclick="startQuiz(100)">100 Câu</button>
+                <div class="mb-4">
+                    <label class="form-label text-white-50 fw-bold d-block mb-2">Chọn số lượng câu hỏi bạn muốn thực hành:</label>
+                    <div class="d-flex justify-content-center gap-2 flex-wrap">
+                        ${[5, 10, 15, 20, 30].filter(n => n <= total || total > 0).map((num, idx) => `
+                            <button class="btn btn-outline-info btn-amount-select ${idx === 0 ? 'active' : ''}" onclick="selectQuizAmount(this, ${num})">${num} câu</button>
+                        `).join('')}
+                        <button class="btn btn-outline-warning btn-amount-select" onclick="selectQuizAmount(this, ${total})">Tất cả (${total})</button>
+                    </div>
                 </div>
+
+                <button class="btn btn-primary fw-bold px-4 py-2" onclick="startQuizSession()">
+                    <i class="fa-solid fa-play me-1"></i> BẮT ĐẦU LÀM BÀI
+                </button>
             </div>
         `;
     }
 
-    // HÀM TRỘN MẢNG NGẪU NHIÊN (Fisher-Yates Shuffle)
-    function shuffleArray(array) {
-        let currentIndex = array.length, randomIndex;
-        while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-        }
-        return array;
+    let selectedQuizAmount = 5;
+
+    function selectQuizAmount(btn, amount) {
+        document.querySelectorAll('.btn-amount-select').forEach(b => b.classList.remove('active', 'btn-info'));
+        btn.classList.add('active');
+        selectedQuizAmount = Math.min(amount, quizQuestions.length);
     }
 
-    async function startQuiz(amount) {
-        const container = document.getElementById('dynamicSection');
-        container.innerHTML = '<div class="text-center py-5 text-muted"><i class="fa-solid fa-spinner fa-spin me-2"></i>Đang khởi tạo bộ câu hỏi ngẫu nhiên...</div>';
-
-        try {
-            let rawQuestions = [];
-            const res = await fetch(`${API_URL}/questions?limit=1000`);
-            if (res.ok) {
-                rawQuestions = await res.json();
-            } else {
-                let fallbackRes = await fetch(`${API_URL}/dynamic-table/test`);
-                if (!fallbackRes.ok) {
-                    fallbackRes = await fetch(`${API_URL}/dynamic-table/testsanpham`);
-                }
-                if (fallbackRes.ok) rawQuestions = await fallbackRes.json();
-            }
-
-            if (!rawQuestions || rawQuestions.length === 0) {
-                container.innerHTML = `
-                    <div class="quiz-card text-center py-4">
-                        <i class="fa-solid fa-triangle-exclamation text-warning mb-2" style="font-size: 30px;"></i>
-                        <h5>Chưa có dữ liệu câu hỏi trong hệ thống.</h5>
-                        <button class="btn btn-sm btn-secondary mt-3" onclick="renderQuizStartScreen()">Quay lại</button>
-                    </div>
-                `;
-                return;
-            }
-
-            const shuffled = shuffleArray([...rawQuestions]);
-            quizQuestions = shuffled.slice(0, Math.min(amount, shuffled.length));
-
-            currentQuizIndex = 0;
-            userScore = 0;
-            renderQuizQuestion();
-
-        } catch (err) {
-            console.error("Lỗi nạp danh sách câu hỏi:", err);
-            container.innerHTML = '<div class="alert alert-danger text-center">Lỗi kết nối máy chủ! Vui lòng thử lại sau.</div>';
-        }
+    function startQuizSession() {
+        // Trộn ngẫu nhiên câu hỏi (Shuffle)
+        const shuffled = [...quizQuestions].sort(() => 0.5 - Math.random());
+        quizQuestions = shuffled.slice(0, selectedQuizAmount || 5);
+        
+        currentQuizIndex = 0;
+        userScore = 0;
+        renderCurrentQuestion();
     }
 
-    function renderQuizQuestion() {
+    function renderCurrentQuestion() {
         const container = document.getElementById('dynamicSection');
         const q = quizQuestions[currentQuizIndex];
+        if (!q) {
+            renderQuizResult();
+            return;
+        }
+
         isAnswered = false;
-
-        const options = q.options || [q.optionA, q.optionB, q.optionC, q.optionD].filter(Boolean);
-
-        let optionsHtml = '';
-        options.forEach((opt, idx) => {
-            optionsHtml += `
-                <button class="quiz-option-btn" id="opt-btn-${idx}" onclick="handleAnswerSelect(${idx}, '${q.correctAnswer || q.answer}')">
-                    <span><strong>${String.fromCharCode(65 + idx)}.</strong> ${opt}</span>
-                    <i class="fa-regular fa-circle" id="opt-icon-${idx}"></i>
-                </button>
-            `;
-        });
+        const opts = Array.isArray(q.options) ? q.options : [q.optionA || '', q.optionB || '', q.optionC || '', q.optionD || ''];
+        const optLabels = ['A', 'B', 'C', 'D'];
 
         container.innerHTML = `
             <div class="quiz-card">
-                <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
-                    <span class="badge bg-primary fs-6">Câu ${currentQuizIndex + 1} / ${quizQuestions.length}</span>
-                    <span class="text-secondary fw-bold">Điểm hiện tại: <span class="text-success">${userScore}</span></span>
+                <div class="d-flex justify-content-between align-items-center mb-3 text-white-50">
+                    <span>Câu hỏi <strong class="text-info">${currentQuizIndex + 1}</strong> / ${quizQuestions.length}</span>
+                    <div>
+                        <span class="badge bg-secondary me-1">${q.category || 'Chung'}</span>
+                        <span class="badge bg-info text-dark">${q.difficulty || 'Dễ'}</span>
+                    </div>
                 </div>
 
-                <h5 class="fw-bold text-light mb-4" style="line-height: 1.6;">${q.question || q.title || 'Câu hỏi chưa có nội dung'}</h5>
+                <h5 class="fw-bold text-white mb-4" style="line-height: 1.6;">${q.question || q.title || ''}</h5>
 
-                <div id="optionsContainer">
-                    ${optionsHtml}
+                <div class="options-group mb-3">
+                    ${opts.map((optText, idx) => `
+                        <button class="quiz-option-btn" id="opt_btn_${idx}" onclick="handleAnswer(${idx})">
+                            <span><strong>${optLabels[idx]}.</strong>${optText}</span>
+                            <i class="fa-regular fa-circle icon-status"></i>
+                        </button>
+                    `).join('')}
                 </div>
 
                 <div id="explanationContainer" style="display: none;"></div>
 
-                <div class="d-flex justify-content-end mt-4 pt-2 border-top border-secondary">
-                    <button class="btn btn-primary px-4" id="btnNextQuestion" style="display: none;" onclick="nextQuizQuestion()">
-                        ${currentQuizIndex < quizQuestions.length - 1 ? 'Câu tiếp theo <i class="fa-solid fa-arrow-right ms-1"></i>' : 'Xem kết quả <i class="fa-solid fa-check-double ms-1"></i>'}
+                <div class="d-flex justify-content-end mt-4">
+                    <button id="btnNextQuestion" class="btn btn-primary fw-bold" style="display: none;" onclick="nextQuestion()">
+                        Câu tiếp theo <i class="fa-solid fa-arrow-right ms-1"></i>
                     </button>
                 </div>
             </div>
         `;
     }
 
-    function handleAnswerSelect(selectedIndex, correctAnswer) {
+    function handleAnswer(selectedIdx) {
         if (isAnswered) return;
         isAnswered = true;
 
         const q = quizQuestions[currentQuizIndex];
-        const options = q.options || [q.optionA, q.optionB, q.optionC, q.optionD].filter(Boolean);
-        
-        let correctIdx = -1;
-
-        if (correctAnswer !== undefined && correctAnswer !== null) {
-            const cleanStr = String(correctAnswer).trim();
-            
-            if (!isNaN(cleanStr) && cleanStr !== '') {
-                correctIdx = parseInt(cleanStr, 10);
-            } else if (['A', 'B', 'C', 'D'].includes(cleanStr.toUpperCase())) {
-                correctIdx = cleanStr.toUpperCase().charCodeAt(0) - 65;
-            } else {
-                correctIdx = options.findIndex(o => o.trim().toLowerCase() === cleanStr.toLowerCase());
-            }
-        }
-
-        const selectedBtn = document.getElementById(`opt-btn-${selectedIndex}`);
-        const selectedIcon = document.getElementById(`opt-icon-${selectedIndex}`);
-
-        if (selectedIndex === correctIdx) {
-            userScore++;
-            selectedBtn.classList.add('correct');
-            selectedIcon.className = 'fa-solid fa-circle-check';
-        } else {
-            selectedBtn.classList.add('incorrect');
-            selectedIcon.className = 'fa-solid fa-circle-xmark';
-
-            if (correctIdx >= 0 && correctIdx < options.length) {
-                const correctBtn = document.getElementById(`opt-btn-${correctIdx}`);
-                const correctIcon = document.getElementById(`opt-icon-${correctIdx}`);
-                if (correctBtn) {
-                    correctBtn.classList.add('correct');
-                    correctIcon.className = 'fa-solid fa-circle-check';
-                }
-            }
-        }
+        const correctIdx = parseInt(q.answer !== undefined ? q.answer : 0);
 
         const buttons = document.querySelectorAll('.quiz-option-btn');
-        buttons.forEach(btn => btn.disabled = true);
+        buttons.forEach((btn, idx) => {
+            btn.disabled = true;
+            const icon = btn.querySelector('.icon-status');
 
-        if (q.explanation && q.explanation.trim() !== '') {
-            const expBox = document.getElementById('explanationContainer');
-            expBox.innerHTML = `
-                <div class="explanation-box">
-                    <i class="fa-solid fa-lightbulb me-1"></i> <strong>Giải thích:</strong> ${q.explanation}
-                </div>
-            `;
-            expBox.style.display = 'block';
+            if (idx === correctIdx) {
+                btn.classList.add('correct');
+                if (icon) icon.className = 'fa-solid fa-circle-check';
+            }
+
+            if (idx === selectedIdx && selectedIdx !== correctIdx) {
+                btn.classList.add('incorrect');
+                if (icon) icon.className = 'fa-solid fa-circle-xmark';
+            }
+        });
+
+        if (selectedIdx === correctIdx) {
+            userScore++;
         }
 
-        document.getElementById('btnNextQuestion').style.display = 'inline-block';
+        const expContainer = document.getElementById('explanationContainer');
+        if (expContainer) {
+            expContainer.style.display = 'block';
+            expContainer.innerHTML = `
+                <div class="explanation-box">
+                    <strong class="d-block mb-1"><i class="fa-solid fa-lightbulb me-1"></i> Lời giải thích:</strong>
+                    <div>${q.explanation || q.note || 'Không có giải thích chi tiết cho câu hỏi này.'}</div>
+                </div>
+            `;
+        }
+
+        const btnNext = document.getElementById('btnNextQuestion');
+        if (btnNext) btnNext.style.display = 'inline-block';
     }
 
-    function nextQuizQuestion() {
+    function nextQuestion() {
         currentQuizIndex++;
         if (currentQuizIndex < quizQuestions.length) {
-            renderQuizQuestion();
+            renderCurrentQuestion();
         } else {
             renderQuizResult();
         }
@@ -831,85 +810,44 @@
 
     function renderQuizResult() {
         const container = document.getElementById('dynamicSection');
-        const percentage = Math.round((userScore / quizQuestions.length) * 100);
+        const total = quizQuestions.length;
+        const percentage = Math.round((userScore / total) * 100);
 
-        let badgeColor = 'bg-danger';
-        let statusText = 'Cần cố gắng hơn!';
+        let resultMessage = '';
+        let resultClass = '';
+
         if (percentage >= 80) {
-            badgeColor = 'bg-success';
-            statusText = 'Xuất sắc!';
+            resultMessage = 'Xuất sắc! Bạn đã nắm rất vững kiến thức.';
+            resultClass = 'text-success';
         } else if (percentage >= 50) {
-            badgeColor = 'bg-warning text-dark';
-            statusText = 'Đạt yêu cầu!';
+            resultMessage = 'Khá tốt! Hãy tiếp tục rèn luyện để đạt điểm tối đa.';
+            resultClass = 'text-warning';
+        } else {
+            resultMessage = 'Bạn cần ôn tập lại kiến thức bài học kỹ hơn nhé!';
+            resultClass = 'text-danger';
         }
 
         container.innerHTML = `
-            <div class="quiz-card text-center py-5">
-                <i class="fa-solid fa-award text-warning mb-3" style="font-size: 60px;"></i>
-                <h3 class="fw-bold text-light mb-1">HOÀN THÀNH BÀI KIỂM TRA</h3>
-                <p class="text-secondary mb-4">Bạn đã trả lời xong toàn bộ câu hỏi.</p>
-
-                <div class="p-4 rounded mb-4" style="background: rgba(255,255,255,0.05); display: inline-block; min-width: 280px;">
-                    <div class="display-4 fw-bold text-info mb-1">${userScore} / ${quizQuestions.length}</div>
-                    <div class="mb-2">Tỷ lệ chính xác: <strong>${percentage}%</strong></div>
-                    <span class="badge ${badgeColor} px-3 py-2 fs-6">${statusText}</span>
+            <div class="quiz-card text-center">
+                <h3 class="fw-bold text-info mb-3"><i class="fa-solid fa-trophy me-2"></i>KẾT QUẢ BÀI KIỂM TRA</h3>
+                
+                <div class="my-4">
+                    <div class="display-3 fw-bold ${resultClass}">${userScore} / ${total}</div>
+                    <div class="fs-5 text-white-50 mt-1">Đạt tỷ lệ: <strong class="text-white">${percentage}%</strong></div>
                 </div>
 
-                <div>
-                    <button class="btn btn-primary px-4 py-2 me-2" onclick="renderQuizStartScreen()">
-                        <i class="fa-solid fa-rotate-right me-1"></i> Làm bài test khác
+                <p class="fs-6 text-light mb-4">${resultMessage}</p>
+
+                <div class="d-flex justify-content-center gap-3">
+                    <button class="btn btn-outline-light fw-bold" onclick="startQuizSession()">
+                        <i class="fa-solid fa-rotate-left me-1"></i> LÀM LẠI BÀI TEST
                     </button>
-                    <button class="btn btn-outline-light px-4 py-2" onclick="showHomeScreen()">
-                        <i class="fa-solid fa-house me-1"></i> Về trang chủ
+                    <button class="btn btn-primary fw-bold" onclick="showHomeScreen()">
+                        <i class="fa-solid fa-house me-1"></i> VỀ TRANG CHỦ
                     </button>
                 </div>
             </div>
         `;
-    }
-
-    async function loadDynamicTableData(tabId, titleName) {
-        const container = document.getElementById('dynamicSection');
-        container.innerHTML = '<div class="text-center py-4 text-muted">Đang tải dữ liệu...</div>';
-        try {
-            const res = await fetch(`${API_URL}/dynamic-table/${tabId}`);
-            const list = res.ok ? await res.json() : [];
-
-            let tableHtml = `
-                <div class="card p-3 shadow-sm bg-dark text-light border-secondary">
-                    <h5 class="fw-bold text-info mb-3"><i class="fa-solid fa-list-check me-2"></i>DANH SÁCH ${titleName.toUpperCase()}</h5>
-                    <div class="table-responsive">
-                        <table class="table table-dark table-bordered align-middle text-center" style="font-size: 13px;">
-                            <thead>
-                                <tr>
-                                    <th style="width: 60px;">STT</th>
-                                    <th>Tên Sản Phẩm / Tên Mục</th>
-                                    <th style="width: 160px;">Trạng Thái</th>
-                                    <th>Ghi Chú / Kết Quả</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-            `;
-
-            if (!list || list.length === 0) {
-                tableHtml += '<tr><td colspan="4" class="text-muted">Chưa có dữ liệu cho mục này.</td></tr>';
-            } else {
-                list.forEach((row, idx) => {
-                    tableHtml += `
-                        <tr>
-                            <td>${idx + 1}</td>
-                            <td class="text-start fw-bold">${row.title || row.question || '-'}</td>
-                            <td><span class="badge ${row.status === 'Đã kiểm tra' ? 'bg-success' : (row.status === 'Đang xử lý' ? 'bg-warning text-dark' : 'bg-danger')}">${row.status || 'Chưa kiểm tra'}</span></td>
-                            <td class="text-start">${row.note || row.explanation || '-'}</td>
-                        </tr>
-                    `;
-                });
-            }
-
-            tableHtml += '</tbody></table></div></div>';
-            container.innerHTML = tableHtml;
-        } catch (err) {
-            container.innerHTML = '<div class="alert alert-danger">Lỗi tải dữ liệu cho mục này!</div>';
-        }
     }
 
     function openImageViewer(url) {
