@@ -102,14 +102,15 @@ let dynamicTablesData = readJsonFile(DYNAMIC_TABLES_FILE, {});
 let layoutConfig = readJsonFile(CONFIG_FILE, DEFAULT_CONFIG);
 let usersData = readJsonFile(USERS_FILE, DEFAULT_USERS);
 
-// 1. Static Middleware (Cung cấp các file tĩnh trong thư mục public)
-app.use(express.static(path.join(__dirname, 'public')));
+// 1. Khai báo các Route giao diện TRƯỚC static middleware để tránh bị đè
+app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'client.html'));
+});
 
-// 2. Điều hướng trang tĩnh chuẩn hóa
-// - Trang Quản Trị: domain/admin -> index.html
-app.get('/admin', (req, res) => res.sendFile(path.resolve(__dirname, 'public', 'index.html')));
+app.get('/admin', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
 
-// - Trang Quiz: domain/quiz -> quiz_client.html
 app.get('/quiz', (req, res) => {
     if (fs.existsSync(QUIZ_HTML_FILE)) {
         return res.sendFile(QUIZ_HTML_FILE);
@@ -117,8 +118,8 @@ app.get('/quiz', (req, res) => {
     res.status(404).send('Chưa cấu hình giao diện Quiz!');
 });
 
-// - Trang Người Dùng (Client): domain/ -> client.html
-app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, 'public', 'client.html')));
+// 2. Tắt tự động phục vụ index.html của static middleware
+app.use(express.static(path.join(__dirname, 'public'), { index: false }));
 
 /* =========================================================
    1. API QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG & ĐĂNG NHẬP
