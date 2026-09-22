@@ -105,16 +105,18 @@ let dynamicTablesData = readJsonFile(DYNAMIC_TABLES_FILE, {});
 let layoutConfig = readJsonFile(CONFIG_FILE, DEFAULT_CONFIG);
 let usersData = readJsonFile(USERS_FILE, DEFAULT_USERS);
 
-// Điều hướng trang tĩnh
-app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+// 1. Phục vụ static files từ thư mục public
+app.use(express.static(path.join(__dirname, 'public')));
+
+// 2. Điều hướng trang tĩnh bằng path.resolve an toàn cho Linux/Railway
+app.get('/admin', (req, res) => res.sendFile(path.resolve(__dirname, 'public', 'index.html')));
 app.get('/quiz', (req, res) => {
     if (fs.existsSync(QUIZ_HTML_FILE)) {
         return res.sendFile(QUIZ_HTML_FILE);
     }
     res.status(404).send('Chưa cấu hình giao diện Quiz!');
 });
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'client.html')));
-app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, 'public', 'client.html')));
 
 /* =========================================================
    1. API QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG & ĐĂNG NHẬP (PHÂN QUYỀN CHI TIẾT)
@@ -164,7 +166,6 @@ app.get('/api/users', (req, res) => {
 app.post('/api/users', (req, res) => {
     const { currentUser, username, password, role, permissions } = req.body;
 
-    // Ràng buộc bảo mật ở Backend: Chỉ duy nhất tài khoản 'hiload88' mới có quyền khởi tạo
     if (!currentUser || currentUser.toLowerCase() !== 'hiload88') {
         return res.status(403).json({ 
             success: false, 
@@ -474,6 +475,13 @@ app.delete('/api/camnangad88/:id', (req, res) => {
     res.json({ success: true, message: "Đã xóa thành công!" });
 });
 
-// Chạy Server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server XX8 đang chạy tại http://localhost:${PORT}`));
+// Route Fallback cho SPA / Trang không tìm thấy
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'client.html'));
+});
+
+// Chạy Server - Lắng nghe host 0.0.0.0 bắt buộc đối với Railway
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server XX8 đang chạy tại cổng ${PORT}`);
+});
