@@ -11,8 +11,12 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Thư mục lưu trữ file upload
 const UPLOADS_DIR = path.join(__dirname, 'public', 'uploads');
-if (!fs.existsSync(UPLOADS_DIR)) {
-    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+try {
+    if (!fs.existsSync(UPLOADS_DIR)) {
+        fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+    }
+} catch (e) {
+    console.error("Không thể tạo thư mục uploads:", e);
 }
 
 // Đường dẫn lưu trữ file dữ liệu quiz & dữ liệu hệ thống
@@ -23,7 +27,7 @@ const CONFIG_FILE = path.join(__dirname, 'layout-config.json');
 const QUIZ_HTML_FILE = path.join(__dirname, 'public', 'quiz_client.html');
 const USERS_FILE = path.join(__dirname, 'users.json');
 
-// Cấu hình danh sách người dùng mặc định (Mặc định tài khoản tối cao hiload88)
+// Cấu hình danh sách người dùng mặc định
 const DEFAULT_USERS = [
     { 
         username: "hiload88", 
@@ -70,16 +74,9 @@ const DEFAULT_CONFIG = {
     ]
 };
 
-// Hàm đọc/ghi file JSON an toàn
+// Hàm đọc file JSON an toàn (Bỏ ghi file tự động khi thiếu để tránh crash)
 function readJsonFile(filePath, defaultValue) {
     if (!fs.existsSync(filePath)) {
-        try {
-            const dir = path.dirname(filePath);
-            if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-            fs.writeFileSync(filePath, JSON.stringify(defaultValue, null, 2), 'utf8');
-        } catch(e) {
-            console.error("Lỗi tạo file mặc định:", e);
-        }
         return defaultValue;
     }
     try { 
@@ -105,10 +102,10 @@ let dynamicTablesData = readJsonFile(DYNAMIC_TABLES_FILE, {});
 let layoutConfig = readJsonFile(CONFIG_FILE, DEFAULT_CONFIG);
 let usersData = readJsonFile(USERS_FILE, DEFAULT_USERS);
 
-// 1. Phục vụ static files từ thư mục public
+// 1. Static Middleware
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 2. Điều hướng trang tĩnh bằng path.resolve an toàn cho Linux/Railway
+// 2. Điều hướng trang tĩnh
 app.get('/admin', (req, res) => res.sendFile(path.resolve(__dirname, 'public', 'index.html')));
 app.get('/quiz', (req, res) => {
     if (fs.existsSync(QUIZ_HTML_FILE)) {
@@ -119,10 +116,9 @@ app.get('/quiz', (req, res) => {
 app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, 'public', 'client.html')));
 
 /* =========================================================
-   1. API QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG & ĐĂNG NHẬP (PHÂN QUYỀN CHI TIẾT)
+   1. API QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG & ĐĂNG NHẬP
    ========================================================= */
 
-// API Đăng nhập
 app.post('/api/admin/login', (req, res) => {
     const { username, password } = req.body;
     const user = usersData.find(u => u.username === username && u.password === password);
@@ -132,14 +128,13 @@ app.post('/api/admin/login', (req, res) => {
             success: true, 
             username: user.username, 
             role: user.role || 'custom',
-            permissions: user.permissions || [], // Trả về mảng danh sách quyền thao tác
+            permissions: user.permissions || [],
             token: "mock-token-" + Date.now() 
         });
     }
     return res.json({ success: false, message: "Tài khoản hoặc mật khẩu không chính xác!" });
 });
 
-// API Đổi mật khẩu
 app.post('/api/admin/change-password', (req, res) => {
     const { username, oldPassword, newPassword } = req.body;
     const userIndex = usersData.findIndex(u => u.username === username && u.password === oldPassword);
@@ -152,7 +147,6 @@ app.post('/api/admin/change-password', (req, res) => {
     return res.json({ success: false, message: "Mật khẩu cũ không chính xác!" });
 });
 
-// API Lấy danh sách người dùng
 app.get('/api/users', (req, res) => {
     res.json(usersData.map(u => ({ 
         username: u.username, 
@@ -162,7 +156,6 @@ app.get('/api/users', (req, res) => {
     })));
 });
 
-// API Tạo tài khoản người dùng & Phân quyền thao tác (Ràng buộc CHỈ hiload88 MỚI ĐƯỢC PHÉP TẠO)
 app.post('/api/users', (req, res) => {
     const { currentUser, username, password, role, permissions } = req.body;
 
@@ -196,7 +189,6 @@ app.post('/api/users', (req, res) => {
     return res.json({ success: true, message: "Tạo tài khoản và phân quyền thành công!" });
 });
 
-// API Chỉnh sửa thông tin/mật khẩu/quyền người dùng (Chỉ hiload88)
 app.put('/api/users/:username', (req, res) => {
     const { currentUser, password, permissions } = req.body;
     const { username } = req.params;
@@ -222,7 +214,6 @@ app.put('/api/users/:username', (req, res) => {
     return res.json({ success: true, message: "Cập nhật tài khoản thành công!" });
 });
 
-// API Xóa tài khoản người dùng (Chỉ hiload88)
 app.delete('/api/users/:username', (req, res) => {
     const { currentUser } = req.body;
     const { username } = req.params;
@@ -247,7 +238,7 @@ app.delete('/api/users/:username', (req, res) => {
 });
 
 /* =========================================================
-   2. API QUẢN LÝ DỮ LIỆU CÂU HỎI & GIAO DIỆN TRẮC NGHIỆM (QUIZ)
+   2. API QUIZ & DỮ LIỆU BẢNG ĐỘNG
    ========================================================= */
 
 app.get('/api/questions', (req, res) => {
@@ -266,7 +257,7 @@ app.post('/api/sports-quiz/update-json', (req, res) => {
         let parsedData = typeof rawJson === 'string' ? JSON.parse(rawJson) : rawJson;
         
         writeJsonFile(ABSOLUTE_QUIZ_FILE, parsedData);
-        res.json({ success: true, message: "Đã cập nhật trực tiếp file sports_quiz_100.json thành công!" });
+        res.json({ success: true, message: "Đã cập nhật thành công!" });
     } catch (err) {
         res.status(400).json({ success: false, message: "Định dạng JSON không hợp lệ: " + err.message });
     }
@@ -280,7 +271,7 @@ app.post('/api/sports-quiz/update-html', (req, res) => {
         }
         
         fs.writeFileSync(QUIZ_HTML_FILE, htmlContent, 'utf8');
-        res.json({ success: true, message: "Đã lưu trực tiếp mã nguồn Frontend Quiz vào file HTML!" });
+        res.json({ success: true, message: "Đã lưu mã nguồn thành công!" });
     } catch (err) {
         res.status(500).json({ success: false, message: "Lỗi khi lưu file HTML: " + err.message });
     }
@@ -293,10 +284,6 @@ app.get('/api/sports-quiz/get-html', (req, res) => {
     }
     res.json({ success: false, content: '' });
 });
-
-/* =========================================================
-   3. API BẢNG DANH SÁCH ĐỘNG & IMPORT JSON BẢO LƯU FILE
-   ========================================================= */
 
 app.get('/api/dynamic-table/:tabId', (req, res) => {
     const { tabId } = req.params;
@@ -399,7 +386,7 @@ app.delete('/api/dynamic-table/:tabId/:rowId', (req, res) => {
 });
 
 /* =========================================================
-   4. API HỆ THỐNG TÙY CHỈNH GIAO DIỆN & LƯU TRÌNH BÀI VIẾT
+   3. API CẤU HÌNH GIAO DIỆN & CẨM NANG
    ========================================================= */
 
 app.get('/api/layout-config', (req, res) => res.json(layoutConfig));
@@ -411,7 +398,11 @@ app.post('/api/layout-config', (req, res) => {
     if (Array.isArray(layoutConfig.navItems)) {
         const quizItem = layoutConfig.navItems.find(item => item.id === 'test' || item.id === 'quiz' || (item.customCss && item.customCss.includes('<!DOCTYPE html>')));
         if (quizItem && quizItem.customCss) {
-            fs.writeFileSync(QUIZ_HTML_FILE, quizItem.customCss, 'utf8');
+            try {
+                fs.writeFileSync(QUIZ_HTML_FILE, quizItem.customCss, 'utf8');
+            } catch (e) {
+                console.error("Lỗi ghi quiz html:", e);
+            }
         }
     }
 
@@ -475,13 +466,13 @@ app.delete('/api/camnangad88/:id', (req, res) => {
     res.json({ success: true, message: "Đã xóa thành công!" });
 });
 
-// Route Fallback cho SPA / Trang không tìm thấy
+// Wildcard Route
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public', 'client.html'));
 });
 
-// Chạy Server - Lắng nghe host 0.0.0.0 bắt buộc đối với Railway
+// Bắt biến PORT động từ hệ thống Railway
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server XX8 đang chạy tại cổng ${PORT}`);
+    console.log(`Server đang lắng nghe tại cổng ${PORT}`);
 });
