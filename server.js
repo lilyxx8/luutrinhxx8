@@ -194,6 +194,35 @@ app.delete('/api/folders/:id', (req, res) => {
     res.json({ success: true, message: "Đã xóa thư mục thành công!", data: foldersData });
 });
 
+/* --- BỔ SUNG THÊM API /api/folders-config CHO FRONTEND CỦA BẠN GỌI --- */
+app.get('/api/folders-config', (req, res) => {
+    res.json(foldersData);
+});
+
+app.post('/api/folders-config', (req, res) => {
+    const newFolders = req.body;
+    if (Array.isArray(newFolders)) {
+        foldersData = newFolders;
+        writeJsonFile(FOLDERS_FILE, foldersData);
+        return res.json({ success: true, message: "Đã lưu danh mục thành công!", data: foldersData });
+    }
+    // Trường hợp gửi dạng Object đơn lẻ
+    if (typeof newFolders === 'object' && newFolders !== null) {
+        const { id, name } = newFolders;
+        if (id && name) {
+            const index = foldersData.findIndex(f => f.id === id);
+            if (index !== -1) {
+                foldersData[index] = { id, name };
+            } else {
+                foldersData.push({ id, name });
+            }
+            writeJsonFile(FOLDERS_FILE, foldersData);
+            return res.json({ success: true, message: "Đã lưu danh mục thành công!", data: foldersData });
+        }
+    }
+    res.status(400).json({ success: false, message: "Dữ liệu không hợp lệ!" });
+});
+
 /* =========================================================
    2. API QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG & ĐĂNG NHẬP
    ========================================================= */
