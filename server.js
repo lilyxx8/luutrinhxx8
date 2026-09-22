@@ -467,7 +467,7 @@ app.delete('/api/camnangad88/:id', (req, res) => {
 });
 
 // Wildcard Route
-app.get('*', (req, res) => {
+app.get('(.*)', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public', 'client.html'));
 });
 
