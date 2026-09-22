@@ -102,17 +102,22 @@ let dynamicTablesData = readJsonFile(DYNAMIC_TABLES_FILE, {});
 let layoutConfig = readJsonFile(CONFIG_FILE, DEFAULT_CONFIG);
 let usersData = readJsonFile(USERS_FILE, DEFAULT_USERS);
 
-// 1. Static Middleware
+// 1. Static Middleware (Cung cấp các file tĩnh trong thư mục public)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 2. Điều hướng trang tĩnh
+// 2. Điều hướng trang tĩnh chuẩn hóa
+// - Trang Quản Trị: domain/admin -> index.html
 app.get('/admin', (req, res) => res.sendFile(path.resolve(__dirname, 'public', 'index.html')));
+
+// - Trang Quiz: domain/quiz -> quiz_client.html
 app.get('/quiz', (req, res) => {
     if (fs.existsSync(QUIZ_HTML_FILE)) {
         return res.sendFile(QUIZ_HTML_FILE);
     }
     res.status(404).send('Chưa cấu hình giao diện Quiz!');
 });
+
+// - Trang Người Dùng (Client): domain/ -> client.html
 app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, 'public', 'client.html')));
 
 /* =========================================================
@@ -466,12 +471,12 @@ app.delete('/api/camnangad88/:id', (req, res) => {
     res.json({ success: true, message: "Đã xóa thành công!" });
 });
 
-// Wildcard Route
+// Middleware Fallback cho SPA (Hứng tất cả đường dẫn không khớp còn lại về client.html)
 app.use((req, res) => {
     res.sendFile(path.resolve(__dirname, 'public', 'client.html'));
 });
 
-// Bắt biến PORT động từ hệ thống Railway
+// Lắng nghe cổng mạng môi trường (Phù hợp tuyệt đối với Railway)
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server đang lắng nghe tại cổng ${PORT}`);
