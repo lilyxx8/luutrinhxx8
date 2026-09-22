@@ -349,7 +349,8 @@
     let userScore = 0;
     let isAnswered = false;
 
-    const FOLDER_MAP = [
+    // Danh mục mặc định (sẽ được thay thế bằng dữ liệu từ API nếu có)
+    let FOLDER_MAP = [
         { id: 'main_gioithieu', name: 'Giới Thiệu HƯỚNG DẪN' },
         { id: 'Slot_nohu', name: 'Test Game - Chạy Cược' },
         { id: 'Bo_don', name: 'Hướng Dẫn Duyệt Đơn' },
@@ -364,6 +365,7 @@
     ];
 
     document.addEventListener("DOMContentLoaded", async () => {
+        await fetchFoldersConfig(); // Nạp cấu hình thư mục động từ Server
         await fetchClientConfig();
         await loadDocs();
 
@@ -391,12 +393,28 @@
         });
     });
 
+    async function fetchFoldersConfig() {
+        try {
+            const res = await fetch(`${API_URL}/folders-config`);
+            if (res.ok) {
+                const data = await res.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    FOLDER_MAP = data;
+                }
+            }
+        } catch (e) {
+            console.error("Không thể tải danh mục động, sử dụng danh mục mặc định.", e);
+        }
+    }
+
     async function refreshCurrentData() {
         const toast = document.getElementById('refreshToast');
         toast.style.display = 'block';
 
+        await fetchFoldersConfig();
         await loadDocs();
         if (selectedFolder) {
+            renderFolderTabs(FOLDER_MAP);
             renderClientDocs();
             if (activeDocId) {
                 const activeDoc = rawDocsData.find(d => String(d.ID) === String(activeDocId));
@@ -420,7 +438,7 @@
             document.getElementById('mainHomeScreen').style.display = 'none';
             document.getElementById('subContentScreen').style.display = 'block';
             
-            selectedFolder = state.folder || FOLDER_MAP[0].id;
+            selectedFolder = state.folder || (FOLDER_MAP[0] ? FOLDER_MAP[0].id : '');
             renderFolderTabs(FOLDER_MAP);
             renderClientDocs();
 
@@ -669,7 +687,6 @@
         `;
     }
 
-    // HÀM TRỘN MẢNG NGẪU NHIÊN (Fisher-Yates Shuffle)
     function shuffleArray(array) {
         let currentIndex = array.length, randomIndex;
         while (currentIndex !== 0) {
