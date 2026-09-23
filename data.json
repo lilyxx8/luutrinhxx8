@@ -1,0 +1,238 @@
+[
+  {
+    "ID": "main_casino",
+    "Parent": "main",
+    "Label": "🎰 Casino Trực Tuyến",
+    "Content": "Chọn trò chơi Casino bạn muốn xem luật:",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "bcr",
+    "Parent": "main_casino",
+    "Label": "🃏 Baccarat (BCR)",
+    "Content": "📖 Luật chơi Baccarat\n- Baccarat gồm 2 bên:\n Nhà Con (Player)\n Nhà Cái (Banker)\n\n- Mỗi bên được chia 2 lá bài ban đầu.\n- Điểm bài được tính theo hàng đơn vị:\n  + A = 1 điểm\n  + 10, J, Q, K = 0 điểm\n  + Các lá còn lại tính theo số trên lá bài.\n\n- Bên nào có tổng điểm gần 9 hơn sẽ thắng.\n- Nếu hai bên có cùng điểm → Kết quả Hòa.\n\n🐉 LONG BẢO\n\nBên đặt cược thắng với chênh lệch điểm theo quy định.\n\n- Chênh lệch 9 điểm: 1:28\n- Chênh lệch 8 điểm: 1:9\n- Chênh lệch 7 điểm: 1:5\n- Chênh lệch 6 điểm: 1:3\n- Chênh lệch 5 điểm: 1:2\n- Chênh lệch 4 điểm: 1:1\n\n- Thắng bằng Bài Tự Nhiên: 1:1\n- Hai bên hòa với Bài Tự Nhiên: Hoàn tiền cược\n\n🃏 LUẬT RÚT LÁ THỨ 3 BACCARAT\n👤 Nhà Con:\n- 0-5 điểm: Rút lá thứ 3.\n- 6-7 điểm: Không rút.\n- 8-9 điểm: Bài tự nhiên.\n\n🏦 Nhà Cái:\n- 0-2 điểm: Luôn rút.\n- 3 điểm: Không rút khi lá thứ 3 Nhà Con là 8.\n- 4 điểm: Không rút khi lá thứ 3 Nhà Con là 0,1,8,9.\n- 5 điểm: Không rút khi lá thứ 3 Nhà Con là 0,1,2,3,8,9.\n- 6 điểm: Không rút khi lá thứ 3 Nhà Con là 0,1,2,3,4,5,8,9.\n- 7 điểm: Không rút.",
+    "File_Url": ""
+  },
+  {
+    "ID": "rongho",
+    "Parent": "main_casino",
+    "Label": "🐉 Rồng Hổ",
+    "Content": "K cao nhất, A thấp nhất.\nMỗi bên nhận 1 lá bài.\nBên có điểm cao hơn thắng. thua 50% nếu về Hoà\nHai lá bằng điểm là Hòa.",
+    "File_Url": ""
+  },
+  {
+    "ID": "xocdia",
+    "Parent": "main_casino",
+    "Label": "🎲 Xóc Đĩa",
+    "Content": "🎲 Cược tổ hợp:\n\n🔴 Lớn:\n3 đỏ 1 trắng hoặc 4 đỏ.\n(2 đỏ 2 trắng: Hoàn tiền cược)\n\n⚪ Nhỏ:\n3 trắng 1 đỏ hoặc 4 trắng.\n(2 đỏ 2 trắng: Hoàn tiền cược)\n\n🔴⚪ Lẻ:\n3 đỏ 1 trắng hoặc 3 trắng 1 đỏ.\n\n⚪🔴 Chẵn:\n4 đỏ, 4 trắng hoặc 2 đỏ 2 trắng.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sicbo",
+    "Parent": "main_casino",
+    "Label": "🎲 Tài Xỉu / Sicbo",
+    "Content": "Trò chơi lắc 3 viên xí ngầu dự đoán tổng điểm Tài (11-17) hoặc Xỉu (4-10)\nCác bộ 3 sẽ không được tính Tài hoặc Xỉu. Chỉ có thể chiến thắng khi đặt vào các cửa Bộ 3\nVí dụ: Dealer đổ ra 3 xúc xắc mặt 6 thì chỉ có các cửa Bão bất kỳ, Bão 6 cụ thể, Cược Tổng 18, Cược số đơn 6 thắng cược. Những mặt cược còn lại sẽ thua",
+    "File_Url": ""
+  },
+  {
+    "ID": "main_xoso",
+    "Parent": "main",
+    "Label": "🎰 Xổ Số Online",
+    "Content": "Chọn loại cược Xổ Số muốn xem luật:",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "xs_dacbiet",
+    "Parent": "main_xoso",
+    "Label": "👑 Đề Đặc Biệt",
+    "Content": "2D: Trúng 2 số cuối Giải Đặc Biệt.\n3D: Trúng 3 số cuối Giải Đặc Biệt.\n4D: Trúng 4 số cuối Giải Đặc Biệt.",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_dedau",
+    "Parent": "main_xoso",
+    "Label": "🎯 Đề Đầu",
+    "Content": "2D: Trúng nếu số đặt cược trùng với giải 8 ( XSMN/XSMT) hoặc giải 7 ( XSMB)\n3D: Trúng nếu số đặt cược trùng với giải 7 ( XSMN/XSMT) hoặc giải 6 ( XSMB)",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_dauduoi",
+    "Parent": "main_xoso",
+    "Label": "🔄 Đầu Đuôi",
+    "Content": "2D: Trúng 2 số cuối ở Giải Đặc Biệt và Giải 8 ( XSMN/XSMT) hoặc giải 7 ( XSMB)\n3D: Trúng 3 số cuối ở Giải Đặc Biệt  và Giải 7 ( XSMN/XSMT) hoặc giải 6 ( XSMB)",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_degiai1",
+    "Parent": "main_xoso",
+    "Label": "🥇 Đề Giải 1",
+    "Content": "2D: Trúng 2 số cuối Giải 1\n3D: Trúng 3 số cuối Giải 1\n4D: Trúng 4 số cuối Giải 1",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_baolo",
+    "Parent": "main_xoso",
+    "Label": "📦 Bao Lô",
+    "Content": "2D: Trúng 2 số cuối tất cả các giải\n3D: Trúng 3 số cuối tất cả các giải\n4D: Trúng 4 số cuối tất cả các giải",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_baolo7",
+    "Parent": "main_xoso",
+    "Label": "⚡ Bao Lô 7",
+    "Content": "2D: Trúng 2 số cuối từ Giải 5 đến Giải 8 và GIẢI ĐẶC BIỆT\n3D: Trúng 3 số cuối từ nhóm số đầu tiên của giải 4, giải 5 đến giải 7, giải đặc biệt tổng cộng có 7 nhóm giải",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_haidauso",
+    "Parent": "main_xoso",
+    "Label": "🔝 Hai Đầu Số",
+    "Content": "Chọn 2 số đầu của Giải Đặc Biệt. Trùng kết quả sẽ thắng.",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_loxien",
+    "Parent": "main_xoso",
+    "Label": "🤯 Lô Xiên",
+    "Content": "PL2: xiên 2 nghĩa là trong 1 vé cược đặt cược 2 con số không trùng nhau. Kết quả sẽ dựa vào 2 số cuối cùng của tất cả các giải trong 1 đài (tỉnh-thành phố) đã chọn.\n\nPL3: xiên 3 nghĩa là trong 1 vé cược đặt 3 con số không trùng nhau. Kết quả dựa vào 2 số cuối cùng trong tất cả các giải trong 1 đài (tỉnh-thành phố) đã chọn.",
+    "File_Url": ""
+  },
+  {
+    "ID": "xs_chanle",
+    "Parent": "main_xoso",
+    "Label": "🎲Cược Chẵn Lẻ / Tài Xỉu Xổ Số",
+    "Content": "Dự đoán tổng 2 số cuối Giải Đặc Biệt là Chẵn/Lẻ hoặc Tài (>=50) / Xỉu (<50).",
+    "File_Url": ""
+  },
+  {
+    "ID": "main_thethao",
+    "Parent": "main",
+    "Label": "⚽ Thể Thao",
+    "Content": "Chọn loại kèo Thể Thao muốn xem luật:",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "sp_tilekhuvuc",
+    "Parent": "main_thethao",
+    "Label": "📖 Tỉ Lệ - Kèo",
+    "Content": "1. Tỷ lệ DEC (tỷ lệ thập phân):\nVới kiểu xem cược Châu Âu, tỉ lệ cược đã bao gồm cả tiền vốn cược ban đầu.\n- Ví dụ: Anh cược 100 VND cho tỉ lệ 2.050 thì anh sẽ thắng được (100x2.050)-100 = 105. Thua thì anh sẽ thua 100 VND\n2. Tỷ lệ US:\nĐơn vị tính là 100. Khi anh cược 10 VND cho tỷ lệ:\n- Ví dụ: kèo dương (+131): nếu thắng thì thắng 10x131/100 = 13.1, thua thì anh thua 10 VND.\nkèo âm (-132): nếu thua thì thua (132/100)x10 = 13.2 VND, thắng thì anh thắng 10 VND\n3. Tỷ lệ HK:\nVới kiểu cược HongKong, anh thắng theo tỷ lệ cược và thua chính xác số tiền đã cược.\nVí dụ: anh cược 100 VND cho tỷ lệ 1.060 thì khi thắng anh ăn được 106 và thua thì thua 100\n4. Tỷ lệ MY:\nVới kiểu cược Malay, anh cần lưu ý tỷ lệ dương hoặc âm. Với số tiền cược là 100 VND:\nTỷ lệ dương, anh ăn theo tỷ lệ cược và thua chính xác số tiền anh cược.\nVí dụ: 0.9, nếu thắng thì thắng 100x0.9 = 90, thua thì anh thua 100 VND\nTỷ lệ âm, anh ăn theo chính xác số tiền đã đặt cược và thua theo tỉ lệ cược.\nVí dụ: -0.78 nếu thua thì thua -0.78x100 = -78, ăn thì ăn 100 VND\n5. Tỷ lệ INDO:\nVới kiểu cược Indo, anh cần lưu ý tỷ lệ dương hoặc âm. Với số tiền cược là 100 VND:\nTỷ lệ dương, anh ăn theo tỷ lệ cược và thua chính xác số tiền anh cược.\nVí dụ: 1.08, nếu thắng thì thắng 100x1.08 = 108, thua thì anh thua 100 VND\nTỷ lệ âm, tiền nhà cái thu = tiền cược x tỷ lệ , nếu thắng thì thắng theo tiền cược, nếu thua thì thua đủ tiền nhà cái thu\nVí dụ: -1.15 nếu đặt cược 100 VND, nhà cái sẽ thu 115 VND. Nếu thắng thì thắng 100 VND (nhà cái trả về 215), nếu thua thì thua 115 VND",
+    "File_Url": "https://i.ibb.co/yFzYTXhg/img-v3-0215e-c9c01b1f-85a2-401f-9952-2c66c4f66bix.jpg",
+    "Image_Captions": ""
+  },
+  {
+    "ID": "sp_bankeo",
+    "Parent": "main_thethao",
+    "Label": "💸 Bán Kèo",
+    "Content": "Đổi Tiền Mặt cho phép bạn bán toàn bộ hoặc một phần vé cược trước khi kết quả của sự kiện/trận đấu được xác định. Bán kèo khả dụng khi anh cảm thấy vé cược không an toàn.\nChỉ khả dụng với các thị trường có biểu tượng Đổi Tiền Mặt. Không áp dụng cho Cược xiên, Cược nhiều và Cược miễn phí.\nSố tiền tối thiểu để đổi sang tiền mặt là 20% tiền cược ban đầu.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_hdp",
+    "Parent": "main_thethao",
+    "Label": "🎯 Cược Chấp FT.HDP",
+    "Content": "• Thời gian tính: Kết quả được tính trong 90 phút thi đấu chính thức + thời gian bù giờ (không tính hiệp phụ và luân lưu).\n• Kèo Đồng Banh (0): Đội nào thắng thì cửa đó thắng đủ tiền; nếu hai đội hòa nhau thì hoàn lại tiền cược.\n• Kèo Đồng Banh Nửa Trái (0.25 / 0-0.5):\n\nNếu hòa: Cửa trên thua nửa tiền cược, cửa dưới ăn nửa tiền cược.\n\nNếu có đội thắng: Cửa chọn đội thắng ăn đủ tiền.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_ou",
+    "Parent": "main_thethao",
+    "Label": "📊 Tài Xỉu FT.O/U",
+    "Content": "• Quy tắc chung: Dự đoán tổng số bàn thắng của cả hai đội ghi được trong 90 phút thi đấu chính thức + thời gian bù giờ (không tính hiệp phụ và luân lưu).\n• Ví dụ Kèo Tài Xỉu 2.5 (2 1/2):\n\nTổng từ 3 bàn trở lên (ví dụ: 2-1, 3-0, 2-2...): Đặt Tài (Over) thắng đủ tiền, đặt Xỉu (Under) thua đủ tiền.\n\nTổng từ 2 bàn trở xuống (ví dụ: 0-0, 1-0, 1-1...): Đặt Xỉu (Under) thắng đủ tiền, đặt Tài (Over) thua đủ tiền.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_1x2",
+    "Parent": "main_thethao",
+    "Label": "🏆 FT 1X2",
+    "Content": "1: Đội nhà thắng.\nX: Hòa.\n2: Đội khách thắng.\nVí dụ: cược đội nhà hoặc đội khách nhưng kết quả hoà thì sẽ tính là thua vé cược",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_keoxien",
+    "Parent": "main_thethao",
+    "Label": "🔗 Kèo Xiên",
+    "Content": "1. Xiên Thường (Mix Parlay / Accumulator)\nKhái niệm: Ghép nhiều trận (từ 2 chân trở lên) vào cùng 1 vé cược duy nhất.\nĐiều kiện thắng: Tất cả các chân phải thắng hoặc hòa. Chỉ cần 1 chân thua đủ, toàn bộ vé xiên sẽ bị tính thua hết.\n\n2. Xiên Hệ Thống (System Bet)\nKhái niệm: Cho phép bạn chọn nhiều trận (thường từ 3 trận trở lên), hệ thống sẽ tự động chia nhỏ thành các tập hợp xiên nhỏ hơn (Xiên 2, Xiên 3, Trixie, Yankee...).\nĐiều kiện thắng: Không bắt buộc phải thắng tất cả các trận. Nếu có 1 vài trận thua, các nhánh xiên nhỏ còn lại vẫn thắng và bạn vẫn nhận được tiền thưởng tương ứng.\nVí dụ (Hệ thống 2/3 - System 2/3): Bạn chọn 3 trận A, B, C. Hệ thống sẽ tự chia thành 3 vé xiên 2 nhỏ:\n1, Xiên (A + B)\n2, Xiên (A + C)\n3, Xiên (B + C)\nNếu trận C thua: Vé (A + B) vẫn thắng và bạn vẫn ăn tiền vé đó.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_tinhxien",
+    "Parent": "main_thethao",
+    "Label": "🧮 Cách Tính Tiền Xiên",
+    "Content": "Tỷ lệ Xiên = Tỷ lệ 1 × Tỷ lệ 2 × ... × Tỷ lệ N.\nThắng đủ giữ nguyên tỷ lệ.\nHòa hệ số 1.\nThua nửa = 0.5\nThắng nửa (kèo châu âu): 1+(tỉ lệ - 1)/2\nThắng nửa (kèo châu á): tỉ lệ/2",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_scorebox",
+    "Parent": "main_thethao",
+    "Label": "📦 Score Box",
+    "Content": "Khái niệm: Dự đoán tỉ số chính xác của trận đấu hoặc cược theo nhóm tỉ số có sẵn.\nCơ chế giữ tiền cược: Hệ thống chỉ thực hiện giữ (khóa) đúng số tiền thua tối đa cho vé cược đó, giúp tối ưu hóa lượng vốn khi bạn đặt nhiều lựa chọn tỉ số khác nhau.\nví dụ: khách cược 30 điểm. kèo thua tối đa là -4.9 thì tiền cược bị giữ là 147 (sẽ thanh toán hoàn tiền với kèo tương ứng thắng hoặc thua )",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_nhandoicohoi",
+    "Parent": "main_thethao",
+    "Label": "❌ Nhân đôi cơ hội",
+    "Content": "có 3 lựa chọn:\n\nđội nhà + hoà: nếu đội khách thắng = thua vé cược\nđội khách + hoà: nếu đội nhà thắng = thua vé cược\nđội nhà + đội khách: nếu tỉ số hoà = thua vé cược \n\ntính từ lúc đặt cược tỉ số = 0-0",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_hiep1",
+    "Parent": "main_thethao",
+    "Label": "⏱ Các Kèo Hiệp 1 (HT)",
+    "Content": "Cược Chấp HT.HDP: Tương tự cược chấp cả trận nhưng chỉ tính kết quả trong Hiệp 1.\n\nTài Xỉu HT.O/U: Dự đoán tổng số bàn thắng của Hiệp 1 cao hơn (Tài) hay thấp hơn (Xỉu) tỷ lệ nhà cái đưa ra.\n\nHT 1X2: Đặt cược kết quả Hiệp 1: 1 (Chủ nhà thắng), X (Hòa), 2 (Đội khách thắng).",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_keophu",
+    "Parent": "main_thethao",
+    "Label": "🎯 Các Kèo Phụ Phổ Biến",
+    "Content": "Kèo Phạt Góc (Corner):\n\nChấp góc: Cược đội nào có số quả phạt góc nhiều hơn sau khi cộng/trừ tỷ lệ chấp.\n\nTài xỉu góc: Dự đoán tổng số quả phạt góc của cả trận lớn hơn hoặc nhỏ hơn mốc ấn định.\n\nKèo Thẻ Phạt (Booking): Dự đoán tổng số điểm thẻ phạt (thường 1 thẻ vàng = 1 điểm, 1 thẻ đỏ = 2 điểm) hoặc cược chấp số thẻ giữa 2 đội.\n\nTỷ Số Chính Xác (Correct Score): Dự đoán đúng tỷ số chung cuộc của trận đấu (ví dụ: 1-0, 2-1, 2-2). Tỷ lệ thưởng thường rất cao.\n\nKèo Chẵn / Lẻ (Odd/Even): Dự đoán tổng số bàn thắng của trận đấu là số Chẵn (0, 2, 4...) hay Lẻ (1, 3, 5...).\n\nBàn Thắng Đầu / Cuối (First/Last Goal): Dự đoán đội nào sẽ ghi bàn thắng đầu tiên hoặc bàn thắng cuối cùng trong trận đấu.",
+    "File_Url": ""
+  },
+  {
+    "ID": "sp_tinhhnang",
+    "Parent": "main_thethao",
+    "Label": "⚙Tính Năng & Quy Định Cần Biết",
+    "Content": "Xả Kèo / Cash Out: Tính năng cho phép bạn rút tiền cược về sớm trước khi trận đấu kết thúc để chốt lời hoặc cắt lỗ.\nCông thức Cashout chuẩn = (Odds ban đầu / Odds hiện tại) * Tiền cược = tiền cash out\n\nLuật Cược Khi Trận Đấu Hoãn/Hủy:\nNếu trận đấu bị hủy/hoãn và không đấu lại trong 12h - 24h, vé cược sẽ bị hủy và hoàn lại tiền cược.\nNếu cược Hiệp 1 đã kết thúc mà Hiệp 2 bị hủy, các vé cược Hiệp 1 vẫn tính là hợp lệ.",
+    "File_Url": ""
+  },
+  {
+    "ID": "main_daga",
+    "Parent": "main",
+    "Label": "🐣 ĐÁ GÀ",
+    "Content": "Bạn muốn xem thông tin:",
+    "File_Url": "",
+    "IsHidden": true
+  },
+  {
+    "ID": "won_daga",
+    "Parent": "main_daga",
+    "Label": "📜 QUY LUẬT",
+    "Content": "Sảnh GA28: Cược tối thiểu 5 điểm/lần - Cược tối đa 20,000 điểm/lần\nSảnh SV128: Cược tối thiểu 5 điểm/lần - Cược tối đa 50,000 điểm/lần - Tổng cược: 100,000 điểm/trận\n\nChân của gà sẽ cột sợi dây Đỏ hoặc Xanh hoặc trên tường tại trường đấu sẽ có bảng màu Đỏ hoặc Xanh.\nGà đỏ (Banker): Meron (Rồng)\nGà xanh (Player): Wala (Phượng)\n\nTrận đấu tối đa 10 phút. Tỷ lệ ăn của Meron và Wala sẽ thay đổi liên tục theo số lượng người đặt cược.",
+    "File_Url": ""
+  },
+  {
+    "ID": "rule_daga",
+    "Parent": "main_daga",
+    "Label": "📖 LUẬT CHUNG",
+    "Content": "Quy định đơn cược: Không thể hủy cược sau khi hệ thống đã xác nhận đăng ký thành công.\nTỷ lệ thanh toán (Odds): Hiển thị mặc định là 1 nếu chưa có cược hoặc tiền cược 2 cửa ngang nhau.\nGà rơi khỏi sàn: Kiểm tra qua video phát lại. Nếu video không rõ, phán quyết chính thức của sàn đấu là kết quả cuối cùng.\nKhông có video xem lại nhưng trận đấu đã bắt đầu, nhà cung cấp sẽ đưa ra phán quyết cuối cùng.\nGián đoạn kết nối: Kết quả dựa theo công bố thực tế tại đấu trường.",
+    "File_Url": ""
+  },
+  {
+    "ID": "hoa_daga",
+    "Parent": "main_daga",
+    "Label": "🤝 HOÀ",
+    "Content": "Hết 10 phút, cả hai con gà vẫn còn trong sàn đấu hoặc không có con gà nào mổ trúng 2 lần.\nCả hai con gà rơi ra ngoài cùng lúc.\nMột con gà bay ra ngoài và con gà thứ hai cũng bay ra trong vòng một giây.\nCả hai con gà đều chết.\n\nToàn bộ tiền cược Meron và Wala được hoàn lại 100% (không mất phí).",
+    "File_Url": ""
+  },
+  {
+    "ID": "huy_daga",
+    "Parent": "main_daga",
+    "Label": "🚫 HUỶ",
+    "Content": "Dao cựa trên con gà bị hỏng, cùn.\nGà chiến bị đặt sai vị trí: Đỏ bắt buộc là MERON. Xanh bắt buộc là WALA.\nTên nhập trận của một hoặc cả hai bên không chính xác.\nHai con gà cùng thuộc một chủ nuôi.\nQuá trình phát video trực tiếp bị gián đoạn (mất điện, internet, thời tiết,...).\nLỗi hệ thống khiến vé cược đặt sau khi trận đấu đã bắt đầu (vé cược không hợp lệ).\nTài khoản đặt cược bị gián đoạn do mạng không ổn định, hết thời gian đặt cược, vé cược không khớp thời gian, cược được đặt sau khi trận đấu bắt đầu,...\n\nToàn bộ tiền cược Meron và Wala được hoàn lại 100% (không mất phí).",
+    "File_Url": ""
+  }
+]
